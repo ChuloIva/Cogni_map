@@ -1,0 +1,48 @@
+\begin{thebibliography}{7}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Authors(2024{\natexlab{a}})}]{inside2024}
+Authors. 2024{\natexlab{a}}.
+\newblock {INSIDE}: {LLMs}' Internal States Retain the Power of Hallucination
+  Detection.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Authors(2024{\natexlab{b}})}]{counsellme2024}
+Authors. 2024{\natexlab{b}}.
+\newblock Introducing {CounseLLMe}: A Dataset of Simulated Mental Health
+  Dialogues for Comparing {LLMs} against Humans.
+\newblock \emph{ScienceDirect}.
+\newblock Multilingual dataset with GPT-3.5, Claude-3 Haiku, and LLaMAntino.
+
+\bibitem[{Authors(2024{\natexlab{c}})}]{caiti2024}
+Authors. 2024{\natexlab{c}}.
+\newblock {LLM}-based Conversational {AI} Therapist for Daily Functioning
+  Screening and Psychotherapeutic Intervention via Everyday Smart Devices.
+\newblock \emph{ACM Transactions on Computing for Healthcare}.
+\newblock ArXiv:2403.10779.
+
+\bibitem[{Authors(2025)}]{metacognitive2025}
+Authors. 2025.
+\newblock Language Models Are Capable of Metacognitive Monitoring and Control
+  of Their Internal Activations.
+\newblock arXiv:2505.13763.
+
+\bibitem[{Belinkov(2022)}]{belinkov2021probing}
+Belinkov, Y. 2022.
+\newblock Probing Classifiers: Promises, Shortcomings, and Advances.
+\newblock \emph{Computational Linguistics}, 48(1): 207--219.
+
+\bibitem[{Rai, Zhou et~al.(2025)}]{rai2025mechanistic}
+Rai, Z.; Zhou, Y.; et~al. 2025.
+\newblock A Practical Review of Mechanistic Interpretability for
+  Transformer-Based Language Models.
+\newblock \emph{arXiv preprint arXiv:2406.xxxxx}.
+\newblock Tutorial presented at ICML 2025.
+
+\bibitem[{Tenney, Das, and Pavlick(2019)}]{tenney2019bert}
+Tenney, I.; Das, D.; and Pavlick, E. 2019.
+\newblock BERT Rediscovers the Classical {NLP} Pipeline.
+\newblock In \emph{Proceedings of the 57th Annual Meeting of the Association
+  for Computational Linguistics}, 4593--4601.
+
+\end{thebibliography}

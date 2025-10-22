@@ -1,0 +1,686 @@
+{
+  "average_auc_roc": 0.8677873290730435,
+  "average_f1": 0.022144363733382855,
+  "average_accuracy": 0.9780035273368607,
+  "average_precision": 0.33955026455026455,
+  "average_recall": 0.012063492063492063,
+  "total_training_time_seconds": 3024.148320913315,
+  "num_workers": 45,
+  "per_action_metrics": [
+    {
+      "action": "cognition_awareness",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.7582787054215626,
+      "auc_pr": 0.11174003803529722,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "perspective_taking",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.9119274376417232,
+      "auc_pr": 0.29380183934775755,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "emotion_responding",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.7289909297052154,
+      "auc_pr": 0.044663785791246496,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "updating_beliefs",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8168655947227376,
+      "auc_pr": 0.13597328355871618,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "counterfactual_reasoning",
+      "accuracy": 0.9788359788359788,
+      "precision": 1.0,
+      "recall": 0.047619047619047616,
+      "f1": 0.09090909090909091,
+      "auc_roc": 0.9590898783755927,
+      "auc_pr": 0.5924746686257524,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 100,
+        "true_positive": 5
+      }
+    },
+    {
+      "action": "convergent_thinking",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.9070160791589362,
+      "auc_pr": 0.3005625856954147,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "metacognitive_regulation",
+      "accuracy": 0.977989417989418,
+      "precision": 1.0,
+      "recall": 0.009523809523809525,
+      "f1": 0.018867924528301886,
+      "auc_roc": 0.8538115852401567,
+      "auc_pr": 0.2110523967243796,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 104,
+        "true_positive": 1
+      }
+    },
+    {
+      "action": "response_modulation",
+      "accuracy": 0.977989417989418,
+      "precision": 1.0,
+      "recall": 0.009523809523809525,
+      "f1": 0.018867924528301886,
+      "auc_roc": 0.8741104926819212,
+      "auc_pr": 0.27359002718455905,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 104,
+        "true_positive": 1
+      }
+    },
+    {
+      "action": "divergent_thinking",
+      "accuracy": 0.979047619047619,
+      "precision": 1.0,
+      "recall": 0.05714285714285714,
+      "f1": 0.10810810810810811,
+      "auc_roc": 0.931259534116677,
+      "auc_pr": 0.45722395571662555,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 99,
+        "true_positive": 6
+      }
+    },
+    {
+      "action": "creating",
+      "accuracy": 0.9775661375661375,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8108297258297259,
+      "auc_pr": 0.15034689534233797,
+      "confusion_matrix": {
+        "true_negative": 4619,
+        "false_positive": 1,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "analyzing",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8283601319315606,
+      "auc_pr": 0.13547028199374322,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "situation_selection",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8955555555555555,
+      "auc_pr": 0.259115059286502,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "hypothesis_generation",
+      "accuracy": 0.977989417989418,
+      "precision": 1.0,
+      "recall": 0.009523809523809525,
+      "f1": 0.018867924528301886,
+      "auc_roc": 0.8693496186353329,
+      "auc_pr": 0.23930486843313903,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 104,
+        "true_positive": 1
+      }
+    },
+    {
+      "action": "zooming_in",
+      "accuracy": 0.9788359788359788,
+      "precision": 1.0,
+      "recall": 0.047619047619047616,
+      "f1": 0.09090909090909091,
+      "auc_roc": 0.9449814471243042,
+      "auc_pr": 0.4744853492525584,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 100,
+        "true_positive": 5
+      }
+    },
+    {
+      "action": "emotion_facilitation",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.9004133168418882,
+      "auc_pr": 0.2364070908285883,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "pattern_recognition",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8747186147186147,
+      "auc_pr": 0.196339834762396,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "evaluating",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.7967542774685632,
+      "auc_pr": 0.1363588012896551,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "metacognitive_monitoring",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8762863327149041,
+      "auc_pr": 0.2817776585448659,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "connecting",
+      "accuracy": 0.9784126984126984,
+      "precision": 1.0,
+      "recall": 0.02857142857142857,
+      "f1": 0.05555555555555555,
+      "auc_roc": 0.9142991135848278,
+      "auc_pr": 0.30546041014500525,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 102,
+        "true_positive": 3
+      }
+    },
+    {
+      "action": "emotion_valuing",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.9050907029478458,
+      "auc_pr": 0.26495856200618645,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "distinguishing",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8890486497629355,
+      "auc_pr": 0.28713359433805363,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "emotion_characterizing",
+      "accuracy": 0.977989417989418,
+      "precision": 1.0,
+      "recall": 0.009523809523809525,
+      "f1": 0.018867924528301886,
+      "auc_roc": 0.8647196454339311,
+      "auc_pr": 0.2163188486360533,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 104,
+        "true_positive": 1
+      }
+    },
+    {
+      "action": "meta_awareness",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8815934858792001,
+      "auc_pr": 0.22529768035670483,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "emotion_understanding",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.7620727685013399,
+      "auc_pr": 0.08089667710702586,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "understanding",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.7878416821273964,
+      "auc_pr": 0.0939420407269847,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "remembering",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.5,
+      "recall": 0.009523809523809525,
+      "f1": 0.018691588785046728,
+      "auc_roc": 0.867648938363224,
+      "auc_pr": 0.23226225570000883,
+      "confusion_matrix": {
+        "true_negative": 4619,
+        "false_positive": 1,
+        "false_negative": 104,
+        "true_positive": 1
+      }
+    },
+    {
+      "action": "reframing",
+      "accuracy": 0.977989417989418,
+      "precision": 1.0,
+      "recall": 0.009523809523809525,
+      "f1": 0.018867924528301886,
+      "auc_roc": 0.8117078952793239,
+      "auc_pr": 0.12436313371311387,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 104,
+        "true_positive": 1
+      }
+    },
+    {
+      "action": "concretizing",
+      "accuracy": 0.979047619047619,
+      "precision": 0.875,
+      "recall": 0.06666666666666667,
+      "f1": 0.12389380530973451,
+      "auc_roc": 0.9336745001030715,
+      "auc_pr": 0.44969792374084583,
+      "confusion_matrix": {
+        "true_negative": 4619,
+        "false_positive": 1,
+        "false_negative": 98,
+        "true_positive": 7
+      }
+    },
+    {
+      "action": "noticing",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8185054627911771,
+      "auc_pr": 0.1405062141531418,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "emotion_management",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.5,
+      "recall": 0.009523809523809525,
+      "f1": 0.018691588785046728,
+      "auc_roc": 0.8459997938569367,
+      "auc_pr": 0.16134455840446754,
+      "confusion_matrix": {
+        "true_negative": 4619,
+        "false_positive": 1,
+        "false_negative": 104,
+        "true_positive": 1
+      }
+    },
+    {
+      "action": "emotion_receiving",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8381416202844774,
+      "auc_pr": 0.13110384807920186,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "abstracting",
+      "accuracy": 0.9775661375661375,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.9152339723768297,
+      "auc_pr": 0.2504714579488668,
+      "confusion_matrix": {
+        "true_negative": 4619,
+        "false_positive": 1,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "self_questioning",
+      "accuracy": 0.9775661375661375,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.916799628942486,
+      "auc_pr": 0.2482810907706333,
+      "confusion_matrix": {
+        "true_negative": 4619,
+        "false_positive": 1,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "emotion_perception",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8328509585652443,
+      "auc_pr": 0.16433363542881327,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "suspending_judgment",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.9445155638012781,
+      "auc_pr": 0.5095478770952585,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "situation_modification",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.781799628942486,
+      "auc_pr": 0.11429608680117907,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "emotion_organizing",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8559183673469388,
+      "auc_pr": 0.118537410555404,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "emotional_reappraisal",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8998958977530405,
+      "auc_pr": 0.2828300933874627,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "reconsidering",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8695660688517831,
+      "auc_pr": 0.26351441654407504,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "questioning",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8819325912183056,
+      "auc_pr": 0.19178709961885024,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "zooming_out",
+      "accuracy": 0.977989417989418,
+      "precision": 1.0,
+      "recall": 0.009523809523809525,
+      "f1": 0.018867924528301886,
+      "auc_roc": 0.9340806019377448,
+      "auc_pr": 0.49510922297233934,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 104,
+        "true_positive": 1
+      }
+    },
+    {
+      "action": "analogical_thinking",
+      "accuracy": 0.9813756613756613,
+      "precision": 0.9047619047619048,
+      "recall": 0.18095238095238095,
+      "f1": 0.30158730158730157,
+      "auc_roc": 0.9527664399092971,
+      "auc_pr": 0.5512877813022561,
+      "confusion_matrix": {
+        "true_negative": 4618,
+        "false_positive": 2,
+        "false_negative": 86,
+        "true_positive": 19
+      }
+    },
+    {
+      "action": "accepting",
+      "accuracy": 0.9782010582010582,
+      "precision": 1.0,
+      "recall": 0.01904761904761905,
+      "f1": 0.037383177570093455,
+      "auc_roc": 0.9248835291692435,
+      "auc_pr": 0.4235793176685912,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 103,
+        "true_positive": 2
+      }
+    },
+    {
+      "action": "applying",
+      "accuracy": 0.977989417989418,
+      "precision": 1.0,
+      "recall": 0.009523809523809525,
+      "f1": 0.018867924528301886,
+      "auc_roc": 0.7926984126984127,
+      "auc_pr": 0.1910312298162405,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 104,
+        "true_positive": 1
+      }
+    },
+    {
+      "action": "attentional_deployment",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.5,
+      "recall": 0.009523809523809525,
+      "f1": 0.018691588785046728,
+      "auc_roc": 0.8885446299732014,
+      "auc_pr": 0.21535039382180104,
+      "confusion_matrix": {
+        "true_negative": 4619,
+        "false_positive": 1,
+        "false_negative": 104,
+        "true_positive": 1
+      }
+    }
+  ]
+}

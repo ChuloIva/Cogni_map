@@ -1,0 +1,289 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.14)  16 OCT 2025 17:50
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**brije_paper.tex
+(./brije_paper.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\c@figure=\count193
+\c@table=\count194
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (./aaai2026.sty
+Package: aaai2026 2026/04/29 AAAI 2026 Submission format
+
+Conference Style for AAAI for LaTeX 2e -- version for submission
+\titlebox=\skip50
+) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2020/03/25 PSNFSS-v9.3 (SPQR) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/helvet.sty
+Package: helvet 2020/03/25 PSNFSS-v9.3 (WaS) 
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+))
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/courier.sty
+Package: courier 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen141
+\Gin@req@width=\dimen142
+)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip51
+\bibsep=\skip52
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count195
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen143
+\captionmargin=\dimen144
+\caption@leftmargin=\dimen145
+\caption@rightmargin=\dimen146
+\caption@width=\dimen147
+\caption@indent=\dimen148
+\caption@parindent=\dimen149
+\caption@hangindent=\dimen150
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count196
+\c@continuedfloat=\count197
+)
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 3
+3.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count198
+\l__pdf_internal_box=\box51
+)
+(./brije_paper.aux)
+\openout1 = `brije_paper.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count199
+\scratchdimen=\dimen151
+\scratchbox=\box52
+\nofMPsegments=\count266
+\nofMParguments=\count267
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count268
+\MPscratchDim=\dimen152
+\MPnumerator=\count269
+\makeMPintoPDFobject=\count270
+\everyMPtoPDFconversion=\toks19
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+\c@eqfn=\count271
+\titlearea=\box53
+\actualheight=\skip53
+
+Underfull \hbox (badness 1102) in paragraph at lines 38--39
+\OT1/ptm/m/n/9 cog-ni-tive ac-tions|such as an-a-lyz-ing, re-con-sid-er-ing, an
+d
+ []
+
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 5
+7.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texm
+f-dist/fonts/enc/dvips/base/8r.enc}
+
+
+
+]
+Underfull \hbox (badness 1033) in paragraph at lines 95--96
+[]\OT1/ptm/b/n/10 Metacognitive \OT1/ptm/m/n/10 (3 ac-tions): metacog-ni-tive m
+on-i-tor-ing,
+ []
+
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
+05.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 122.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 122.
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
+\OT1/ptm/m/n/10 sim-ply: (1) de-fine the con-struct and ex-am-ples in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
+\OT1/pcr/m/n/10 variable[]pools.py\OT1/ptm/m/n/10 , (2) op-tion-ally add cus-to
+m
+ []
+
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 1
+28.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 128.
+
+Underfull \hbox (badness 2762) in paragraph at lines 128--129
+\OT1/ptm/m/n/10 tech-nique for cap-tur-ing dis-crim-i-na-tive ac-ti-va-tions. F
+or
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 144--145
+[]\OT1/ptm/m/n/10 The in-ter-ac-tive ter-mi-nal UI (im-ple-mented in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 144--145
+\OT1/pcr/m/n/10 src/probes/Interactive[]TUI.py\OT1/ptm/m/n/10 ) dis-plays
+ []
+
+
+Underfull \hbox (badness 1968) in paragraph at lines 150--151
+\OT1/ptm/m/n/10 pist ac-tions were: (1) re-sponse mod-u-la-tion|managing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 150--151
+\OT1/ptm/m/n/10 emo-tional ex-pres-sion to cre-ate safety, (2) notic-
+ []
+
+
+Underfull \hbox (badness 1521) in paragraph at lines 152--153
+\OT1/ptm/m/n/10 quen-cies of self-questioning, re-con-sid-er-ing be-liefs, and
+ []
+
+
+Underfull \hbox (badness 1675) in paragraph at lines 154--155
+\OT1/ptm/m/n/10 taking and dis-tin-guish-ing. Late lay-ers (28-30) spe-cial-
+ []
+
+
+Underfull \hbox (badness 1082) in paragraph at lines 164--165
+[]\OT1/ptm/b/n/10 Implications for AI Safety. \OT1/ptm/m/n/10 The frame-work en
+-ables
+ []
+
+
+Underfull \hbox (badness 1838) in paragraph at lines 168--169
+[]\OT1/ptm/b/n/10 Human-AI In-ter-ac-tion. \OT1/ptm/m/n/10 Token-level cog-ni-t
+ive trans-
+ []
+
+
+Underfull \hbox (badness 2142) in paragraph at lines 176--177
+[]\OT1/ptm/m/n/10 The three-component ar-chi-tec-ture (data gen-er-a-tor in
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 180--181
+[]\OT1/ptm/m/n/10 All code, the com-plete data gen-er-a-tion pipeline
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 180--181
+\OT1/ptm/m/n/10 (\OT1/pcr/m/n/10 third[]party/datagen/\OT1/ptm/m/n/10 ), pre-tr
+ained probes for
+ []
+
+(./brije_paper.bbl) [4
+
+] (./brije_paper.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 3345 strings out of 476182
+ 57572 string characters out of 5795595
+ 1941975 words of memory out of 5000000
+ 25339 multiletter control sequences out of 15000+600000
+ 573461 words of font info for 58 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 57i,5n,65p,1037b,185s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
+w/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a
+.pfb>
+Output written on brije_paper.pdf (4 pages, 105883 bytes).
+PDF statistics:
+ 53 PDF objects out of 1000 (max. 8388607)
+ 32 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

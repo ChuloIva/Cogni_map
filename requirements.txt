@@ -1,0 +1,28 @@
+# Core Dependencies
+torch>=2.0.0
+transformers>=4.30.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+
+# Data Handling
+h5py>=3.8.0
+pandas>=2.0.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Terminal UI
+textual>=0.40.0
+rich>=13.0.0
+
+# Progress Tracking
+tqdm>=4.65.0
+
+# Model Intervention
+nnsight>=0.5.9
+
+# Optional: GPU Support
+# CUDA: Install PyTorch with CUDA support from pytorch.org
+# AMD ROCm: Set environment variables via gpu_utils.py
+# Apple Silicon: MPS automatically detected

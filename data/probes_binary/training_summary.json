@@ -1,0 +1,115 @@
+{
+  "total_layers": 10,
+  "total_probes": 450,
+  "total_time_hours": 1.907317276729478,
+  "parallel_training": true,
+  "num_workers": 45,
+  "layer_results": [
+    {
+      "layer": 21,
+      "avg_auc": 0.9444699374699375,
+      "avg_f1": 0.4811128624270715,
+      "avg_accuracy": 0.9817236919459144,
+      "time_minutes": 13.659303601582845,
+      "num_workers": 45,
+      "success": true
+    },
+    {
+      "layer": 22,
+      "avg_auc": 0.9424832680546967,
+      "avg_f1": 0.4978846165883222,
+      "avg_accuracy": 0.9835155790711346,
+      "time_minutes": 12.133842380841573,
+      "num_workers": 45,
+      "success": true
+    },
+    {
+      "layer": 23,
+      "avg_auc": 0.9372447605304747,
+      "avg_f1": 0.5024262316153687,
+      "avg_accuracy": 0.9833274544385656,
+      "time_minutes": 11.825924654801687,
+      "num_workers": 45,
+      "success": true
+    },
+    {
+      "layer": 24,
+      "avg_auc": 0.9210642021118212,
+      "avg_f1": 0.5048175922870987,
+      "avg_accuracy": 0.9832333921222812,
+      "time_minutes": 11.592010351022084,
+      "num_workers": 45,
+      "success": true
+    },
+    {
+      "layer": 25,
+      "avg_auc": 0.913499003641861,
+      "avg_f1": 0.5069478311295423,
+      "avg_accuracy": 0.9840752498530275,
+      "time_minutes": 12.112112847963969,
+      "num_workers": 45,
+      "success": true
+    },
+    {
+      "layer": 26,
+      "avg_auc": 0.9104447651114319,
+      "avg_f1": 0.5133124833108824,
+      "avg_accuracy": 0.9805808348030571,
+      "time_minutes": 11.910593938827514,
+      "num_workers": 45,
+      "success": true
+    },
+    {
+      "layer": 27,
+      "avg_auc": 0.8956385166861357,
+      "avg_f1": 0.5132836978491787,
+      "avg_accuracy": 0.983647266313933,
+      "time_minutes": 11.228223073482514,
+      "num_workers": 45,
+      "success": true
+    },
+    {
+      "layer": 28,
+      "avg_auc": 0.8861125770173389,
+      "avg_f1": 0.5263284286892395,
+      "avg_accuracy": 0.982490299823633,
+      "time_minutes": 9.88849458694458,
+      "num_workers": 45,
+      "success": true
+    },
+    {
+      "layer": 29,
+      "avg_auc": 0.8796392496392497,
+      "avg_f1": 0.5120663125906307,
+      "avg_accuracy": 0.9819353321575545,
+      "time_minutes": 10.350059465567272,
+      "num_workers": 45,
+      "success": true
+    },
+    {
+      "layer": 30,
+      "avg_auc": 0.8522746512746513,
+      "avg_f1": 0.48347282605383063,
+      "avg_accuracy": 0.9828336272780718,
+      "time_minutes": 9.73847170273463,
+      "num_workers": 45,
+      "success": true
+    }
+  ],
+  "config": {
+    "batch_size": 32,
+    "epochs": 50,
+    "learning_rate": 0.0005,
+    "weight_decay": 0.001,
+    "early_stopping_patience": 10,
+    "use_scheduler": true,
+    "num_workers": 45,
+    "pin_activations_to_gpu": true
+  },
+  "statistics": {
+    "avg_auc": 0.9082870931537599,
+    "best_auc": 0.9444699374699375,
+    "worst_auc": 0.8522746512746513,
+    "best_layer": 21
+  }
+}

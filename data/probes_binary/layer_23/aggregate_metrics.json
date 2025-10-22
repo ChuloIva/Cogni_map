@@ -1,0 +1,686 @@
+{
+  "average_auc_roc": 0.9372447605304747,
+  "average_f1": 0.5024262316153687,
+  "average_accuracy": 0.9833274544385656,
+  "average_precision": 0.6816519709171,
+  "average_recall": 0.43788359788359776,
+  "total_training_time_seconds": 707.5848865509033,
+  "num_workers": 45,
+  "per_action_metrics": [
+    {
+      "action": "convergent_thinking",
+      "accuracy": 0.9853968253968254,
+      "precision": 0.8461538461538461,
+      "recall": 0.41904761904761906,
+      "f1": 0.5605095541401274,
+      "auc_roc": 0.9477623170480314,
+      "auc_pr": 0.6822480208686424,
+      "confusion_matrix": {
+        "true_negative": 4612,
+        "false_positive": 8,
+        "false_negative": 61,
+        "true_positive": 44
+      }
+    },
+    {
+      "action": "emotion_receiving",
+      "accuracy": 0.9786243386243386,
+      "precision": 0.75,
+      "recall": 0.05714285714285714,
+      "f1": 0.10619469026548672,
+      "auc_roc": 0.8381447124304268,
+      "auc_pr": 0.39256755149059797,
+      "confusion_matrix": {
+        "true_negative": 4618,
+        "false_positive": 2,
+        "false_negative": 99,
+        "true_positive": 6
+      }
+    },
+    {
+      "action": "analyzing",
+      "accuracy": 0.9809523809523809,
+      "precision": 0.5619834710743802,
+      "recall": 0.6476190476190476,
+      "f1": 0.6017699115044248,
+      "auc_roc": 0.9500989486703774,
+      "auc_pr": 0.5275777449473822,
+      "confusion_matrix": {
+        "true_negative": 4567,
+        "false_positive": 53,
+        "false_negative": 37,
+        "true_positive": 68
+      }
+    },
+    {
+      "action": "understanding",
+      "accuracy": 0.977989417989418,
+      "precision": 0.5217391304347826,
+      "recall": 0.11428571428571428,
+      "f1": 0.1875,
+      "auc_roc": 0.8509266130694703,
+      "auc_pr": 0.2028502049132493,
+      "confusion_matrix": {
+        "true_negative": 4609,
+        "false_positive": 11,
+        "false_negative": 93,
+        "true_positive": 12
+      }
+    },
+    {
+      "action": "zooming_out",
+      "accuracy": 0.9966137566137566,
+      "precision": 0.968421052631579,
+      "recall": 0.8761904761904762,
+      "f1": 0.92,
+      "auc_roc": 0.9933869305297878,
+      "auc_pr": 0.9505002660731822,
+      "confusion_matrix": {
+        "true_negative": 4617,
+        "false_positive": 3,
+        "false_negative": 13,
+        "true_positive": 92
+      }
+    },
+    {
+      "action": "noticing",
+      "accuracy": 0.9782010582010582,
+      "precision": 0.5128205128205128,
+      "recall": 0.38095238095238093,
+      "f1": 0.4371584699453552,
+      "auc_roc": 0.9321686250257679,
+      "auc_pr": 0.38729322941096955,
+      "confusion_matrix": {
+        "true_negative": 4582,
+        "false_positive": 38,
+        "false_negative": 65,
+        "true_positive": 40
+      }
+    },
+    {
+      "action": "cognition_awareness",
+      "accuracy": 0.9767195767195768,
+      "precision": 0.3684210526315789,
+      "recall": 0.06666666666666667,
+      "f1": 0.11290322580645161,
+      "auc_roc": 0.8815213358070499,
+      "auc_pr": 0.2010843261074184,
+      "confusion_matrix": {
+        "true_negative": 4608,
+        "false_positive": 12,
+        "false_negative": 98,
+        "true_positive": 7
+      }
+    },
+    {
+      "action": "self_questioning",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "auc_roc": 0.8121273964131107,
+      "auc_pr": 0.3542919605097079,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 105,
+        "true_positive": 0
+      }
+    },
+    {
+      "action": "distinguishing",
+      "accuracy": 0.9887830687830688,
+      "precision": 0.9193548387096774,
+      "recall": 0.5428571428571428,
+      "f1": 0.6826347305389222,
+      "auc_roc": 0.9725314368171512,
+      "auc_pr": 0.7997557320591117,
+      "confusion_matrix": {
+        "true_negative": 4615,
+        "false_positive": 5,
+        "false_negative": 48,
+        "true_positive": 57
+      }
+    },
+    {
+      "action": "counterfactual_reasoning",
+      "accuracy": 0.995978835978836,
+      "precision": 0.967391304347826,
+      "recall": 0.8476190476190476,
+      "f1": 0.9035532994923858,
+      "auc_roc": 0.9937126365697795,
+      "auc_pr": 0.9533378691105198,
+      "confusion_matrix": {
+        "true_negative": 4617,
+        "false_positive": 3,
+        "false_negative": 16,
+        "true_positive": 89
+      }
+    },
+    {
+      "action": "attentional_deployment",
+      "accuracy": 0.9832804232804233,
+      "precision": 0.58125,
+      "recall": 0.8857142857142857,
+      "f1": 0.7018867924528301,
+      "auc_roc": 0.9880024737167594,
+      "auc_pr": 0.6001439138062653,
+      "confusion_matrix": {
+        "true_negative": 4553,
+        "false_positive": 67,
+        "false_negative": 12,
+        "true_positive": 93
+      }
+    },
+    {
+      "action": "updating_beliefs",
+      "accuracy": 0.971005291005291,
+      "precision": 0.3904109589041096,
+      "recall": 0.5428571428571428,
+      "f1": 0.4541832669322709,
+      "auc_roc": 0.931178107606679,
+      "auc_pr": 0.33644271513547597,
+      "confusion_matrix": {
+        "true_negative": 4531,
+        "false_positive": 89,
+        "false_negative": 48,
+        "true_positive": 57
+      }
+    },
+    {
+      "action": "emotion_responding",
+      "accuracy": 0.9741798941798941,
+      "precision": 0.28205128205128205,
+      "recall": 0.10476190476190476,
+      "f1": 0.1527777777777778,
+      "auc_roc": 0.8245722531436818,
+      "auc_pr": 0.14614726619471394,
+      "confusion_matrix": {
+        "true_negative": 4592,
+        "false_positive": 28,
+        "false_negative": 94,
+        "true_positive": 11
+      }
+    },
+    {
+      "action": "emotion_valuing",
+      "accuracy": 0.9881481481481481,
+      "precision": 0.9016393442622951,
+      "recall": 0.5238095238095238,
+      "f1": 0.6626506024096386,
+      "auc_roc": 0.9514842300556586,
+      "auc_pr": 0.739505267648731,
+      "confusion_matrix": {
+        "true_negative": 4614,
+        "false_positive": 6,
+        "false_negative": 50,
+        "true_positive": 55
+      }
+    },
+    {
+      "action": "connecting",
+      "accuracy": 0.9832804232804233,
+      "precision": 0.9333333333333333,
+      "recall": 0.26666666666666666,
+      "f1": 0.4148148148148148,
+      "auc_roc": 0.9381642960214388,
+      "auc_pr": 0.6626933700727754,
+      "confusion_matrix": {
+        "true_negative": 4618,
+        "false_positive": 2,
+        "false_negative": 77,
+        "true_positive": 28
+      }
+    },
+    {
+      "action": "questioning",
+      "accuracy": 0.9807407407407407,
+      "precision": 0.7692307692307693,
+      "recall": 0.19047619047619047,
+      "f1": 0.3053435114503817,
+      "auc_roc": 0.9503081838796125,
+      "auc_pr": 0.4328495147286991,
+      "confusion_matrix": {
+        "true_negative": 4614,
+        "false_positive": 6,
+        "false_negative": 85,
+        "true_positive": 20
+      }
+    },
+    {
+      "action": "abstracting",
+      "accuracy": 0.9858201058201058,
+      "precision": 0.796875,
+      "recall": 0.4857142857142857,
+      "f1": 0.6035502958579881,
+      "auc_roc": 0.9623902288188003,
+      "auc_pr": 0.6568069034684355,
+      "confusion_matrix": {
+        "true_negative": 4607,
+        "false_positive": 13,
+        "false_negative": 54,
+        "true_positive": 51
+      }
+    },
+    {
+      "action": "metacognitive_monitoring",
+      "accuracy": 0.9845502645502645,
+      "precision": 0.7105263157894737,
+      "recall": 0.5142857142857142,
+      "f1": 0.5966850828729282,
+      "auc_roc": 0.9245052566481137,
+      "auc_pr": 0.5635156211468696,
+      "confusion_matrix": {
+        "true_negative": 4598,
+        "false_positive": 22,
+        "false_negative": 51,
+        "true_positive": 54
+      }
+    },
+    {
+      "action": "remembering",
+      "accuracy": 0.9864550264550265,
+      "precision": 0.7887323943661971,
+      "recall": 0.5333333333333333,
+      "f1": 0.6363636363636364,
+      "auc_roc": 0.955599876314162,
+      "auc_pr": 0.6394854137408805,
+      "confusion_matrix": {
+        "true_negative": 4605,
+        "false_positive": 15,
+        "false_negative": 49,
+        "true_positive": 56
+      }
+    },
+    {
+      "action": "meta_awareness",
+      "accuracy": 0.9841269841269841,
+      "precision": 0.7083333333333334,
+      "recall": 0.4857142857142857,
+      "f1": 0.576271186440678,
+      "auc_roc": 0.9621407957122243,
+      "auc_pr": 0.5860271478844675,
+      "confusion_matrix": {
+        "true_negative": 4599,
+        "false_positive": 21,
+        "false_negative": 54,
+        "true_positive": 51
+      }
+    },
+    {
+      "action": "situation_modification",
+      "accuracy": 0.9784126984126984,
+      "precision": 0.5164835164835165,
+      "recall": 0.44761904761904764,
+      "f1": 0.47959183673469385,
+      "auc_roc": 0.9424799010513296,
+      "auc_pr": 0.4204957021579409,
+      "confusion_matrix": {
+        "true_negative": 4576,
+        "false_positive": 44,
+        "false_negative": 58,
+        "true_positive": 47
+      }
+    },
+    {
+      "action": "suspending_judgment",
+      "accuracy": 0.9976719576719577,
+      "precision": 0.9895833333333334,
+      "recall": 0.9047619047619048,
+      "f1": 0.945273631840796,
+      "auc_roc": 0.9949979385693671,
+      "auc_pr": 0.9758913224699113,
+      "confusion_matrix": {
+        "true_negative": 4619,
+        "false_positive": 1,
+        "false_negative": 10,
+        "true_positive": 95
+      }
+    },
+    {
+      "action": "emotion_understanding",
+      "accuracy": 0.9735449735449735,
+      "precision": 0.32142857142857145,
+      "recall": 0.17142857142857143,
+      "f1": 0.2236024844720497,
+      "auc_roc": 0.8671614100185528,
+      "auc_pr": 0.18765807602286827,
+      "confusion_matrix": {
+        "true_negative": 4582,
+        "false_positive": 38,
+        "false_negative": 87,
+        "true_positive": 18
+      }
+    },
+    {
+      "action": "reconsidering",
+      "accuracy": 0.9817989417989418,
+      "precision": 0.6862745098039216,
+      "recall": 0.3333333333333333,
+      "f1": 0.44871794871794873,
+      "auc_roc": 0.9622211915069059,
+      "auc_pr": 0.497863697332523,
+      "confusion_matrix": {
+        "true_negative": 4604,
+        "false_positive": 16,
+        "false_negative": 70,
+        "true_positive": 35
+      }
+    },
+    {
+      "action": "divergent_thinking",
+      "accuracy": 0.9904761904761905,
+      "precision": 1.0,
+      "recall": 0.5714285714285714,
+      "f1": 0.7272727272727273,
+      "auc_roc": 0.9738074623788909,
+      "auc_pr": 0.8979437568864271,
+      "confusion_matrix": {
+        "true_negative": 4620,
+        "false_positive": 0,
+        "false_negative": 45,
+        "true_positive": 60
+      }
+    },
+    {
+      "action": "zooming_in",
+      "accuracy": 0.9923809523809524,
+      "precision": 0.7804878048780488,
+      "recall": 0.9142857142857143,
+      "f1": 0.8421052631578947,
+      "auc_roc": 0.9960884353741497,
+      "auc_pr": 0.8104015860114245,
+      "confusion_matrix": {
+        "true_negative": 4593,
+        "false_positive": 27,
+        "false_negative": 9,
+        "true_positive": 96
+      }
+    },
+    {
+      "action": "emotional_reappraisal",
+      "accuracy": 0.9817989417989418,
+      "precision": 0.6938775510204082,
+      "recall": 0.3238095238095238,
+      "f1": 0.44155844155844154,
+      "auc_roc": 0.9530890538033396,
+      "auc_pr": 0.53076549565813,
+      "confusion_matrix": {
+        "true_negative": 4605,
+        "false_positive": 15,
+        "false_negative": 71,
+        "true_positive": 34
+      }
+    },
+    {
+      "action": "concretizing",
+      "accuracy": 0.988994708994709,
+      "precision": 0.9649122807017544,
+      "recall": 0.5238095238095238,
+      "f1": 0.6790123456790124,
+      "auc_roc": 0.9622933415790559,
+      "auc_pr": 0.8509640852102216,
+      "confusion_matrix": {
+        "true_negative": 4618,
+        "false_positive": 2,
+        "false_negative": 50,
+        "true_positive": 55
+      }
+    },
+    {
+      "action": "applying",
+      "accuracy": 0.9788359788359788,
+      "precision": 0.5555555555555556,
+      "recall": 0.23809523809523808,
+      "f1": 0.3333333333333333,
+      "auc_roc": 0.8935899814471242,
+      "auc_pr": 0.35012745093095293,
+      "confusion_matrix": {
+        "true_negative": 4600,
+        "false_positive": 20,
+        "false_negative": 80,
+        "true_positive": 25
+      }
+    },
+    {
+      "action": "response_modulation",
+      "accuracy": 0.9858201058201058,
+      "precision": 0.7714285714285715,
+      "recall": 0.5142857142857142,
+      "f1": 0.6171428571428571,
+      "auc_roc": 0.9558853844568129,
+      "auc_pr": 0.6163667066723193,
+      "confusion_matrix": {
+        "true_negative": 4604,
+        "false_positive": 16,
+        "false_negative": 51,
+        "true_positive": 54
+      }
+    },
+    {
+      "action": "reframing",
+      "accuracy": 0.9813756613756613,
+      "precision": 0.7428571428571429,
+      "recall": 0.24761904761904763,
+      "f1": 0.37142857142857144,
+      "auc_roc": 0.9475128839414554,
+      "auc_pr": 0.4745361097816086,
+      "confusion_matrix": {
+        "true_negative": 4611,
+        "false_positive": 9,
+        "false_negative": 79,
+        "true_positive": 26
+      }
+    },
+    {
+      "action": "emotion_management",
+      "accuracy": 0.9777777777777777,
+      "precision": 0.5,
+      "recall": 0.009523809523809525,
+      "f1": 0.018691588785046728,
+      "auc_roc": 0.8717398474541332,
+      "auc_pr": 0.3509192493146923,
+      "confusion_matrix": {
+        "true_negative": 4619,
+        "false_positive": 1,
+        "false_negative": 104,
+        "true_positive": 1
+      }
+    },
+    {
+      "action": "emotion_facilitation",
+      "accuracy": 0.9873015873015873,
+      "precision": 0.7710843373493976,
+      "recall": 0.6095238095238096,
+      "f1": 0.6808510638297872,
+      "auc_roc": 0.9551762523191094,
+      "auc_pr": 0.6787948494638057,
+      "confusion_matrix": {
+        "true_negative": 4601,
+        "false_positive": 19,
+        "false_negative": 41,
+        "true_positive": 64
+      }
+    },
+    {
+      "action": "perspective_taking",
+      "accuracy": 0.9875132275132276,
+      "precision": 0.8194444444444444,
+      "recall": 0.5619047619047619,
+      "f1": 0.6666666666666666,
+      "auc_roc": 0.9715594722737579,
+      "auc_pr": 0.6574799905870907,
+      "confusion_matrix": {
+        "true_negative": 4607,
+        "false_positive": 13,
+        "false_negative": 46,
+        "true_positive": 59
+      }
+    },
+    {
+      "action": "analogical_thinking",
+      "accuracy": 0.9932275132275132,
+      "precision": 0.9506172839506173,
+      "recall": 0.7333333333333333,
+      "f1": 0.8279569892473119,
+      "auc_roc": 0.9920645227788085,
+      "auc_pr": 0.8876583357128252,
+      "confusion_matrix": {
+        "true_negative": 4616,
+        "false_positive": 4,
+        "false_negative": 28,
+        "true_positive": 77
+      }
+    },
+    {
+      "action": "emotion_organizing",
+      "accuracy": 0.9841269841269841,
+      "precision": 0.6829268292682927,
+      "recall": 0.5333333333333333,
+      "f1": 0.5989304812834224,
+      "auc_roc": 0.9413863121005978,
+      "auc_pr": 0.5446233711244517,
+      "confusion_matrix": {
+        "true_negative": 4594,
+        "false_positive": 26,
+        "false_negative": 49,
+        "true_positive": 56
+      }
+    },
+    {
+      "action": "accepting",
+      "accuracy": 0.9902645502645503,
+      "precision": 0.7251908396946565,
+      "recall": 0.9047619047619048,
+      "f1": 0.8050847457627118,
+      "auc_roc": 0.9953834260977118,
+      "auc_pr": 0.7486035428368693,
+      "confusion_matrix": {
+        "true_negative": 4584,
+        "false_positive": 36,
+        "false_negative": 10,
+        "true_positive": 95
+      }
+    },
+    {
+      "action": "metacognitive_regulation",
+      "accuracy": 0.9786243386243386,
+      "precision": 0.5263157894736842,
+      "recall": 0.38095238095238093,
+      "f1": 0.4419889502762431,
+      "auc_roc": 0.9264471243042672,
+      "auc_pr": 0.3692960992689525,
+      "confusion_matrix": {
+        "true_negative": 4584,
+        "false_positive": 36,
+        "false_negative": 65,
+        "true_positive": 40
+      }
+    },
+    {
+      "action": "emotion_perception",
+      "accuracy": 0.9794708994708995,
+      "precision": 0.6176470588235294,
+      "recall": 0.2,
+      "f1": 0.302158273381295,
+      "auc_roc": 0.922965367965368,
+      "auc_pr": 0.3927490485755096,
+      "confusion_matrix": {
+        "true_negative": 4607,
+        "false_positive": 13,
+        "false_negative": 84,
+        "true_positive": 21
+      }
+    },
+    {
+      "action": "situation_selection",
+      "accuracy": 0.9870899470899471,
+      "precision": 0.8235294117647058,
+      "recall": 0.5333333333333333,
+      "f1": 0.6473988439306358,
+      "auc_roc": 0.9645732838589981,
+      "auc_pr": 0.6358997457049815,
+      "confusion_matrix": {
+        "true_negative": 4608,
+        "false_positive": 12,
+        "false_negative": 49,
+        "true_positive": 56
+      }
+    },
+    {
+      "action": "emotion_characterizing",
+      "accuracy": 0.9792592592592593,
+      "precision": 0.8181818181818182,
+      "recall": 0.08571428571428572,
+      "f1": 0.15517241379310345,
+      "auc_roc": 0.9201236858379715,
+      "auc_pr": 0.40649054288973563,
+      "confusion_matrix": {
+        "true_negative": 4618,
+        "false_positive": 2,
+        "false_negative": 96,
+        "true_positive": 9
+      }
+    },
+    {
+      "action": "pattern_recognition",
+      "accuracy": 0.9813756613756613,
+      "precision": 0.6307692307692307,
+      "recall": 0.3904761904761905,
+      "f1": 0.4823529411764706,
+      "auc_roc": 0.948315811172954,
+      "auc_pr": 0.5055839547548716,
+      "confusion_matrix": {
+        "true_negative": 4596,
+        "false_positive": 24,
+        "false_negative": 64,
+        "true_positive": 41
+      }
+    },
+    {
+      "action": "evaluating",
+      "accuracy": 0.9760846560846561,
+      "precision": 0.43333333333333335,
+      "recall": 0.24761904761904763,
+      "f1": 0.3151515151515151,
+      "auc_roc": 0.8913213770356627,
+      "auc_pr": 0.2663030248649389,
+      "confusion_matrix": {
+        "true_negative": 4586,
+        "false_positive": 34,
+        "false_negative": 79,
+        "true_positive": 26
+      }
+    },
+    {
+      "action": "creating",
+      "accuracy": 0.9760846560846561,
+      "precision": 0.45348837209302323,
+      "recall": 0.37142857142857144,
+      "f1": 0.4083769633507853,
+      "auc_roc": 0.8962554112554113,
+      "auc_pr": 0.3241359802943963,
+      "confusion_matrix": {
+        "true_negative": 4573,
+        "false_positive": 47,
+        "false_negative": 66,
+        "true_positive": 39
+      }
+    },
+    {
+      "action": "hypothesis_generation",
+      "accuracy": 0.9817989417989418,
+      "precision": 0.620253164556962,
+      "recall": 0.4666666666666667,
+      "f1": 0.532608695652174,
+      "auc_roc": 0.9688486909915481,
+      "auc_pr": 0.5408996442926928,
+      "confusion_matrix": {
+        "true_negative": 4590,
+        "false_positive": 30,
+        "false_negative": 56,
+        "true_positive": 49
+      }
+    }
+  ]
+}

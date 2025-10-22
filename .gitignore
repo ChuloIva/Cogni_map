@@ -1,0 +1,10 @@
+.venv/
+data/activations
+output/analysis_AnnoMI/all_predictions.json
+pdfs/brodley-transcripts-of-carl-rogers-therapy-sessions.pdf
+.DS_Store
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
