@@ -64,7 +64,7 @@ class UniversalMultiLayerInferenceEngine:
         """
         # Auto-detect device if not provided
         if device is None:
-            from gpu_utils import get_optimal_device
+            from .gpu_utils import get_optimal_device
             device = get_optimal_device()
 
         self.probes_base_dir = Path(probes_base_dir)

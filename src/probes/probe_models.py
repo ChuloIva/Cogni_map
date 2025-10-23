@@ -440,8 +440,8 @@ def load_probe(
             base_probe = MultiHeadProbe(**base_config)
         probe = CalibratedProbe(base_probe)
     elif model_class == 'SentimentRegressionProbe':
-        # Import SentimentRegressionProbe
-        from sentiment_regression_probe import SentimentRegressionProbe
+        # Import SentimentRegressionProbe from the same package
+        from .sentiment_regression_probe import SentimentRegressionProbe
         probe = SentimentRegressionProbe(**model_config)
     else:
         raise ValueError(f"Unknown model class: {model_class}")
