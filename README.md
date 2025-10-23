@@ -149,16 +149,6 @@ See the [datagen README](data/datagen/README.md) for complete documentation and 
 
 ---
 
-## Notebooks
-
-Interactive Jupyter notebooks are provided for hands-on exploration:
-
-1. **`notebooks/test_universal_inference.ipynb`** - Universal probes demo with visualizations
-2. **`notebooks/Sentiment_Full_Pipeline_Colab.ipynb`** - Complete sentiment probe pipeline (Google Colab compatible)
-3. **`notebooks/Streaming_Token_Probe_Demo.ipynb`** - Interactive TUI demonstration
-
----
-
 ## Repository Structure
 
 ```
@@ -257,77 +247,12 @@ The system detects **45 different cognitive actions** based on scientific taxono
 
 ---
 
-### Probe Performance Metrics
-
-#### Cognitive Action Probes - Top Performers (Layer 7)
-Ranked by AUC-ROC (Area Under ROC Curve - measures discrimination ability):
-
-| Rank | Action | AUC-ROC | F1 Score | Precision | Recall | Category |
-|------|--------|---------|----------|-----------|---------|----------|
-| 1 | `suspending_judgment` | 0.998 | 0.807 | 0.961 | 0.695 | Metacognitive |
-| 2 | `concretizing` | 0.994 | 0.740 | 0.941 | 0.610 | Analytical |
-| 3 | `counterfactual_reasoning` | 0.992 | 0.817 | 0.938 | 0.724 | Creative |
-| 4 | `zooming_in` | 0.991 | 0.675 | 0.891 | 0.543 | Analytical |
-| 5 | `divergent_thinking` | 0.987 | 0.701 | 0.884 | 0.581 | Creative |
-| 6 | `emotion_valuing` | 0.987 | 0.647 | 0.871 | 0.514 | Emotional |
-| 7 | `analogical_thinking` | 0.986 | 0.751 | 0.895 | 0.648 | Creative |
-| 8 | `accepting` | 0.983 | 0.646 | 0.898 | 0.505 | Metacognitive |
-| 9 | `zooming_out` | 0.981 | 0.568 | 0.977 | 0.400 | Analytical |
-| 10 | `convergent_thinking` | 0.979 | 0.582 | 0.800 | 0.457 | Analytical |
-| 11 | `distinguishing` | 0.978 | 0.584 | 0.839 | 0.448 | Analytical |
-| 12 | `perspective_taking` | 0.973 | 0.379 | 0.926 | 0.238 | Metacognitive |
-| 13 | `connecting` | 0.972 | 0.538 | 0.824 | 0.400 | Analytical |
-| 14 | `abstracting` | 0.967 | 0.338 | 0.880 | 0.210 | Analytical |
-| 15 | `pattern_recognition` | 0.968 | 0.328 | 0.759 | 0.210 | Metacognitive |
-| 16 | `emotional_reappraisal` | 0.967 | 0.408 | 0.714 | 0.286 | Emotional |
-| 17 | `situation_selection` | 0.966 | 0.391 | 0.818 | 0.257 | Emotional |
-| 18 | `hypothesis_generation` | 0.965 | 0.434 | 0.816 | 0.295 | Creative |
-| 19 | `attentional_deployment` | 0.963 | 0.506 | 0.755 | 0.381 | Emotional |
-| 20 | `emotion_facilitation` | 0.962 | 0.090 | 0.833 | 0.048 | Emotional |
-| 21 | `reconsidering` | 0.962 | 0.441 | 0.800 | 0.305 | Metacognitive |
-| 22 | `remembering` | 0.961 | 0.602 | 0.820 | 0.476 | Analytical |
-| 23 | `self_questioning` | 0.957 | 0.036 | 0.333 | 0.019 | Metacognitive |
-| 24 | `meta_awareness` | 0.954 | 0.437 | 0.717 | 0.314 | Metacognitive |
-| 25 | `questioning` | 0.954 | 0.368 | 0.806 | 0.238 | Metacognitive |
-| 26 | `response_modulation` | 0.951 | 0.552 | 0.696 | 0.457 | Emotional |
-| 27 | `reframing` | 0.944 | 0.333 | 0.615 | 0.229 | Creative |
-| 28 | `analyzing` | 0.941 | 0.200 | 0.800 | 0.114 | Analytical |
-| 29 | `emotion_organizing` | 0.935 | 0.395 | 0.638 | 0.286 | Emotional |
-| 30 | `emotion_perception` | 0.935 | 0.411 | 0.674 | 0.295 | Emotional |
-| 31 | `emotion_receiving` | 0.932 | 0.350 | 0.658 | 0.238 | Emotional |
-| 32 | `noticing` | 0.929 | 0.122 | 0.700 | 0.067 | Metacognitive |
-| 33 | `metacognitive_monitoring` | 0.927 | 0.326 | 0.875 | 0.200 | Metacognitive |
-| 34 | `situation_modification` | 0.928 | 0.019 | 1.000 | 0.010 | Emotional |
-| 35 | `updating_beliefs` | 0.922 | 0.208 | 0.650 | 0.124 | Metacognitive |
-| 36 | `applying` | 0.915 | 0.157 | 0.900 | 0.086 | Analytical |
-| 37 | `metacognitive_regulation` | 0.915 | 0.240 | 0.750 | 0.143 | Metacognitive |
-| 38 | `emotion_characterizing` | 0.912 | 0.231 | 0.875 | 0.133 | Emotional |
-| 39 | `emotion_management` | 0.908 | 0.206 | 0.619 | 0.124 | Emotional |
-| 40 | `creating` | 0.899 | 0.236 | 0.682 | 0.143 | Creative |
-| 41 | `understanding` | 0.887 | 0.085 | 0.385 | 0.048 | Analytical |
-| 42 | `evaluating` | 0.880 | 0.217 | 0.583 | 0.133 | Analytical |
-| 43 | `cognition_awareness` | 0.881 | 0.053 | 0.375 | 0.029 | Metacognitive |
-| 44 | `emotion_understanding` | 0.867 | 0.055 | 0.600 | 0.029 | Emotional |
-| 45 | `emotion_responding` | 0.790 | 0.000 | 0.000 | 0.000 | Emotional |
-
-**Overall Performance (Layer 7 Average)**:
-- **Average AUC-ROC**: 0.945
-- **Average Accuracy**: 98.3%
-- **Average F1 Score**: 0.382
-- **Average Precision**: 75.0%
-- **Average Recall**: 28.2%
 
 **Performance Across All Layers**:
 
 ![Cognitive Probe Performance](data/cognitive_probe_performance_by_layer.png)
 
 The visualization above shows how cognitive action probe performance varies across all 30 layers of the model. Layer 9 achieves the best average AUC-ROC (0.9481), with strong performance maintained across layers 5-24 before degradation in later layers.
-
-**Individual Action Performance**:
-
-![All Cognitive Actions Performance](data/all_cognitive_actions_performance.png)
-
-This grid shows each of the 45 cognitive actions and their AUC-ROC performance across all layers. Actions are color-coded by category: Metacognitive (blue), Analytical (purple), Creative (orange), and Emotional (green). Each subplot highlights the best-performing layer for that specific action.
 
 **Best vs Worst Performing Actions**:
 
