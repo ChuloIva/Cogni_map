@@ -1,4 +1,4 @@
-# Brije: Watching Minds Think
+# Cogni map: Watching Minds Think
 
 This repository provides a toolkit to detect 45 cognitive actions in real-time as a language model (Gemma-3-4B) generates text. Think of it as an fMRI for an AI's thought process.
 
@@ -16,6 +16,8 @@ Explore cognitive actions and sentiment at the token level with a full-screen te
 - Real-time cognitive action predictions
 - Layer-by-layer activation heatmaps
 - Per-action confidence scores and distributions
+
+![TUI Example](data/TUI_example.png)
 
 ---
 
