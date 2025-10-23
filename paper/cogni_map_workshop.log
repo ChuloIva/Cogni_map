@@ -1,0 +1,413 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.8.16)  23 OCT 2025 22:14
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**cogni_map_workshop.tex
+(./cogni_map_workshop.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count196
+\c@section=\count197
+\c@subsection=\count198
+\c@subsubsection=\count199
+\c@paragraph=\count266
+\c@subparagraph=\count267
+\c@figure=\count268
+\c@table=\count269
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen141
+) (./aaai2026.sty
+Package: aaai2026 2026/04/29 AAAI 2026 Submission format
+Conference Style for AAAI for LaTeX 2e -- version for submission
+\titlebox=\skip51
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2020/03/25 PSNFSS-v9.3 (SPQR) 
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/helvet.sty
+Package: helvet 2020/03/25 PSNFSS-v9.3 (WaS) 
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/courier.sty
+Package: courier 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen142
+\Gin@req@width=\dimen143
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip52
+\bibsep=\skip53
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count270
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen144
+\captionmargin=\dimen145
+\caption@leftmargin=\dimen146
+\caption@rightmargin=\dimen147
+\caption@width=\dimen148
+\caption@indent=\dimen149
+\caption@parindent=\dimen150
+\caption@hangindent=\dimen151
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count271
+\c@continuedfloat=\count272
+)
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 3
+4.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count273
+\l__pdf_internal_box=\box52
+)
+No file cogni_map_workshop.aux.
+\openout1 = `cogni_map_workshop.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+(/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count274
+\scratchdimen=\dimen152
+\scratchbox=\box53
+\nofMPsegments=\count275
+\nofMParguments=\count276
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count277
+\MPscratchDim=\dimen153
+\MPnumerator=\count278
+\makeMPintoPDFobject=\count279
+\everyMPtoPDFconversion=\toks19
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+\c@eqfn=\count280
+\titlearea=\box54
+\actualheight=\skip54
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 3
+6.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+)
+
+Package natbib Warning: Citation `chen2024designing' on page 1 undefined on inp
+ut line 39.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 39.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 39.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 39.
+
+Package natbib Warning: Citation `bereska2024mechanistic' on page 1 undefined o
+n input line 44.
+
+
+Package natbib Warning: Citation `chen2024designing' on page 1 undefined on inp
+ut line 44.
+
+
+Underfull \hbox (badness 2310) in paragraph at lines 46--47
+\OT1/ptm/m/n/10 spired by cog-ni-tive psy-chol-ogy tax-onomies, these ac-
+ []
+
+
+Package natbib Warning: Citation `alain2016understanding' on page 1 undefined o
+n input line 48.
+
+
+Package natbib Warning: Citation `zou2023representation' on page 1 undefined on
+ input line 48.
+
+
+Package natbib Warning: Citation `chen2024designing' on page 1 undefined on inp
+ut line 48.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 50.
+
+
+
+Underfull \hbox (badness 1292) in paragraph at lines 56--57
+\OT1/ptm/m/n/10 tions: di-ver-gent[]thinking, re-fram-ing, ana-log-i-cal[]think
+ing,
+ []
+
+
+Package natbib Warning: Citation `chen2024designing' on page 1 undefined on inp
+ut line 60.
+
+
+Package natbib Warning: Citation `chen2024designing' on page 1 undefined on inp
+ut line 60.
+
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 6
+2.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+LaTeX Font Info:    Trying to load font information for OMS+pcr on input line 6
+2.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/omspcr.fd
+File: omspcr.fd 
+)
+LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 62.
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
+[]\OT1/pcr/m/n/10 augmented[]text = f"\OMS/cmsy/m/n/10 f\OT1/pcr/m/n/10 text\OM
+S/cmsy/m/n/10 gn\OT1/pcr/m/n/10 n\OMS/cmsy/m/n/10 n\OT1/pcr/m/n/10 nThe
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
+\OT1/pcr/m/n/10 cognitive action being demonstrated
+ []
+
+
+Overfull \hbox (9.00534pt too wide) in paragraph at lines 72--72
+[]            \OT1/pcr/m/n/9 layers[layer_idx].output[0].save()[] 
+ []
+
+! Undefined control sequence.
+l.77 ... binary linear probes ($\theta \in \mathbb
+                                                  {R}^{4096 \times 1}$) with...
+
+? 
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
+[]\OT1/ptm/b/n/10 Training de-tails: \OT1/ptm/m/n/10 AdamW op-ti-mizer (lr=5e-4
+,
+ []
+
+
+Underfull \hbox (badness 4391) in paragraph at lines 79--80
+\OT1/ptm/m/n/10 weight[]decay=1e-3), co-sine an-neal-ing sched-uler, early
+ []
+
+
+
+[1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/l
+ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
+
+
+
+]
+
+Package natbib Warning: Citation `chen2024designing' on page 2 undefined on inp
+ut line 85.
+
+
+Package natbib Warning: Citation `chen2024designing' on page 2 undefined on inp
+ut line 85.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 96--97
+[]\OT1/ptm/b/n/10 Challenging ac-tions: \OT1/ptm/m/n/10 Emo-tion[]Responding (0
+.778
+ []
+
+
+Package natbib Warning: Citation `zou2023representation' on page 2 undefined on
+ input line 99.
+
+
+Package natbib Warning: Citation `alain2016understanding' on page 2 undefined o
+n input line 99.
+
+
+
+
+Package natbib Warning: Citation `chen2024designing' on page 2 undefined on inp
+ut line 124.
+
+
+Package natbib Warning: Citation `alain2016understanding' on page 2 undefined o
+n input line 124.
+
+
+Package natbib Warning: Citation `zou2023representation' on page 2 undefined on
+ input line 124.
+
+
+Underfull \hbox (badness 2753) in paragraph at lines 128--129
+[]\OT1/ptm/b/n/10 Future di-rec-tions: \OT1/ptm/m/n/10 (1) Ex-tend-ing to large
+r mod-els
+ []
+
+
+Underfull \hbox (badness 1552) in paragraph at lines 130--131
+\OT1/ptm/m/n/10 AI rea-son-ing, po-ten-tially help-ing users iden-tify bi-ased
+ []
+
+
+Underfull \hbox (badness 1152) in paragraph at lines 130--131
+\OT1/ptm/m/n/10 thought pro-cesses, and re-searchers de-velop more in-ter-
+ []
+
+
+Underfull \hbox (badness 1924) in paragraph at lines 150--153
+\OT1/ptm/m/n/10 Ken-neth Li, Nicholas Castillo Marin, Oam Pa-tel, Jan
+ []
+
+
+
+[2]
+
+Package natbib Warning: Citation `alain2016understanding' on page 3 undefined o
+n input line 165.
+
+
+Underfull \hbox (badness 1810) in paragraph at lines 167--168
+\OT1/ptm/m/n/10 tions (meta[]awareness, self[]questioning) peak at lay-ers
+ []
+
+
+Underfull \hbox (badness 1092) in paragraph at lines 173--174
+\OT1/ptm/m/n/10 Ac-cept-ing (12.4%), Un-der-stand-ing (11.2%), Con-nect-ing
+ []
+
+
+Underfull \hbox (badness 1019) in paragraph at lines 177--178
+\OT1/ptm/m/n/10 as-so-ciate with pos-i-tive sen-ti-ment, while crit-i-cal ac-ti
+ons
+ []
+
+
+
+
+Underfull \hbox (badness 2277) in paragraph at lines 179--180
+[]\OT1/ptm/b/n/10 Clinical In-sights: \OT1/ptm/m/n/10 The de-tected pat-terns a
+lign with
+ []
+
+
+Underfull \hbox (badness 1033) in paragraph at lines 179--180
+\OT1/ptm/m/n/10 Rogers' the-o-ret-i-cal frame-work where ther-a-pists pro-vide
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 189--190
+[]\OT1/ptm/b/n/10 Code avail-abil-ity: \OT1/ptm/m/n/10 Full source code,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 189--190
+\OT1/ptm/m/n/10 trained probes, and datasets avail-able at:
+ []
+
+
+Package natbib Warning: There were undefined citations.
+
+
+
+[3] (./cogni_map_workshop.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+
+! Package natbib Error: Bibliography not compatible with author-year citations.
+
+(natbib)                Press <return> to continue in numerical citation style.
+
+
+See the natbib package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.22 ...mand\NAT@force@numbers{}\NAT@force@numbers
+                                                  
+? 
+)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 3361 strings out of 473190
+ 57973 string characters out of 5715800
+ 463574 words of memory out of 5000000
+ 26604 multiletter control sequences out of 15000+600000
+ 578507 words of font info for 69 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 57i,5n,65p,1093b,196s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></
+usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
+sr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr
+/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/l
+ocal/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/tex
+live/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/
+texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist
+/fonts/type1/urw/times/utmri8a.pfb>
+Output written on cogni_map_workshop.pdf (3 pages, 119882 bytes).
+PDF statistics:
+ 60 PDF objects out of 1000 (max. 8388607)
+ 36 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
