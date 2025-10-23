@@ -136,6 +136,17 @@ python src/probes/sentiment_regression_probe.py \
     --device auto
 ```
 
+### Generate Your Own Training Data
+
+Want to create custom training data for your own probes? We provide a complete data generation framework in `data/datagen/`:
+
+- **Production-ready pipeline** using LLMs to generate high-quality examples
+- **Stratified sampling** across 36 domains with 50+ subjects per domain
+- **Async parallel processing** for efficient generation
+- **Google Colab notebooks** for easy experimentation
+
+See the [datagen README](data/datagen/README.md) for complete documentation and examples.
+
 ---
 
 ## Notebooks
@@ -317,6 +328,12 @@ The visualization above shows how cognitive action probe performance varies acro
 ![All Cognitive Actions Performance](data/all_cognitive_actions_performance.png)
 
 This grid shows each of the 45 cognitive actions and their AUC-ROC performance across all layers. Actions are color-coded by category: Metacognitive (blue), Analytical (purple), Creative (orange), and Emotional (green). Each subplot highlights the best-performing layer for that specific action.
+
+**Best vs Worst Performing Actions**:
+
+![Best vs Worst Actions](data/best_worst_actions.png)
+
+Comparison of the top 10 and bottom 10 performing cognitive actions (by average AUC-ROC across all layers). The best performers like Suspending Judgment (0.988) and Counterfactual Reasoning (0.984) show consistently high performance across most layers, while the worst performers like Emotion Responding (0.778) and Understanding (0.837) show more variability and lower overall discrimination ability.
 
 #### Sentiment Probes Performance
 
