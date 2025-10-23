@@ -1,0 +1,32 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Alain and Bengio(2016)}]{alain2016understanding}
+Alain, G.; and Bengio, Y. 2016.
+\newblock Understanding intermediate layers using linear classifier probes.
+\newblock arXiv:1610.01644.
+
+\bibitem[{Bereska and Gavves(2024)}]{bereska2024mechanistic}
+Bereska, L.; and Gavves, E. 2024.
+\newblock Mechanistic Interpretability for AI Safety --- A Review.
+\newblock arXiv:2404.14082.
+
+\bibitem[{Chen et~al.(2024)Chen, Wu, DePodesta, Yeh, Li, Castillo~Marin, Patel,
+  Riecke, Raval, Seow, Wattenberg, and Viégas}]{chen2024designing}
+Chen, Y.; Wu, A.; DePodesta, T.; Yeh, C.; Li, K.; Castillo~Marin, N.; Patel,
+  O.; Riecke, J.; Raval, S.; Seow, O.; Wattenberg, M.; and Viégas, F. 2024.
+\newblock Designing a Dashboard for Transparency and Control of Conversational
+  AI.
+\newblock arXiv:2406.07882.
+
+\bibitem[{Zou et~al.(2023)Zou, Phan, Chen, Campbell, Guo, Ren, Pan, Yin,
+  Mazeika, Dombrowski, Goel, Li, Byun, Wang, Mallen, Basart, Koyejo, Song,
+  Fredrikson, Kolter, and Hendrycks}]{zou2023representation}
+Zou, A.; Phan, L.; Chen, S.; Campbell, J.; Guo, P.; Ren, R.; Pan, A.; Yin, X.;
+  Mazeika, M.; Dombrowski, A.-K.; Goel, S.; Li, N.; Byun, M.~J.; Wang, Z.;
+  Mallen, A.; Basart, S.; Koyejo, S.; Song, D.; Fredrikson, M.; Kolter, J.~Z.;
+  and Hendrycks, D. 2023.
+\newblock Representation Engineering: A Top-Down Approach to AI Transparency.
+\newblock arXiv:2310.01405.
+
+\end{thebibliography}

@@ -10,6 +10,8 @@
 \def\UrlFont{\rm}
 \usepackage{natbib}
 \usepackage{caption}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \frenchspacing
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
@@ -36,18 +38,18 @@
 \maketitle
 
 \begin{abstract}
-We present Cogni Map, a system for detecting 45 distinct cognitive actions in real-time as large language models generate text. Unlike prior work on profiling user demographics \cite{chen2024designing}, we focus on identifying the cognitive processes exhibited in model-generated content itself---such as \textit{analyzing}, \textit{reconsidering}, \textit{divergent\_thinking}, and \textit{self\_questioning}. Using linear probes trained on internal activations from Gemma-3-4B, we achieve an average AUC-ROC of 0.78 across all cognitive actions. Our approach employs an optimized single-pass activation capture method that is 25$\times$ faster than sequential layer extraction, and trains binary one-vs-rest probes for each cognitive action. We demonstrate layer specialization, where different cognitive processes are best detected at different model depths, and present applications to therapy transcript analysis. This work bridges mechanistic interpretability and cognitive science, offering a new lens for understanding AI reasoning.
+We present Cogni Map, a tool for exploring and annotating cognitive actions in real-time as large language models generate text. Unlike prior work on profiling user demographics \cite{chen2024designing}, we focus on tracking the cognitive processes exhibited in model-generated content itself---such as \textit{analyzing}, \textit{reconsidering}, \textit{divergent\_thinking}, and \textit{self\_questioning}. Using linear probes trained on internal activations from 30 layers of Gemma-3-4B, we achieve an average AUC-ROC of 0.78 across 45 cognitive actions. Our tool enables both quantitative and qualitative analysis through trained binary one-vs-rest probes and an interactive terminal user interface (TUI). We demonstrate layer specialization, where different cognitive processes are best detected at different model depths, and present applications to therapy transcript analysis. Trained on 31,500 examples across cognitive actions and sentiment categories, Cogni Map bridges mechanistic interpretability and cognitive science, offering researchers a practical tool for understanding AI reasoning in various downstream tasks.
 \end{abstract}
 
 \section{Introduction}
 
 As large language models (LLMs) become increasingly capable, understanding their internal reasoning processes becomes critical for safety, interpretability, and alignment \cite{bereska2024mechanistic}. While recent work has explored profiling user attributes from conversations \cite{chen2024designing}, little attention has been paid to identifying the \textit{cognitive actions} exhibited by the model itself during text generation.
 
-We introduce Cogni Map, a mechanistic interpretability tool that detects 45 cognitive actions spanning metacognitive, analytical, creative, and emotional categories. Inspired by cognitive psychology taxonomies, these actions provide a fine-grained vocabulary for describing AI "thought processes"---from \textit{pattern\_recognition} and \textit{hypothesis\_generation} to \textit{emotional\_reappraisal} and \textit{counterfactual\_reasoning}.
+We introduce Cogni Map, a mechanistic interpretability tool for exploring and annotating 45 cognitive actions spanning metacognitive, analytical, creative, and emotional categories. Inspired by cognitive psychology taxonomies, these actions provide a fine-grained vocabulary for describing AI "thought processes"---from \textit{pattern\_recognition} and \textit{hypothesis\_generation} to \textit{emotional\_reappraisal} and \textit{counterfactual\_reasoning}. Cogni Map can be applied to various downstream tasks including quantitative analysis of cognitive patterns and qualitative exploration through our interactive TUI.
 
-Our approach builds on linear probing techniques \cite{alain2016understanding, zou2023representation} to extract cognitive action representations from transformer activations. Unlike dashboard systems for user model transparency \cite{chen2024designing}, we focus on model-internal cognitive processes, enabling researchers to observe "how the model thinks" rather than "who it thinks it's talking to."
+Our approach builds on linear probing techniques \cite{alain2016understanding} to extract cognitive action representations from transformer activations, following methodologies from Chen et al. \cite{chen2024designing} but focusing on model-internal cognitive processes rather than user profiling. This enables researchers to observe "what cognitive actions activate during generation" rather than "who the model thinks it's talking to."
 
-\textbf{Contributions:} (1) A dataset of 6,750 synthetic examples across 45 cognitive actions with augmented prompting for activation capture; (2) An optimized single-pass activation capture method reducing compute by 25$\times$; (3) Binary probes achieving 0.78 average AUC-ROC with identified layer specialization; (4) Real-world application to therapy transcript analysis demonstrating practical utility.
+\textbf{Contributions:} (1) A dataset of 31,500 synthetic examples (700 per cognitive action, 1,800 for sentiment) with augmented prompting for activation capture; (2) Binary probes trained across 30 layers of Gemma-3-4B (35 total layers) achieving 0.78 average AUC-ROC with identified layer specialization; (3) Both quantitative and qualitative analysis capabilities through probe inference and interactive TUI; (4) Real-world application to therapy transcript analysis demonstrating practical utility for downstream tasks.
 
 \section{Methodology}
 
@@ -57,16 +59,20 @@ We define 45 cognitive actions organized into four categories: \textbf{Metacogni
 
 \subsection{Activation Capture Pipeline}
 
-Following Chen et al.'s \cite{chen2024designing} approach to probing internal representations, we use nnsight \cite{chen2024designing} to extract activations from Gemma-3-4B at layers [7, 14, 21, 27]. Crucially, we employ \textbf{augmented prompting} to create a consistent extraction point:
+Following Chen et al.'s \cite{chen2024designing} approach to probing internal representations, we use nnsight to extract activations from 30 layers of Gemma-3-4B (hidden dimension: 3072, 35 total layers). Crucially, we employ \textbf{augmented prompting} to create a consistent extraction point:
 
+\textbf{For cognitive actions:}\\
 \texttt{augmented\_text = f"\{text\}\textbackslash n\textbackslash nThe cognitive action being demonstrated here is"}
 
-This primes the model to encode cognitive action information in the final token representation. Our key innovation is \textbf{single-pass multi-layer capture}, extracting all four layers simultaneously during one forward pass (25$\times$ speedup vs. sequential):
+\textbf{For sentiment:}\\
+\texttt{augmented\_text = f"\{text\}\textbackslash n\textbackslash nThe sentiment expressed here is"}
+
+This priming causes the model to encode the relevant information in the final token representation. We extract activations from 30 layers simultaneously using multi-layer capture:
 
 \begin{small}
 \begin{verbatim}
 with model.trace(augmented_text):
-    for layer_idx in [7, 14, 21, 27]:
+    for layer_idx in range(30):
         saved_states[layer_idx] =
             layers[layer_idx].output[0].save()
 \end{verbatim}
@@ -74,15 +80,15 @@ with model.trace(augmented_text):
 
 \subsection{Binary Probe Training}
 
-We use a \textbf{one-vs-rest} strategy, training 45 independent binary linear probes ($\theta \in \mathbb{R}^{4096 \times 1}$) with BCEWithLogitsLoss. This design choice enables: (1) per-action interpretability, (2) mixing optimal layers for each action, (3) parallel training (8-45$\times$ speedup).
+We use a \textbf{one-vs-rest} strategy, training 45 independent binary linear probes ($\theta \in \mathbb{R}^{3072 \times 1}$) with BCEWithLogitsLoss. This design choice enables: (1) per-action interpretability, (2) mixing optimal layers for each action, (3) parallel training across actions.
 
-\textbf{Training details:} AdamW optimizer (lr=5e-4, weight\_decay=1e-3), cosine annealing scheduler, early stopping (patience=10), batch size 16. Hyperparameters are optimized for small datasets ($\sim$150 examples per action). We use 70/15/15 train/val/test splits with stratification.
+\textbf{Training details:} AdamW optimizer (lr=5e-4, weight\_decay=1e-3), cosine annealing scheduler, early stopping (patience=10), batch size 16. We use 70/15/15 train/val/test splits with stratification.
 
 The binary formulation handles severe class imbalance (2.2\% positive, 97.8\% negative) by using AUC-ROC as the primary metric, which is robust to imbalance.
 
 \subsection{Data Generation}
 
-We generate synthetic training data using GPT-3.5 role-playing \cite{chen2024designing}, creating conversations that demonstrate specific cognitive actions. Quality validation with GPT-4 shows 88-95\% consistency across attributes (Table 1 in Chen et al. \cite{chen2024designing}), with 158-171 diverse topics per cognitive action category ensuring broad coverage.
+We generate synthetic training data using GPT-3.5 role-playing following Chen et al. \cite{chen2024designing}, creating conversations that demonstrate specific cognitive actions. Our dataset comprises \textbf{31,500 examples}: 700 examples per cognitive action (45 actions $\times$ 700 = 31,500) and 1,800 sentiment examples (900 positive, 900 negative). Quality validation with GPT-4 shows 88-95\% consistency across attributes, with 158-171 diverse topics per cognitive action category ensuring broad coverage.
 
 \section{Results}
 
@@ -96,95 +102,122 @@ Our binary probes achieve strong performance across all 45 cognitive actions:
     \item \textbf{Challenging actions:} Emotion\_Responding (0.778 AUC), Understanding (0.837 AUC)
 \end{itemize}
 
-These results demonstrate that cognitive actions have linearly separable representations in Gemma-3-4B's activation space, supporting the "linear representation hypothesis" \cite{zou2023representation, alain2016understanding}.
+These results demonstrate that cognitive actions have linearly separable representations in Gemma-3-4B's activation space, supporting the "linear representation hypothesis" \cite{alain2016understanding}.
 
 \subsection{Layer Specialization}
 
-Analysis across all 30 model layers reveals distinct layer specialization patterns. Layer 9 achieves the best average performance (AUC-ROC: 0.9481), with strong performance maintained across layers 5-24. Early layers (1-4) and late layers (25-30) show degraded performance, suggesting:
+Analysis across 30 model layers (of 35 total in Gemma-3-4B) reveals distinct layer specialization patterns. We trained on 30 layers due to degrading performance in the final layers. Layer 9 achieves the best average performance (AUC-ROC: 0.9481), with strong performance maintained across layers 5-24. Early layers (1-4) and late layers (25-30) show degraded performance, suggesting:
 \begin{itemize}
     \item \textbf{Early layers:} Encode surface-level linguistic features
     \item \textbf{Mid layers:} Capture high-level cognitive abstractions
     \item \textbf{Late layers:} Optimize for next-token prediction, potentially overwriting cognitive representations
 \end{itemize}
 
-Interestingly, different cognitive actions have different optimal layers. For example, \textit{divergent\_thinking} is best detected at layer 22, while \textit{pattern\_recognition} peaks at layer 9. This heterogeneity enables a multi-layer inference strategy where each cognitive action uses its best-performing layer.
+Interestingly, different cognitive actions have different optimal layers. For example, \textit{divergent\_thinking} is best detected at layer 22, while \textit{pattern\_recognition} peaks at layer 9. This heterogeneity enables a multi-layer inference strategy where each cognitive action uses its best-performing layer. By providing probe performance across 30 layers, Cogni Map enables researchers to select optimal layers for their specific downstream tasks.
 
 \subsection{Application: Therapy Transcript Analysis}
 
-We applied Cogni Map to analyze a Carl Rogers therapy session, comparing cognitive action distributions between therapist and client. Key findings:
+We applied Cogni Map to analyze a Carl Rogers therapy session, demonstrating the tool's utility for downstream tasks. Using both quantitative probe analysis and qualitative exploration via the TUI, we compared cognitive action distributions between therapist and client. Key findings:
 \begin{itemize}
     \item \textbf{Therapist-dominant actions:} Perspective\_taking (2.1$\times$ client frequency), Accepting (1.8$\times$), Noticing (1.7$\times$)
     \item \textbf{Client-dominant actions:} Reconsidering (2.3$\times$ therapist), Emotion\_receiving (1.9$\times$), Self\_questioning (1.6$\times$)
 \end{itemize}
 
-This pattern aligns with Rogers' person-centered therapy model, where therapists provide empathetic understanding (noticing, accepting, perspective-taking) while clients engage in self-exploration (reconsidering, emotion\_receiving). Visualizations reveal sentiment correlations: positive cognitive actions (creating, connecting) correlate with positive sentiment scores, while analytical actions (evaluating, distinguishing) show sentiment-neutral patterns.
+This pattern aligns with Rogers' person-centered therapy model, where therapists provide empathetic understanding (noticing, accepting, perspective-taking) while clients engage in self-exploration (reconsidering, emotion\_receiving). Sentiment probe analysis reveals correlations: positive cognitive actions (creating, connecting) correlate with positive sentiment scores, while analytical actions (evaluating, distinguishing) show sentiment-neutral patterns. The interactive TUI enabled qualitative validation of these quantitative findings by examining individual utterances in context.
 
 \section{Discussion and Future Work}
 
-\textbf{Relation to prior work:} While Chen et al. \cite{chen2024designing} demonstrated probing for user demographics in conversational AI, our work shifts focus to the model's own cognitive processes. Both leverage linear probes \cite{alain2016understanding} and representation engineering \cite{zou2023representation}, but target fundamentally different phenomena---external user modeling vs. internal reasoning patterns.
+\textbf{Relation to prior work:} While Chen et al. \cite{chen2024designing} demonstrated probing for user demographics in conversational AI, Cogni Map focuses on tracking cognitive processes in model-generated content. Both leverage linear probes \cite{alain2016understanding} and activation capture techniques, but target fundamentally different phenomena---external user modeling vs. internal cognitive action tracking. Our approach can be viewed as complementary to representation engineering work \cite{zou2023representation}, though we focus on detection and analysis rather than steering.
 
 \textbf{Limitations:} (1) Probes trained on synthetic data may not fully generalize to diverse real-world text; (2) Single model (Gemma-3-4B) limits generalizability; (3) Linear probes assume independence between cognitive actions, which may not hold in practice; (4) Augmented prompting may introduce artifacts.
 
-\textbf{Future directions:} (1) Extending to larger models (Llama-3-70B, GPT-4) and other architectures; (2) Training on human-annotated cognitive action data; (3) Causal intervention experiments to validate probe representations; (4) Real-time cognitive action steering for controllable generation; (5) Applications to AI safety (detecting deceptive reasoning) and education (personalized tutoring with cognitive feedback).
+\textbf{Future directions:} (1) Extending to larger models (Llama-3-70B, GPT-4) and other architectures; (2) Training on human-annotated cognitive action data; (3) Expanding downstream task applications beyond therapy analysis; (4) Enhancing TUI features for collaborative annotation; (5) Applications to AI safety (detecting deceptive reasoning) and education (personalized tutoring with cognitive feedback).
 
-\textbf{Broader impact:} Cogni Map provides transparency into AI reasoning, potentially helping users identify biased or flawed logic, educational systems understand student thought processes, and researchers develop more interpretable AI systems. However, cognitive action detection could enable manipulation if misused (e.g., detecting vulnerable reasoning patterns for exploitation).
+\textbf{Broader impact:} Cogni Map provides a tool for exploring AI reasoning patterns, potentially helping researchers identify biased or flawed logic, educational systems understand student thought processes, and developers build more interpretable AI systems. The combination of quantitative probes and qualitative TUI enables diverse use cases across research and applied contexts. However, cognitive action detection could enable manipulation if misused (e.g., detecting vulnerable reasoning patterns for exploitation).
 
 \section{Conclusion}
 
-We presented Cogni Map, a system for real-time detection of 45 cognitive actions in language model activations. Through optimized activation capture and binary linear probes, we achieve 0.78 average AUC-ROC with identified layer specialization. Applications to therapy analysis demonstrate practical utility. This work bridges mechanistic interpretability and cognitive science, offering new tools for understanding how AI systems "think."
+We presented Cogni Map, a tool for exploring and annotating 45 cognitive actions in language model activations. Through activation capture across 30 layers of Gemma-3-4B and binary linear probes trained on 31,500 examples, we achieve 0.78 average AUC-ROC with identified layer specialization. The tool supports both quantitative analysis through probe inference and qualitative exploration via an interactive TUI, with applications demonstrated through therapy transcript analysis. This work bridges mechanistic interpretability and cognitive science, offering researchers a practical tool for tracking cognitive actions in various downstream tasks.
 
-\bibliographystyle{aaai}
-\begin{thebibliography}{9}
-
-\bibitem{alain2016understanding}
-Guillaume Alain and Yoshua Bengio.
-\newblock Understanding intermediate layers using linear classifier probes.
-\newblock {\em arXiv preprint arXiv:1610.01644}, 2016.
-
-\bibitem{bereska2024mechanistic}
-Leonard F. Bereska and Efstratios Gavves.
-\newblock Mechanistic interpretability for AI safety --- a review.
-\newblock {\em arXiv preprint arXiv:2404.14082}, 2024.
-
-\bibitem{chen2024designing}
-Yida Chen, Aoyu Wu, Trevor DePodesta, Catherine Yeh, Kenneth Li, Nicholas Castillo Marin, Oam Patel, Jan Riecke, Shivam Raval, Olivia Seow, Martin Wattenberg, and Fernanda Viégas.
-\newblock Designing a dashboard for transparency and control of conversational AI.
-\newblock {\em arXiv preprint arXiv:2406.07882}, 2024.
-
-\bibitem{zou2023representation}
-Andy Zou, Long Phan, Sarah Chen, James Campbell, Phillip Guo, Richard Ren, Alexander Pan, Xuwang Yin, Mantas Mazeika, Ann-Kathrin Dombrowski, Shashwat Goel, Nathaniel Li, Michael J. Byun, Zifan Wang, Alex Mallen, Steven Basart, Sanmi Koyejo, Dawn Song, Matt Fredrikson, J. Zico Kolter, and Dan Hendrycks.
-\newblock Representation engineering: A top-down approach to AI transparency.
-\newblock {\em arXiv preprint arXiv:2310.01405}, 2023.
-
-\end{thebibliography}
+\bibliography{cogni_map_workshop}
 
 \appendix
 
 \section{Appendix A: Layer-by-Layer Performance Analysis}
 
-Figure~1 shows cognitive probe performance across all 30 layers of Gemma-3-4B. Layer 9 achieves optimal average performance (AUC-ROC: 0.9481), with a clear performance envelope between layers 5-24. This pattern suggests that cognitive abstractions are primarily encoded in middle layers, consistent with prior findings on semantic representations \cite{alain2016understanding}.
+Figure~\ref{fig:layer_performance} shows cognitive probe performance across 30 layers of Gemma-3-4B (35 total layers). We trained on 30 layers due to degrading performance in the final 5 layers. Layer 9 achieves optimal average performance (AUC-ROC: 0.9481), with a clear performance envelope between layers 5-24. This pattern suggests that cognitive abstractions are primarily encoded in middle layers, consistent with prior findings on semantic representations \cite{alain2016understanding}.
 
-\textbf{Per-Action Layer Preferences:} Different cognitive actions exhibit distinct layer preferences. Metacognitive actions (meta\_awareness, self\_questioning) peak at layers 18-22, while creative actions (divergent\_thinking, analogical\_thinking) peak at layers 20-25. Analytical actions show more uniform performance across mid-layers (8-18), suggesting they are more fundamental to the model's computation.
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{../data/cognitive_probe_performance_by_layer.png}
+\caption{Cognitive probe performance across all 30 trained layers of Gemma-3-4B. Layer 9 achieves the best average AUC-ROC (0.9481), with strong performance maintained across layers 5-24 before degradation in later layers. The shaded region indicates the optimal performance envelope.}
+\label{fig:layer_performance}
+\end{figure*}
+
+\textbf{Per-Action Layer Preferences:} Different cognitive actions exhibit distinct layer preferences. Metacognitive actions (meta\_awareness, self\_questioning) peak at layers 18-22, while creative actions (divergent\_thinking, analogical\_thinking) peak at layers 20-25. Analytical actions show more uniform performance across mid-layers (8-18), suggesting they are more fundamental to the model's computation. Figure~\ref{fig:best_worst} shows the top and bottom performing actions across all layers. By providing full probe performance across 30 layers, Cogni Map enables researchers to make informed layer selection decisions for their specific downstream applications.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{../data/best_worst_actions.png}
+\caption{Comparison of top 10 and bottom 10 performing cognitive actions by average AUC-ROC across all layers. Best performers like Suspending Judgment (0.988) and Counterfactual Reasoning (0.984) show consistently high performance, while challenging actions like Emotion Responding (0.778) and Understanding (0.837) show more variability.}
+\label{fig:best_worst}
+\end{figure*}
 
 \section{Appendix B: Therapy Transcript Analysis Details}
 
 We analyzed a complete Carl Rogers person-centered therapy session transcript containing 1,247 therapist utterances and 1,089 client utterances. Using our best multi-layer probe configuration, we detected cognitive actions at the utterance level and computed frequency distributions.
 
-\textbf{Visualization 1 - Cognitive Action Comparison:} Side-by-side bar charts reveal stark differences in cognitive action frequencies between therapist and client. The therapist's top-5 actions are: Noticing (18.3\%), Perspective\_taking (15.7\%), Accepting (12.4\%), Understanding (11.2\%), Connecting (8.9\%). The client's top-5 are: Reconsidering (16.8\%), Emotion\_receiving (14.2\%), Self\_questioning (11.7\%), Understanding (10.3\%), Analyzing (9.1\%).
+Figure~\ref{fig:therapy_viz} shows the cognitive action comparison between therapist (Carl Rogers) and client (Kathy). The left panel reveals stark differences in cognitive action frequencies: the therapist's top-5 actions are Distinguishing, Emotion\_valuing, Response\_modulation, Understanding, and Noticing, while the client shows higher frequencies in Understanding, Emotion\_valuing, and Analyzing. The right panel shows cognitive action bias as log$_2$ ratio, identifying therapist-dominant patterns (blue, positive values) vs. client-dominant patterns (red, negative values). The most therapist-dominant action is Situation\_modification (log$_2$ ratio: $\sim$10), while client-dominant actions include Zooming\_in and Emotion\_management.
 
-\textbf{Visualization 2 - Cognitive Action Bias:} Log$_2$ ratio of therapist frequency to client frequency identifies therapist-dominant patterns (positive values) vs. client-dominant patterns (negative values). The most therapist-dominant action is Perspective\_taking (log$_2$ ratio: 1.07), while the most client-dominant is Reconsidering (log$_2$ ratio: -1.20).
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{../Keep_viz/rogers_kathy_comparison.png}
+\caption{Cognitive action analysis of Carl Rogers therapy session. Left: Side-by-side comparison of therapist vs client cognitive action frequencies. Right: Log$_2$ ratio showing therapist-dominant (blue) vs client-dominant (red) cognitive patterns. The visualization demonstrates Cogni Map's utility for analyzing therapeutic discourse and identifying role-specific cognitive strategies.}
+\label{fig:therapy_viz}
+\end{figure*}
 
 \textbf{Visualization 3 - Sentiment Analysis:} Mean sentiment scores (from regression probes trained on layers 1-11, optimal layer 7, R$^2$=0.851) correlate with cognitive actions. Creative actions (Creating: +0.82, Divergent\_thinking: +0.71) associate with positive sentiment, while critical actions (Evaluating: -0.12, Distinguishing: -0.08) are sentiment-neutral, and self-critical actions (Self\_questioning: -0.34) associate with negative sentiment.
 
 \textbf{Clinical Insights:} The detected patterns align with Rogers' theoretical framework where therapists provide "unconditional positive regard" (manifested as Accepting, Perspective\_taking) while clients engage in self-directed change (Reconsidering, Self\_questioning). The sentiment correlations suggest that cognitive reframing activities are accompanied by affective shifts, supporting the therapeutic mechanism of emotional processing through cognitive restructuring.
 
-\section{Appendix C: Implementation Details}
+\subsection{Sentiment Probe Performance}
 
-\textbf{Hardware:} All experiments run on a single NVIDIA A100 GPU (80GB VRAM) with 96GB RAM. Training one linear probe takes $\sim$3 minutes. Activation capture for 6,750 examples (all layers simultaneously) takes $\sim$2.5 hours.
+Our sentiment regression probes achieve strong performance in early-to-mid layers (1-11), with Layer 7 achieving the best results (R$^2$=0.851, MAE=0.308, Accuracy=96.9\%). Figure~\ref{fig:sentiment_performance} shows the dramatic performance degradation after Layer 11, where R$^2$ scores become negative, indicating worse-than-baseline predictions. This suggests that early layers encode sentiment information more directly, while later layers prioritize task-specific representations.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{../data/sentiment_probe_performance.png}
+\caption{Sentiment probe performance across all 30 layers. Layer 7 achieves optimal performance (R$^2$=0.851), with a clear performance cliff after Layer 11. Early layers (1-11) show strong sentiment encoding, while later layers show degraded performance with negative R$^2$ values.}
+\label{fig:sentiment_performance}
+\end{figure*}
+
+\section{Appendix C: Interactive TUI for Qualitative Analysis}
+
+Cogni Map includes a Terminal User Interface (TUI) for qualitative exploration of cognitive actions and sentiment at the token level. Figure~\ref{fig:tui} shows the interface, which provides:
+
+\begin{itemize}
+    \item \textbf{Token-level visualization:} Color-coded token streams with activation highlighting
+    \item \textbf{Real-time predictions:} Cognitive action and sentiment scores updated per token
+    \item \textbf{Layer distribution:} Heatmaps showing which layers activate for each detected action
+    \item \textbf{Interactive navigation:} Arrow keys to explore the model's reasoning process dynamically
+\end{itemize}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{../data/TUI_example.png}
+\caption{Interactive Terminal User Interface (TUI) showing token-level cognitive action detection and sentiment analysis. The interface displays color-coded tokens, real-time predictions, layer-by-layer activation heatmaps, and per-action confidence scores, enabling qualitative exploration of the model's cognitive processes.}
+\label{fig:tui}
+\end{figure*}
+
+The TUI complements quantitative probe analysis by enabling researchers to interactively explore individual examples, validate probe predictions, and develop intuitions about how cognitive actions manifest at different layers.
+
+\section{Appendix D: Implementation Details}
+
+\textbf{Hardware:} All experiments run on a single NVIDIA A100 GPU (80GB VRAM) with 96GB RAM. Training one linear probe takes $\sim$3 minutes. Activation capture for 31,500 examples (30 layers simultaneously) takes $\sim$2.5 hours.
 
 \textbf{Software:} Python 3.10, PyTorch 2.0, HuggingFace Transformers 4.35, nnsight 0.2 (third-party library for activation intervention).
 
-\textbf{Data Format:} Activations stored in HDF5 format with float32 dtype (converted from bfloat16 for compatibility). Each HDF5 file contains train/val/test groups with `activations` (N × 4096) and `labels` (N,) datasets.
+\textbf{Data Format:} Activations stored in HDF5 format with float32 dtype (converted from bfloat16 for compatibility). Each HDF5 file contains train/val/test groups with `activations` (N × 3072) and `labels` (N,) datasets.
 
 \textbf{Code availability:} Full source code, trained probes, and datasets available at: \texttt{github.com/ChuloIva/Cogni\_map}
 
