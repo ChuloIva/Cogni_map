@@ -45,13 +45,20 @@ def parse_rogers_session(filepath):
         sentiment_mean = float(match.group(4))
         actions_block = match.group(5)
 
-        # Parse cognitive actions
-        action_pattern = r'✓\s+\d+\.\s+(.*?)\s+\(Layers.*?\)\s+Count:\s+(\d+)'
+        # Parse cognitive actions (filter by layer <= 21)
+        action_pattern = r'✓\s+\d+\.\s+(.*?)\s+\(Layers\s+([\d\s,]+?)\)\s+Count:\s+(\d+)'
         actions = {}
         for action_match in re.finditer(action_pattern, actions_block):
             action_name = action_match.group(1).strip()
-            count = int(action_match.group(2))
-            actions[action_name] = count
+            layers_str = action_match.group(2).strip()
+            count = int(action_match.group(3))
+
+            # Parse layer numbers and check if all are <= 21
+            layers = [int(l.strip()) for l in layers_str.replace(',', ' ').split() if l.strip().isdigit()]
+
+            # Only include actions where ALL layers are <= 21
+            if layers and all(layer <= 21 for layer in layers):
+                actions[action_name] = count
 
         utterances.append({
             'number': utt_num,
