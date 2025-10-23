@@ -8,7 +8,7 @@ This repository provides a toolkit to detect 45 cognitive actions in real-time a
 Detect 45 cognitive actions like `analyzing`, `reconsidering`, `divergent_thinking`, and `self_questioning` using trained probes on the model's internal states across layers 1-28.
 
 ### 2. Sentiment Probes (Regression-Based)
-Capture continuous sentiment scores (-3 to +3) using regression probes trained on layers 1-11, providing nuanced emotional context beyond binary classification.
+Capture continuous sentiment scores (-3 to +3) using regression probes trained across all 28 layers of the model, providing nuanced emotional context beyond binary classification. Best performance is achieved in early-to-mid layers (1-11), with layer 7 being optimal.
 
 ### 3. Interactive TUI (Token-Level Visualization)
 Explore cognitive actions and sentiment at the token level with a full-screen terminal interface that shows:
@@ -300,13 +300,27 @@ Ranked by AUC-ROC (Area Under ROC Curve - measures discrimination ability):
 | 45 | `emotion_responding` | 0.790 | 0.000 | 0.000 | 0.000 | Emotional |
 
 **Overall Performance (Layer 7 Average)**:
-- **Average AUC-ROC**: 0.945 (excellent discrimination)
+- **Average AUC-ROC**: 0.945
 - **Average Accuracy**: 98.3%
 - **Average F1 Score**: 0.382
 - **Average Precision**: 75.0%
 - **Average Recall**: 28.2%
 
+**Performance Across All Layers**:
+
+![Cognitive Probe Performance](data/cognitive_probe_performance_by_layer.png)
+
+The visualization above shows how cognitive action probe performance varies across all 30 layers of the model. Layer 9 achieves the best average AUC-ROC (0.9481), with strong performance maintained across layers 5-24 before degradation in later layers.
+
+**Individual Action Performance**:
+
+![All Cognitive Actions Performance](data/all_cognitive_actions_performance.png)
+
+This grid shows each of the 45 cognitive actions and their AUC-ROC performance across all layers. Actions are color-coded by category: Metacognitive (blue), Analytical (purple), Creative (orange), and Emotional (green). Each subplot highlights the best-performing layer for that specific action.
+
 #### Sentiment Probes Performance
+
+While sentiment probes are trained on all 30 layers, early-to-mid layers (1-11) show the best performance. Later layers (12-28) exhibit significantly degraded performance with negative R² values, indicating worse-than-baseline predictions. The table below shows the best-performing layers:
 
 | Layer | MSE | MAE | R² | Accuracy |
 |-------|-----|-----|-----|----------|
@@ -324,11 +338,11 @@ Ranked by AUC-ROC (Area Under ROC Curve - measures discrimination ability):
 
 **Best Sentiment Layer**: Layer 7 with **R² = 0.851** (85.1% variance explained)
 
-**Interpretation**:
-- **MSE** (Mean Squared Error): Lower is better, ~0.14 is excellent for normalized sentiment
-- **MAE** (Mean Absolute Error): Average prediction error of ~0.3 on normalized scale
-- **R²**: Explains 85% of variance in sentiment scores
-- **Accuracy**: 96.9% for directional classification (positive/negative/neutral)
+**Performance Across All Layers**:
+
+![Sentiment Probe Performance](data/sentiment_probe_performance.png)
+
+The visualization above shows sentiment probe performance across all 30 layers. Note the dramatic performance cliff after Layer 11, where R² scores become negative (worse than baseline). Layer 7 achieves the best balance across all metrics (R²=0.8473, MAE=0.2999, Accuracy=96.9%).
 
 ---
 
