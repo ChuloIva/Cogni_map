@@ -47,31 +47,39 @@ def parse_rogers_session(filepath):
 
         # Parse cognitive actions (filter by layer <= 21)
         action_pattern = r'✓\s+\d+\.\s+(.*?)\s+\(Layers\s+([\d\s,]+?)\)\s+Count:\s+(\d+)'
-        actions = {}
+        actions = set()  # Use set to track unique actions per utterance
         for action_match in re.finditer(action_pattern, actions_block):
             action_name = action_match.group(1).strip()
             layers_str = action_match.group(2).strip()
-            count = int(action_match.group(3))
+
+            # Skip "sentiment" action - it's noise
+            if action_name.lower() == 'sentiment':
+                continue
 
             # Parse layer numbers and check if all are <= 21
             layers = [int(l.strip()) for l in layers_str.replace(',', ' ').split() if l.strip().isdigit()]
 
             # Only include actions where ALL layers are <= 21
             if layers and all(layer <= 21 for layer in layers):
-                actions[action_name] = count
+                actions.add(action_name)  # Add to set (binary: present or not)
 
-        utterances.append({
-            'number': utt_num,
-            'speaker': speaker,
-            'text': text,
-            'sentiment': sentiment_mean,
-            'actions': actions
-        })
+        # Filter out utterances with less than 10 characters
+        if len(text) >= 10:
+            utterances.append({
+                'number': utt_num,
+                'speaker': speaker,
+                'text': text,
+                'sentiment': sentiment_mean,
+                'actions': actions
+            })
 
     return utterances
 
 def aggregate_by_speaker(utterances):
-    """Aggregate cognitive action counts and sentiments by speaker."""
+    """Aggregate cognitive action counts and sentiments by speaker.
+
+    Counts how many utterances each action appears in (not the aggregated count from file).
+    """
 
     speaker_data = defaultdict(lambda: {
         'actions': Counter(),
@@ -85,9 +93,10 @@ def aggregate_by_speaker(utterances):
 
         speaker_data[speaker]['sentiments'].append(sentiment)
 
-        for action, count in utt['actions'].items():
-            speaker_data[speaker]['actions'][action] += count
-            # Record sentiment for each occurrence of this action
+        # utt['actions'] is now a set, so each action counts as 1 per utterance
+        for action in utt['actions']:
+            speaker_data[speaker]['actions'][action] += 1  # Count utterance occurrences
+            # Record sentiment for each utterance where this action appears
             speaker_data[speaker]['action_sentiments'][action].append(sentiment)
 
     return speaker_data
@@ -280,8 +289,8 @@ def print_summary_stats(speaker_data, therapist, client):
 
 def main():
     # File paths (relative to Keep_viz directory)
-    input_file = Path("data/Kathy_session_interactive_analysis.txt")
-    output_dir = Path(".")  # Save visualizations in Keep_viz directory
+    input_file = Path("Keep_viz/data/Kathy_session_annotated.txt")
+    output_dir = Path("new_output/")  # Save visualizations in Keep_viz directory
     output_dir.mkdir(parents=True, exist_ok=True)
 
     print("Parsing Carl Rogers session data...")
