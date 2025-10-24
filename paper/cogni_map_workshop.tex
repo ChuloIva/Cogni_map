@@ -12,6 +12,7 @@
 \usepackage{caption}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{placeins}
 \frenchspacing
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
@@ -85,30 +86,32 @@ Cogni Map is a practical tool for exploring and annotating 45 cognitive actions 
 \clearpage
 \appendix
 
-\section{Additional Visualizations}
+\section{Appendix}
+\vspace{2em}
 
-\begin{figure*}[t]
+\noindent
+\begin{minipage}{\textwidth}
 \centering
 \includegraphics[width=\textwidth]{../Keep_viz/rogers_kathy_comparison.png}
-\caption{Therapy session analysis comparing cognitive action patterns between therapist (Carl Rogers) and client (Kathy). Left panel shows aggregate counts of cognitive actions for both participants across filtered data. Right panel displays cognitive action bias as log2 ratio, highlighting therapist-dominant actions (blue) such as \textit{situation\_modification}, \textit{emotional\_reappraisal}, and \textit{emotion\_facilitation}, versus client-dominant actions (red) including \textit{zooming\_in}, \textit{self\_questioning}, and \textit{applying}. These patterns align with person-centered therapy principles.}
+\captionof{figure}{Therapy session analysis comparing cognitive action patterns between therapist (Carl Rogers) and client (Kathy). Left panel shows aggregate counts of cognitive actions for both participants across filtered data. Right panel displays cognitive action bias as log2 ratio, highlighting therapist-dominant actions (blue) such as \textit{situation\_modification}, \textit{emotional\_reappraisal}, and \textit{emotion\_facilitation}, versus client-dominant actions (red) including \textit{zooming\_in}, \textit{self\_questioning}, and \textit{applying}. These patterns align with person-centered therapy principles.}
 \label{fig:therapy_comparison}
-\end{figure*}
+\end{minipage}
 
-\begin{figure*}[t]
+\begin{figure*}[!htbp]
 \centering
 \includegraphics[width=\textwidth]{../data/cognitive_probe_performance_by_layer.png}
 \caption{Cognitive action probe performance across all 30 layers of Gemma-3-4B. The visualization shows average AUC-ROC scores for each layer, with Layer 9 achieving peak performance (0.948 AUC-ROC). Strong performance is maintained across mid-layers (5-24), while early and late layers show degraded performance. This pattern suggests that early layers focus on surface-level features, mid-layers capture high-level cognitive abstractions, and late layers optimize for next-token prediction, potentially overwriting intermediate representations.}
 \label{fig:layer_performance}
 \end{figure*}
 
-\begin{figure*}[t]
+\begin{figure*}[!htbp]
 \centering
 \includegraphics[width=\textwidth]{../data/best_worst_actions.png}
 \caption{Comparison of top 10 and bottom 10 performing cognitive actions ranked by average AUC-ROC across all layers. Best performers like \textit{suspending\_judgment} (0.988) and \textit{counterfactual\_reasoning} (0.984) show consistently high performance and distinct activation patterns across most layers. Worst performers like \textit{emotion\_responding} (0.778) and \textit{understanding} (0.837) exhibit more variability and lower overall discrimination ability, suggesting these concepts may be more distributed or context-dependent in the model's representation space.}
 \label{fig:best_worst}
 \end{figure*}
 
-\begin{figure*}[t]
+\begin{figure*}[!htbp]
 \centering
 \includegraphics[width=\textwidth]{../data/sentiment_probe_performance.png}
 \caption{Sentiment probe performance across all 30 layers showing contrasting specialization pattern compared to cognitive probes. Optimal performance is concentrated in early-to-mid layers (1-11) with Layer 7 achieving peak R²=0.851 (85.1\% variance explained), MSE=0.143, and 96.9\% accuracy. Sharp degradation occurs after Layer 11 with negative R² values in layers 12-30, indicating sentiment representations are encoded earlier in the processing hierarchy than higher-level cognitive abstractions. The four panels show R² Score (top-left), Mean Squared Error (top-right), Mean Absolute Error (bottom-left), and Classification Accuracy (bottom-right).}
