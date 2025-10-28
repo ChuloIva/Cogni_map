@@ -1,0 +1,50 @@
+# Changelog
+
+## 0.5.0 - 2025-09-23
+
+* Better handing of model layers. (#73)
+  * Thanks to @wassname and @thiswillbeyourgithub ! :tada:
+* Fix for Qwen2 inference `attention_type`. (#73)
+* Reasoning dataset for steering thinking models. (#69)
+  * Thanks to @wassname ! :tada:
+* Add `compute_hiddens` hook for fancy things. (#74)
+  * See `notebooks/model_delta.ipynb` for an example.
+
+## 0.4.0 - 2024-12-13
+
+* SAE support! See `notebooks/sae.ipynb` for an example. (#49)
+* Fixes for models in `bfloat16`. (#49)
+* `accelerate` removed from project dependencies, please install it manually with `pip install accelerate` if you need `device_map="auto"` or other `accelerate` features. (#56)
+* (for devs) Migrate project to `uv` and `ruff` from `poetry` and `black`. (#56)
+
+## 0.3.1 - 2024-07-01
+
+* Add `method="pca_center"` option for training vectors with a more accurate method. (#29 / #34)
+  * Thanks to @r3ndd ! :tada:
+  * (The old method, `"pca_diff"`, remains the default.)
+  * Also adds the undocumented / experimental `method="umap"`.
+* Adds `ControlVector.import_gguf(filename)` as a peer to `export_gguf`. (#34)
+* Fixes a bug with training vectors on right-padded models, such as llama-3-*. (#38)
+  * Thanks to @ohxh ! :tada:
+* (0.3.0 was a botched release, has been yanked)
+
+## 0.2.2 - 2024-03-09
+
+* Fix a bug in control.py (#18)
+
+## 0.2.1 - 2024-03-04
+
+* Add GPT-2 support. (#12)
+* Officially support Python 3.10 and 3.11. (#13)
+
+## 0.2.0 - 2024-03-03
+
+* Add control vector arithmetic. (#6)
+* Add GGUF export. (#5, #9)
+* Notebooks: Add code questions dataset. (#4)
+* Notebooks: Move `data/` to `notebooks/data/`. (#7)
+* Notebooks: Add MPS (Apple Silicon) autodetection. (#8) 
+
+## 0.1.0 - 2024-01-21
+
+* Initial release.

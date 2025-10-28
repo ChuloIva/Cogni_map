@@ -1,0 +1,11 @@
+langchain>=0.1.0
+langchain-openai
+crfm-helm
+scipy
+seaborn
+matplotlib
+pandas
+pydantic
+python-dotenv
+openai>=1.0.0
+tqdm
