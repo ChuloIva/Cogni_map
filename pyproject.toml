@@ -29,3 +29,7 @@ packages = ["src"]
 [tool.uv]
 dev-dependencies = []
 
+[[tool.uv.index]]
+name = "pytorch-rocm"
+url = "https://download.pytorch.org/whl/rocm6.0"
+

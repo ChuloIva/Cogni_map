@@ -1,0 +1,93 @@
+{
+  "model_name": "google/gemma-3-4b-it",
+  "temperature": 0.0,
+  "overall_accuracy": 0.6466666666666666,
+  "total_samples": 1200,
+  "total_correct": 776,
+  "condition_results": [
+    {
+      "condition": "0_backward_belief_true_belief",
+      "accuracy": 0.78,
+      "num_samples": 100,
+      "num_correct": 78,
+      "uncertain_grades": 0
+    },
+    {
+      "condition": "0_backward_belief_false_belief",
+      "accuracy": 0.23,
+      "num_samples": 100,
+      "num_correct": 23,
+      "uncertain_grades": 0
+    },
+    {
+      "condition": "0_forward_belief_true_belief",
+      "accuracy": 0.88,
+      "num_samples": 100,
+      "num_correct": 88,
+      "uncertain_grades": 0
+    },
+    {
+      "condition": "0_forward_belief_false_belief",
+      "accuracy": 0.48,
+      "num_samples": 100,
+      "num_correct": 48,
+      "uncertain_grades": 0
+    },
+    {
+      "condition": "0_forward_action_true_belief",
+      "accuracy": 0.82,
+      "num_samples": 100,
+      "num_correct": 82,
+      "uncertain_grades": 0
+    },
+    {
+      "condition": "0_forward_action_false_belief",
+      "accuracy": 0.58,
+      "num_samples": 100,
+      "num_correct": 58,
+      "uncertain_grades": 0
+    },
+    {
+      "condition": "1_backward_belief_true_belief",
+      "accuracy": 0.43,
+      "num_samples": 100,
+      "num_correct": 43,
+      "uncertain_grades": 0
+    },
+    {
+      "condition": "1_backward_belief_false_belief",
+      "accuracy": 0.66,
+      "num_samples": 100,
+      "num_correct": 66,
+      "uncertain_grades": 0
+    },
+    {
+      "condition": "1_forward_belief_true_belief",
+      "accuracy": 0.62,
+      "num_samples": 100,
+      "num_correct": 62,
+      "uncertain_grades": 0
+    },
+    {
+      "condition": "1_forward_belief_false_belief",
+      "accuracy": 0.83,
+      "num_samples": 100,
+      "num_correct": 83,
+      "uncertain_grades": 0
+    },
+    {
+      "condition": "1_forward_action_true_belief",
+      "accuracy": 0.82,
+      "num_samples": 100,
+      "num_correct": 82,
+      "uncertain_grades": 0
+    },
+    {
+      "condition": "1_forward_action_false_belief",
+      "accuracy": 0.63,
+      "num_samples": 100,
+      "num_correct": 63,
+      "uncertain_grades": 0
+    }
+  ]
+}
