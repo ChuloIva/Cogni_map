@@ -1,4 +1,4 @@
-I would need to steer the model towards ToM using repeng library that is available in the repo in third party.
+I would need to steer the model towards ToM using repeng library that is available in the repo ToM folder.
 So lets analyse how it was implemented there and lets steer gemma 3 4b, I would need to steer it towards being better at theory of mind, so the idea is to train that vector, vector that steers the model towards being better at ToM. 
 
 
