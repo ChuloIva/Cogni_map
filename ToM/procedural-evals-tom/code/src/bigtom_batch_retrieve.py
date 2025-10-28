@@ -5,6 +5,7 @@ import json
 import csv
 import argparse
 import os
+from datetime import datetime
 from dotenv import load_dotenv
 from openai import OpenAI
 
