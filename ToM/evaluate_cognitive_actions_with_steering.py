@@ -106,7 +106,7 @@ class CognitiveActionEvaluator:
         benchmark_dir: str = "procedural-evals-tom/data/conditions",
         results_dir: str = "results",
         steering_coeff: float = 1.5,
-        probe_layer_range: Tuple[int, int] = (21, 30),
+        probe_layer_range: Tuple[int, int] = (10, 20),
         steering_layer_range: List[int] = None,
         device: str = None
     ):
@@ -127,7 +127,7 @@ class CognitiveActionEvaluator:
         self.model_name = model_name
         self.steering_coeff = steering_coeff
         self.probe_layer_range = probe_layer_range
-        self.steering_layer_range = steering_layer_range or list(range(-5, -18, -1))
+        self.steering_layer_range = steering_layer_range or list(range(-4, -20, -1))
 
         # Resolve paths
         script_dir = Path(__file__).parent
@@ -954,7 +954,7 @@ def main():
     parser.add_argument(
         '--steering-vector',
         type=str,
-        default='steering_vectors/tom_general_chat.gguf',
+        default='steering_vectors/tom_backward_belief.gguf',
         help='Path to steering vector .gguf file'
     )
     parser.add_argument(
@@ -972,7 +972,7 @@ def main():
     parser.add_argument(
         '--num-samples', '-n',
         type=int,
-        default=50,
+        default=10,
         help='Number of samples to evaluate'
     )
     parser.add_argument(
@@ -984,7 +984,7 @@ def main():
     parser.add_argument(
         '--steering-coeff',
         type=float,
-        default=1.3,
+        default=1000,
         help='Steering coefficient (strength)'
     )
     parser.add_argument(

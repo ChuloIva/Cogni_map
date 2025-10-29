@@ -266,3 +266,43 @@ combined_tom_vector = (
 ```
 
 
+### Skills by axis
+
+- **Order init (0 vs 1)**
+  - 0 (implicit belief): infer the agent’s belief from context; stronger perspective-taking, discourse/model-building, and inhibition of your own knowledge.
+  - 1 (explicit belief stated): bind and track a stated belief over subsequent events; working memory and consistency checking.
+
+- **Direction (forward vs backward)**
+  - Forward: maintain a situation model as events unfold; temporal tracking; predict beliefs/actions from current context.
+  - Backward: abductive reasoning from later observations to earlier mental states; causal-temporal reconstruction; plan/outcome interpretation.
+
+- **Variable (belief vs action)**
+  - Belief: first-order Theory of Mind—represent what the agent believes vs what is true; perspective decoupling.
+  - Action: plan/action prediction conditioned on the agent’s belief and goal; goal-conditioned policy simulation.
+
+- **Belief type (true_belief vs false_belief)**
+  - True: align agent belief with world state; consistency and factual tracking.
+  - False: decouple agent belief from reality; counterfactual simulation (“what they think” vs “what is”); stronger inhibition of evaluator knowledge.
+
+### Skills per condition family
+
+- **Forward belief — true_belief**
+  - Track unfolding facts; attribute correct belief; maintain consistency.
+- **Forward belief — false_belief**
+  - Infer belief that conflicts with reality; suppress your own knowledge; classic first-order ToM with misbelief.
+- **Backward belief — true_belief**
+  - Reason backward from later cues/actions to reconstruct a correct prior belief; causal/abductive inference.
+- **Backward belief — false_belief**
+  - Abduct prior misbelief from later evidence; distinguish outcomes driven by ignorance vs world changes; robust perspective-taking.
+- **Forward action — true_belief**
+  - Predict goal-directed action from accurate beliefs; commonsense planning.
+- **Forward action — false_belief**
+  - Predict action from the agent’s mistaken belief; simulate plans under incorrect world models; strong belief–action decoupling.
+
+### Core capabilities exercised across tests
+- Reading comprehension and event sequencing
+- Working memory for entities, states, and updates
+- Causal-temporal reasoning and abduction
+- First-order Theory of Mind and perspective decoupling
+- Counterfactual simulation and knowledge inhibition
+- Goal recognition and commonsense planning
