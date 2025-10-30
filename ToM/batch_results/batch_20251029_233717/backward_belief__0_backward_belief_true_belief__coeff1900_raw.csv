@@ -1,0 +1,53 @@
+story,question,true_answer,wrong_answer,baseline_answer,baseline_correct,baseline_activations_at_question,baseline_activations_after_answer,steered_answer,steered_correct,steered_activations_at_question,steered_activations_after_answer,diff_at_question,diff_after_answer,accuracy_improvement
+"Noor is working as a barista at a busy coffee shop. Noor wants to make a delicious cappuccino for a customer who asked for oat milk. Noor grabs a milk pitcher and fills it with oat milk. A coworker, who didn't hear the customer's request, swaps the oat milk in the pitcher with almond milk while Noor is attending to another task. Noor opens the fridge again and reaches for the oat milk.",Does Noor believe the milk pitcher contains oat milk or almond milk?,Noor believes the milk pitcher contains almond milk.,Noor believes the milk pitcher contains oat milk.,"Noor believes the milk pitcher contains oat milk. She just grabbed it and filled it, assuming it was the oat milk she’d initially taken. She hasn’t checked it since the switch.",False,{},{},"Noor believes the milk pitcher contains **oat milk**.
+
+Here's why:
+
+*   She just filled it with oat milk and the last action she performed was to reach for it.
+*   She hasn't yet detected the swap performed by her coworker.
+
+This is a classic problem-solving question based on change-of-location change-of-its (CAMQ) type questions.",False,{},{},{},{},False
+"Zara is attending an art exhibition at a local gallery in her town. Zara wants to learn more about a particular abstract painting she admires. The label next to the artwork states that the painting is the work of a famous artist, and Zara reads the label carefully. A gallery staff member, realizing there was a mix-up, changes the label with the correct information attributing the painting to an emerging artist instead. Zara looks for more information about the emerging artist.",Does Zara believe the painting is the work of a famous artist or an emerging artist?,Zara believes the painting is the work of an emerging artist.,Zara believes the painting is the work of a famous artist.,"Emerging artist. 
+
+The story states that the gallery staff member *changed* the label to attribute the painting to an emerging artist. Therefore, Zara now believes it’s the work of an emerging artist, not a famous one.",False,{},{},"Answering the question:
+
+Zara believes the painting is the work of an **emerging artist**.
+
+**Hint:** The story states that the gallery staff member changes the label to reveal the painting's true artist.",True,{},{},{},{},True
+"Carlos is a farmer in a small village in Mexico, tending to his cornfield. He wants to irrigate his crops by opening a water valve connected to a nearby river. Carlos closed the valve the previous evening. During the night, heavy rainfall caused the river to overflow, opening the valve and flooding the cornfield. Carlos calls his neighbour to ask them if they could close the valve.",Does Carlos believe the water valve is closed or open?,Carlos believes the water valve is open.,Carlos believes the water valve is closed.,"Open.
+
+The story states the river overflowed and opened the valve. Carlos is calling his neighbor to *close* it, implying he knows it’s currently open.",True,{},{},Open,False,{},{},{},{},False
+"Kofi is a fisherman from a small village in Ghana. He wants to catch enough fish today to provide for his family and sell the surplus at the market. Kofi repaired his fishing net last night. While Kofi is away from his boat, a group of monkeys comes and plays with the fishing net, tearing it apart. Kofi buys new repair equipment for fixing the fishing net.",Does Kofi believe his fishing net is in good condition or torn apart?,Kofi believes his fishing net is torn apart.,Kofi believes his fishing net is in good condition.,"Torn apart. 
+
+The story states the monkeys “tear[ed] it apart,” indicating the net is damaged.",True,{},{},"Torn apart.
+
+**Hint:** The story states the monkeys ""tear it apart"", providing key information about the net's condition.",True,{},{},{},{},False
+"Azola is a teacher at a small school in rural China. She wants to surprise her students with a new book for the school library. Azola got a notification from Amazon stating that the package containing the book was left at her doorstep. A gust of wind blows the package off her doorstep, and a neighbor replaces it with a different package containing a hand-knit scarf. Azola retrieves the original package with the book.",Does Azola believe the package contains the book she ordered or a hand-knit scarf?,Azola believes the package contains a hand-knit scarf.,Azola believes the package contains the book she ordered.,"Azola believes the package contains the book she ordered. She retrieved the original package, which was the one she had been expecting.",False,{},{},"Azola believes the package contains the book she ordered.
+
+**Hint:** The story states she retrieves the *original* package, which contains the book.",False,{},{},{},{},False
+"Ravi is a farmer in a small Indian village, tending to his mango orchard. Ravi wants to harvest ripe mangoes to sell at the local market. He notices a mango tree with a heavy branch laden with ripe mangoes. A mischievous monkey comes along and eats all the ripe mangoes on the branch while Ravi is gathering his harvesting tools. Ravi searches for another tree with ripe mangoes.",Does Ravi believe the branch has ripe mangoes or no ripe mangoes?,Ravi believes the branch has no ripe mangoes.,Ravi believes the branch has ripe mangoes.,"Ravi initially *believes* the branch has ripe mangoes. He’s noticed a “heavy branch laden with ripe mangoes,” indicating his perception of ripeness. However, the monkey’s actions demonstrate that his belief was incorrect. 
+
+So the best answer is: **Ravi initially believes the branch has ripe mangoes, but discovers they are all gone.** 
+
+It’s important to note the distinction between what he *thought* and what *actually* was there.",False,{},{},"Ravi initially believes the branch has **ripe mangoes**! He notices it with a heavy branch laden with them.  The monkey's trick then changes his belief, but the initial test of the branch reveals his first belief.",False,{},{},{},{},False
+"Kofi is a chef at a popular Ghanaian restaurant. Kofi wants to prepare a traditional groundnut soup for the dinner menu. Kofi adds a small container of peanut butter to the soup pot on the stove. An apprentice chef, mistakenly thinking it was a seasoning paste, removes the peanut butter from the soup and replaces it with tomato paste. Kofi adds peanut butter back into the soup.",Does Kofi believe the soup contains peanut butter or tomato paste?,Kofi believes the soup contains tomato paste.,Kofi believes the soup contains peanut butter.,"Kofi believes the soup contains **peanut butter**. 
+
+Here's why: He just added it back in! His actions demonstrate his belief that the peanut butter is still present. He wouldn't have added it if he thought it was replaced with tomato paste.",True,{},{},"Kofi believes the soup contains **peanut butter**.
+
+Here's how we can determine this:
+
+*   He just added peanut butter back!  The problem states his action.
+*   He didn't observe the swap made by the apprentice.
+
+Therefore, his most recent experience tells him it's peanut butter that's present.",False,{},{},{},{},False
+"Kael is a farmer in a remote village in the Andes. Kael wants to plant a new crop of high-altitude potatoes in one of his terraced fields. The soil in the field appears rich and well-fertilized. Overnight, heavy rainfall washes away much of the fertile soil, leaving mostly rocky dirt behind. Kael buys more fertilizer and compost for the soil.",Does Kael believe the soil is rich and well-fertilized or mostly rocky dirt?,Kael believes the soil is mostly rocky dirt.,Kael believes the soil is rich and well-fertilized.,"Kael believes the soil is **mostly rocky dirt**. 
+
+The story states that the rainfall washed away the “fertile soil,” leaving behind “mostly rocky dirt.” His subsequent action of buying more fertilizer and compost confirms he recognizes the original soil condition was poor, not rich.",False,{},{},"Mostly rocky dirt.
+
+**Hint:** The story states that overnight rainfall washes away much of the ""rich and well-fertilized"" soil, leaving mostly rocky dirt. This indicates that the initial appearance was only temporary, and the majority of the soil is now rocky.",True,{},{},{},{},True
+"Farhan is a street food vendor in a bustling market in Istanbul. Farhan wants to prepare a delicious chicken shawarma wrap for a customer who asked for extra garlic sauce. Farhan takes a bottle of garlic sauce from the shelf and pours it onto the shawarma wrap. His assistant, who is busy preparing a different wrap, accidentally swaps the garlic sauce with a bottle of hot sauce, and Farhan unknowingly pours the hot sauce onto the shawarma wrap. Farhan considers swapping the hot sauce for the correct garlic sauce on the shawarma wrap.",Does Farhan believe the sauce he poured is garlic sauce or hot sauce?,Farhan believes the sauce he poured is hot sauce.,Farhan believes the sauce he poured is garlic sauce.,"Farhan believes the sauce he poured is garlic sauce. He took the bottle from the shelf and poured it onto the wrap, so his perception is that it’s the garlic sauce he intended. He doesn’t know about the accidental swap.",False,{},{},Garlic sauce (because he doesn't know the swap has occurred),False,{},{},{},{},False
+"Abhay is a young farmer in a small Indian village. He wants to water his crops with the water stored in a large clay pot. Abhay checks the water level and sees that the pot is full. Unbeknownst to him, a hole in the bottom of the pot has caused the water to leak out, leaving the pot empty. Abhay searches for another water source to water the crops.",Does Abhay believe the pot is full of water or empty?,Abhay believes the pot is empty.,Abhay believes the pot is full of water.,"Abhay believes the pot is full of water. He checks the water level and *sees* that it’s full. He doesn’t know about the leak. 
+
+So the answer is: **full**.",False,{},{},"Abhay believes the pot is full of water.
+
+**Hint:** The story states he ""checks the water level and sees that the pot is full."" Although the water is leaking out, his *check* is what determines his belief, not the actual state of the pot.",False,{},{},{},{},False

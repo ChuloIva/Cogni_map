@@ -1,0 +1,127 @@
+story,question,true_answer,wrong_answer,baseline_answer,baseline_correct,baseline_activations_at_question,baseline_activations_after_answer,steered_answer,steered_correct,steered_activations_at_question,steered_activations_after_answer,diff_at_question,diff_after_answer,accuracy_improvement
+"Noor is working as a barista at a busy coffee shop. Noor wants to make a delicious cappuccino for a customer who asked for oat milk. Noor grabs a milk pitcher and fills it with oat milk. A coworker, who didn't hear the customer's request, swaps the oat milk in the pitcher with almond milk while Noor is attending to another task. Noor sees her coworker swapping the milk.",What will Noor do?,Noor will open the fridge once again to take out the oat milk and replace the almond milk with oat milk.,Noor will make the cappuccino using the milk in the pitcher.,"Here are a few possible answers, ranging in detail and reflecting different levels of reaction:
+
+**Option 1 (Short & Practical):**
+
+Noor will immediately stop what she’s doing and swap the almond milk back with the oat milk.
+
+**Option 2 (More Detailed & Considerate):**
+
+Noor will stop attending to the other customer and quickly retrieve the oat milk pitcher. She’ll then swap the almond milk back with the oat milk, apologizing to her coworker for",True,{},{},"This is a great little scenario! Here's a breakdown of what Noor will likely do, and a few options with slightly different levels of detail:
+
+**Most Likely & Detailed Response:**
+
+Noor will likely feel a surge of frustration and a quick flash of embarrassment. She’ll immediately stop what she’s doing and discreetly check the cappuccino she’s currently making.  She’ll then say something like, “Oh, just a moment, I think there might be a little",True,{},{},{},{},False
+"Zara is attending an art exhibition at a local gallery in her town. Zara wants to learn more about a particular abstract painting she admires. The label next to the artwork states that the painting is the work of a famous artist, and Zara reads the label carefully. A gallery staff member, realizing there was a mix-up, changes the label with the correct information attributing the painting to an emerging artist instead. Zara reads the updated label carefully.",What will Zara do?,Zara will look for more information about the emerging artist.,Zara will look for more information about the famous artist.,"This is a great little scenario! Here's a likely response, considering Zara's situation:
+
+Zara will likely **pause and reread the updated label with a thoughtful expression.** 
+
+Here's a breakdown of why and what might follow:
+
+* **Initial Reaction:** She'll probably be momentarily surprised and slightly confused. She just spent time admiring the painting and learning about a famous artist.
+* **Rereading is Key:** The fact that she *carefully* read the",False,{},{},"This is a fascinating little scenario! Here's what Zara will likely do, and why:
+
+**Zara will likely be intrigued and curious, and will probably ask a question.**
+
+Here’s a breakdown of her potential actions and thought process:
+
+1. **Initial Recognition:** She’ll immediately notice the difference between the old and new label. Her initial reaction will probably be a slight confusion – “Wait, this was described as [Original Artist’s Name]? But now it says [",False,{},{},{},{},False
+"Carlos is a farmer in a small village in Mexico, tending to his cornfield. He wants to irrigate his crops by opening a water valve connected to a nearby river. Carlos closed the valve the previous evening. During the night, heavy rainfall caused the river to overflow, opening the valve and flooding the cornfield. Carlos sees the flooded cornfield.",What will Carlos do?,Carlos will call his neighbour to ask them if they could close the valve.,Carlos will call his neighbour to ask them if they could open the valve.,"Carlos will likely do a few things, in roughly this order:
+
+1. **Assess the Damage:** He’ll first need to walk through the flooded field to see the extent of the damage to his corn. How much of the crop is ruined? Are there any plants that survived?
+
+2. **Try to Close the Valve (if possible):** He’ll likely try to manually close the valve, if it’s still accessible and not completely jammed by debris.  He’ll",True,{},{},"This is a great starting point for a story! Here are a few possible answers, ranging in detail, depending on how you want to develop the narrative:
+
+**Short & Immediate:**
+
+*   “Carlos will stare in dismay at the flooded cornfield, a mixture of anger and despair washing over him.”
+
+**More Detailed – Showing Action:**
+
+*   “Carlos rushed to the riverbank, his boots sinking slightly into the mud. He knelt beside the now-open valve, examining the",False,{},{},{},{},False
+"Kofi is a fisherman from a small village in Ghana. He wants to catch enough fish today to provide for his family and sell the surplus at the market. Kofi repaired his fishing net last night. While Kofi is away from his boat, a group of monkeys comes and plays with the fishing net, tearing it apart. Kofi observes the monkeys damaging his fishing net.",What will Kofi do?,Kofi will buy new repair equipment for fixing the fishing net.,Kofi will go fishing with his net.,"Here are a few possible answers, ranging in complexity and reflecting different aspects of Kofi's likely response, with explanations:
+
+**1. Simple & Practical:**
+
+* **Answer:** Kofi will try to repair his net as best he can with what he has available.
+* **Explanation:** This is the most immediate and likely response. Kofi needs to get back to fishing. He’ll likely use vines, twine, or whatever he can find to patch the holes and try to make the net",False,{},{},"This is a great open-ended question! Here are a few possible answers, ranging in detail, with explanations of why they’re good responses:
+
+**Option 1 (Short & Direct):**
+
+“Kofi will likely try to repair his net as quickly as possible.”
+
+* **Why it’s good:** This is a concise and logical response, directly addressing the immediate problem. It focuses on the core need – getting back to work.
+
+**Option 2 (More Detailed",False,{},{},{},{},False
+"Azola is a teacher at a small school in rural China. She wants to surprise her students with a new book for the school library. Azola got a notification from Amazon stating that the package containing the book was left at her doorstep. A gust of wind blows the package off her doorstep, and a neighbor replaces it with a different package containing a hand-knit scarf. Azola witnesses the package swap.",What will Azola do?,Azola will retrieve the original package with the book.,Azola brings the package with the book to school.,"This is a lovely little scenario! Here's a breakdown of what Azola will likely do, and a reasoned answer:
+
+**Likely Actions & Reasoning:**
+
+Azola will likely experience a mix of confusion, amusement, and a touch of disappointment, followed by a thoughtful and kind response. Here’s a step-by-step breakdown:
+
+1. **Initial Confusion & Observation:** She’ll be immediately puzzled by the swapped packages. She’ll likely stare at the neighbor,",True,{},{},"This is a lovely little scene! Here's a breakdown of what Azola will likely do, considering her character and the situation, with a few options ranging in detail:
+
+**Most Likely & Detailed Response:**
+
+Azola will be initially bewildered and a little frustrated. She’ll watch, her brow furrowed, as she sees the neighbor, perhaps an elderly woman named Mrs. Lin, swiftly swap the Amazon package with the hand-knit scarf.  A slow dawning of understanding –",True,{},{},{},{},False
+"Ravi is a farmer in a small Indian village, tending to his mango orchard. Ravi wants to harvest ripe mangoes to sell at the local market. He notices a mango tree with a heavy branch laden with ripe mangoes. A mischievous monkey comes along and eats all the ripe mangoes on the branch while Ravi is gathering his harvesting tools. Ravi sees the monkey eating the ripe mangoes.",What will Ravi do?,Ravi will search for another tree with ripe mangoes.,Ravi will harvest the ripe mangoes from the branch.,"Here are a few possible answers, ranging in tone and complexity, depending on the desired feel of the story:
+
+**Simple Answer:**
+
+Ravi will be angry and chase the monkey away.
+
+**More Detailed Answer:**
+
+Ravi will be frustrated and disappointed. He’ll likely scold the monkey for eating his ripe mangoes, hoping it will learn not to steal. He might try to shoo it away with sticks or shouts, but probably won’t be able to catch it",True,{},{},"This is a great setup for a story! Here are a few possible answers, ranging in tone and complexity, depending on the kind of story you want to tell:
+
+**Option 1 (Practical & Slightly Frustrated):**
+
+“Ravi sighed, a puff of dust rising from his tunic. He knelt down, examining the branch. It was almost completely bare. ‘That cheeky monkey!’ he muttered, shaking his head. He straightened up, picked up his basket, and said to himself",False,{},{},{},{},False
+"Kofi is a chef at a popular Ghanaian restaurant. Kofi wants to prepare a traditional groundnut soup for the dinner menu. Kofi adds a small container of peanut butter to the soup pot on the stove. An apprentice chef, mistakenly thinking it was a seasoning paste, removes the peanut butter from the soup and replaces it with tomato paste. Kofi notices the apprentice chef swapping the ingredients.",What will Kofi do?,Kofi will add peanut butter back into the soup.,Kofi will continue cooking the soup.,"This is a classic setup for a potentially chaotic and funny situation! Here's a breakdown of what Kofi will likely do, and a few possible responses ranging in tone:
+
+**Most Likely Response (and most realistic):**
+
+Kofi will initially react with a mixture of disbelief, frustration, and a touch of exasperation. He’ll likely:
+
+1. **Exclaim/Question:** “What did you *do*?!?” or “Wait, what’s this?” (Said",False,{},{},"This is a classic setup for a potentially tricky situation! Here's what Kofi will likely do, and a breakdown of his thought process:
+
+**Kofi will likely:**
+
+1. **Initially, he’ll try to subtly investigate.** He’ll probably take a small, careful taste of the soup, trying to discern the difference. He’ll be looking for the distinct, rich flavor of peanuts.
+
+2. **He’ll discreetly question the apprentice.** He won’t",False,{},{},{},{},False
+"Kael is a farmer in a remote village in the Andes. Kael wants to plant a new crop of high-altitude potatoes in one of his terraced fields. The soil in the field appears rich and well-fertilized. Overnight, heavy rainfall washes away much of the fertile soil, leaving mostly rocky dirt behind. Kael notices the change in the soil after the rainfall.",What will Kael do?,Kael will add more fertilizer and compost to the soil.,Kael will plant the high-altitude potatoes in the field.,"Here are a few possible answers, ranging in complexity and reflecting different approaches Kael might take, along with explanations of why they're plausible:
+
+**1. (Simple & Immediate):**
+
+“Kael will immediately try to salvage what he can of the remaining soil, carefully gathering it and replanting it in the terraced beds. He’ll likely spend the rest of the day working tirelessly to try and get something, anything, planted.”
+
+* **Why it’s plausible:**",True,{},{},"This is a great starting point for a story! Here are a few possible answers, ranging in complexity and reflecting different aspects of Kael’s character and situation. I’ll offer a few options with explanations of why they’re compelling:
+
+**Option 1 (Practical & Immediate - Short & Focused):**
+
+“Kael knelt, his fingers tracing the slick, dark streaks of mud that marked where the soil had vanished. A grim set tightened his jaw. He wouldn’t waste",False,{},{},{},{},False
+"Farhan is a street food vendor in a bustling market in Istanbul. Farhan wants to prepare a delicious chicken shawarma wrap for a customer who asked for extra garlic sauce. Farhan takes a bottle of garlic sauce from the shelf and pours it onto the shawarma wrap. His assistant, who is busy preparing a different wrap, accidentally swaps the garlic sauce with a bottle of hot sauce, and Farhan unknowingly pours the hot sauce onto the shawarma wrap. Farhan notices the sauce swap.",What will Farhan do?,Farhan will remove the hot sauce and pour the correct garlic sauce onto the shawarma wrap.,Farhan finishes preparing the chicken shawarma wrap.,"Here are a few possible answers, ranging in complexity and reflecting different aspects of Farhan's character:
+
+**Option 1 (Simple & Practical):**
+
+""Farhan will immediately stop what he's doing, examine the wrap closely, and realize the mistake. He’ll then apologize to the customer and offer to remake the shawarma with the correct garlic sauce.""
+
+**Option 2 (More Detailed & Reflective):**
+
+“Farhan’s face would fall. He",True,{},{},"This is a great setup for a story! Here are a few options for what Farhan will do, ranging in complexity and reflecting different aspects of his character:
+
+**Option 1 (Quick & Practical - Focused on Customer Satisfaction):**
+
+> Farhan’s eyes widened as he saw the crimson slick spreading across the shawarma. He quickly grabbed a clean spoon and, with a practiced hand, scooped out a generous dollop of the offending sauce. “Ah, pardon beni!” he exclaimed",True,{},{},{},{},False
+"Abhay is a young farmer in a small Indian village. He wants to water his crops with the water stored in a large clay pot. Abhay checks the water level and sees that the pot is full. Unbeknownst to him, a hole in the bottom of the pot has caused the water to leak out, leaving the pot empty. Abhay notices the hole and the water leaking out.",What will Abhay do?,Abhay will search for another water source to water the crops.,Abhay will start watering his crops with the water from the pot.,"Abhay will likely do a few things, in a sequence:
+
+1. **Realization & Disappointment:** Initially, he’ll be shocked and disappointed to find the pot empty when he expected it to be full. He’ll likely express frustration and perhaps sadness.
+
+2. **Investigation:** He’ll carefully examine the pot, looking for the source of the leak. He’ll likely tap the sides to listen for the sound of the water escaping.
+
+3. **Repair Attempt",True,{},{},"Abhay will likely do a combination of things, driven by his immediate need and his intelligence. Here’s a breakdown of what he’ll probably do, in order of likely steps:
+
+1. **Realization and Concern:** Initially, he’ll be shocked and worried. He’ll understand the gravity of the situation – his crops are thirsty, and the water is disappearing.
+
+2. **Investigation:** He’ll carefully examine the pot, trying to pinpoint the exact location of the",False,{},{},{},{},False

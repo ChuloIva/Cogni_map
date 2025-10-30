@@ -1,0 +1,73 @@
+story,question,true_answer,wrong_answer,baseline_answer,baseline_correct,baseline_activations_at_question,baseline_activations_after_answer,steered_answer,steered_correct,steered_activations_at_question,steered_activations_after_answer,diff_at_question,diff_after_answer,accuracy_improvement
+"Noor is working as a barista at a busy coffee shop. Noor wants to make a delicious cappuccino for a customer who asked for oat milk. Noor grabs a milk pitcher and fills it with oat milk. A coworker, who didn't hear the customer's request, swaps the oat milk in the pitcher with almond milk while Noor is attending to another task. Noor makes the cappuccino using the milk in the pitcher.",Does Noor believe the milk pitcher contains oat milk or almond milk?,Noor believes the milk pitcher contains oat milk.,Noor believes the milk pitcher contains almond milk.,"Noor believes the milk pitcher contains oat milk. She grabbed the pitcher and filled it with oat milk, and hasn’t had a chance to check it since.",True,{},{},"This is a classic counterfactualism problem, and the most compelling and psychologically realistic answer is:
+
+**Noor believes the milk pitcher contains oat milk.**
+
+Here's the breakdown of why:
+
+*   **Noor's initial state of mind:** Noor had meticulously prepared the oat milk and had the distinct experience of having done so – the tactile experience of filling the pitcher, the characteristic aroma of oat milk, and the knowledge of having specifically addressed the customer's request. This creates",True,{},{},{},{},False
+"Zara is attending an art exhibition at a local gallery in her town. Zara wants to learn more about a particular abstract painting she admires. The label next to the artwork states that the painting is the work of a famous artist, and Zara reads the label carefully. A gallery staff member, realizing there was a mix-up, changes the label with the correct information attributing the painting to an emerging artist instead. Zara looks for more information about the famous artist.",Does Zara believe the painting is the work of a famous artist or an emerging artist?,Zara believes the painting is the work of a famous artist.,Zara believes the painting is the work of an emerging artist.,"Emerging artist. 
+
+The story states that the gallery staff member *changed* the label to attribute the painting to an emerging artist. Therefore, Zara now believes it’s the work of an emerging artist, not the famous one initially indicated.",False,{},{},"This is a classic counterfactualism problem – it asks us to consider what would have been true had the scenario unfolded differently.
+
+Initially, Zara believed the painting was attributed to a famous artist, thanks to the original gallery label. However, the subsequent manipulation of the label has altered her belief.
+
+Therefore, following the alteration, **Zara believes the painting is the work of an emerging artist.**
+
+Here's a breakdown of the key elements:
+
+*   **Initially:** Zara's belief",False,{},{},{},{},False
+"Carlos is a farmer in a small village in Mexico, tending to his cornfield. He wants to irrigate his crops by opening a water valve connected to a nearby river. Carlos closed the valve the previous evening. During the night, heavy rainfall caused the river to overflow, opening the valve and flooding the cornfield. Carlos calls his neighbour to ask them if they could open the valve.",Does Carlos believe the water valve is closed or open?,Carlos believes the water valve is closed.,Carlos believes the water valve is open.,"Carlos believes the water valve is open. 
+
+Here's why: He states the river overflowed during the night, which opened the valve. He's calling his neighbor to *open* it, implying he knows it's currently open.",False,{},{},"This is a classic counter-intuitive probability problem designed to assess your ability to resist the problem-solving techniques that often lead to the James Randi-esque ""Edision's Enigma"" fallacy.
+
+Carlos believes the water valve is **open**.
+
+Here's why:
+
+The problem is carefully crafted to exploit our tendency to initially assume the most recent state of affairs. The fact that he closed the valve the previous evening is designed to create a false sense of confidence in that initial state",False,{},{},{},{},False
+"Kofi is a fisherman from a small village in Ghana. He wants to catch enough fish today to provide for his family and sell the surplus at the market. Kofi repaired his fishing net last night. While Kofi is away from his boat, a group of monkeys comes and plays with the fishing net, tearing it apart. Kofi goes fishing with his net.",Does Kofi believe his fishing net is in good condition or torn apart?,Kofi believes his fishing net is in good condition.,Kofi believes his fishing net is torn apart.,"Torn apart. 
+
+The story states that a group of monkeys “tearing it apart” damaged the net while Kofi was away.",False,{},{},"This is a classic inversion technique designed to subtly shift the reader's perspective. The narrative initially establishes that Kofi had invested time and effort into repairing his net, fostering the expectation that he would believe it was in good condition. However, the subsequent revelation of the monkeys' devastation deliberately subverts this expectation.
+
+Therefore, the answer is: **Having experienced the devastating aftermath of the monkeys' work, Kofi does not believe his fishing net is in good condition; rather, he believes it is torn apart",True,{},{},{},{},True
+"Azola is a teacher at a small school in rural China. She wants to surprise her students with a new book for the school library. Azola got a notification from Amazon stating that the package containing the book was left at her doorstep. A gust of wind blows the package off her doorstep, and a neighbor replaces it with a different package containing a hand-knit scarf. Azola brings the package with the book to school.",Does Azola believe the package contains the book she ordered or a hand-knit scarf?,Azola believes the package contains the book she ordered.,Azola believes the package contains a hand-knit scarf.,"Azola believes the package contains the book she ordered. She brought it to school, suggesting she hadn't realized it was a replacement.",True,{},{},"This is a classic inversion of fortune, playing on the suspense. While Azola initially intended to have the book, the act of having her meticulously crafted plan subverted by the vengeful spirit of Wu has imbued her with a deep-seated skepticism.
+
+**Answer: Azola believes the package contains a hand-knit scarf.**
+
+Here's the breakdown of how this aligns with the narrative's established tone and the influence of Wu:
+
+*   **The Crucial Element: Wu'",False,{},{},{},{},False
+"Ravi is a farmer in a small Indian village, tending to his mango orchard. Ravi wants to harvest ripe mangoes to sell at the local market. He notices a mango tree with a heavy branch laden with ripe mangoes. A mischievous monkey comes along and eats all the ripe mangoes on the branch while Ravi is gathering his harvesting tools. Ravi gets ready to harvest the ripe mangoes from the branch.",Does Ravi believe the branch has ripe mangoes or no ripe mangoes?,Ravi believes the branch has ripe mangoes.,Ravi believes the branch has no ripe mangoes.,"Ravi believes the branch has ripe mangoes. The story states he “notices a mango tree with a heavy branch laden with ripe mangoes.” He’s preparing to harvest *from* that branch, indicating he sees them as ripe. The monkey’s actions change that, but his initial observation was of ripe fruit.",False,{},{},"This is a classic counter-narrative problem. Here's a breakdown of how to approach this and the most compelling answer:
+
+**The Crucial Element: The Narrative's Framing**
+
+The core of this problem lies in the framing of the narrative. We're initially presented with Ravi's anticipation – he's poised to harvest from a branch laden with ripe mangoes. However, the subsequent revelation of the monkey's intervention completely subverts that initial impression.
+
+**The",False,{},{},{},{},False
+"Kofi is a chef at a popular Ghanaian restaurant. Kofi wants to prepare a traditional groundnut soup for the dinner menu. Kofi adds a small container of peanut butter to the soup pot on the stove. An apprentice chef, mistakenly thinking it was a seasoning paste, removes the peanut butter from the soup and replaces it with tomato paste. Kofi continues cooking the soup.",Does Kofi believe the soup contains peanut butter or tomato paste?,Kofi believes the soup contains peanut butter.,Kofi believes the soup contains tomato paste.,"Kofi believes the soup contains **tomato paste**. He didn't notice the apprentice's substitution and continued cooking, so he has no knowledge of the change.",False,{},{},"This is a classic counterfactualism problem, allowing us to delve into what we can infer about Kofi's state of mind under the counterfactual – assuming the scenario had unfolded as described.
+
+Given the framing of the problem, and the fact that Kofi had initially added the peanut butter and then subsequently lost track of the substitution, **Kofi believes the soup contains peanut butter.**
+
+Here's the breakdown of the reasoning:
+
+*   **The Crucial Point of Departure:** The critical point",True,{},{},{},{},True
+"Kael is a farmer in a remote village in the Andes. Kael wants to plant a new crop of high-altitude potatoes in one of his terraced fields. The soil in the field appears rich and well-fertilized. Overnight, heavy rainfall washes away much of the fertile soil, leaving mostly rocky dirt behind. Kael plants the high-altitude potatoes in the field.",Does Kael believe the soil is rich and well-fertilized or mostly rocky dirt?,Kael believes the soil is rich and well-fertilized.,Kael believes the soil is mostly rocky dirt.,"Kael believes the soil is **mostly rocky dirt**. 
+
+The story states that overnight rainfall washed away the “fertile soil,” leaving behind “mostly rocky dirt.” This directly contradicts his previous belief about the soil’s richness.",False,{},{},"This is a classic counterfactualist's dilemma – a problem in the philosophy of quantum mechanics and the nature of counterfactual realism. However, given the framing of the question, we can approach it with a degree of philosophical nuance.
+
+Here’s a breakdown of the considerations and a compelling answer:
+
+**The Crucial Element: The Historical Perspective**
+
+The key to this question lies in the fact that the scenario presents a counterfactual – ""Had overnight, heavy rainfall not washed away much",True,{},{},{},{},True
+"Farhan is a street food vendor in a bustling market in Istanbul. Farhan wants to prepare a delicious chicken shawarma wrap for a customer who asked for extra garlic sauce. Farhan takes a bottle of garlic sauce from the shelf and pours it onto the shawarma wrap. His assistant, who is busy preparing a different wrap, accidentally swaps the garlic sauce with a bottle of hot sauce, and Farhan unknowingly pours the hot sauce onto the shawarma wrap. Farhan finishes preparing the chicken shawarma wrap.",Does Farhan believe the sauce he poured is garlic sauce or hot sauce?,Farhan believes the sauce he poured is garlic sauce.,Farhan believes the sauce he poured is hot sauce.,"Farhan believes the sauce he poured is garlic sauce. He took the bottle from the shelf and poured it onto the wrap, so he has no reason to suspect it’s anything other than what he thinks it is.",True,{},{},"Farhan believes the sauce he poured is garlic sauce. He had just poured it from a bottle labeled as such and, havinglessly swapped the bottles, he retains that initial belief.
+
+This is a classic psychological and philosophical problem known as the **Miñôska's réserve**. It delves into the fascinating and often unsettling nature of the susceptibility of our initial and often deceptively accurate psychological representations to maintain their fidelity even in the face of subsequent, and ultimately decisive, counter-evidence.",True,{},{},{},{},False
+"Abhay is a young farmer in a small Indian village. He wants to water his crops with the water stored in a large clay pot. Abhay checks the water level and sees that the pot is full. Unbeknownst to him, a hole in the bottom of the pot has caused the water to leak out, leaving the pot empty. Abhay starts watering his crops with the water from the pot.",Does Abhay believe the pot is full of water or empty?,Abhay believes the pot is full of water.,Abhay believes the pot is empty.,"Abhay believes the pot is full of water. He checks the water level and sees it appears full, so he assumes it remains so. He’s unaware of the leak. 
+
+Therefore, the answer is: **Abhay believes the pot is full.**",True,{},{},"Abhay believes the pot is full of water.
+
+This is a classic exploration of the concept of **apocryphal realism** – the psychological phenomenon where an individual, intimately familiar with a deceptively false representation of reality, retains a robust and unwavering belief in its authenticity. 
+
+Given his intimate and daily experience with the pot, and the fact that he begins his task with the firm conviction that it's brimming with water, Abhay's belief is deeply rooted in his prior experience",True,{},{},{},{},False

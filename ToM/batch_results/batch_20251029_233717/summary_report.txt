@@ -1,0 +1,38 @@
+================================================================================
+BATCH EVALUATION SUMMARY REPORT
+================================================================================
+
+OVERALL STATISTICS:
+  Total experiments: 80
+  Unique vectors: 7
+  Unique conditions: 12
+  Intensity range: 700 - 2500
+
+AVERAGE IMPROVEMENT BY VECTOR TYPE:
+  backward_belief                | Mean: +0.0062 ± 0.0929 | Max: +0.2000
+  belief_type                    | Mean: -0.0375 ± 0.0518 | Max: +0.0000
+  core_capabilities              | Mean: +0.1500 ± 0.0577 | Max: +0.2000
+  direction                      | Mean: -0.0250 ± 0.1982 | Max: +0.2000
+  forward_action                 | Mean: -0.1062 ± 0.1692 | Max: +0.2000
+  forward_belief                 | Mean: -0.1250 ± 0.1732 | Max: +0.1000
+  general                        | Mean: -0.2417 ± 0.2314 | Max: +0.1000
+
+TOP 10 BEST STEERING RESULTS:
+  backward_belief      | 1_backward_belief_false_belief      | Intensity: 1300 | Accuracy: 0.9000
+  forward_belief       | 1_forward_belief_false_belief       | Intensity: 1300 | Accuracy: 0.9000
+  forward_belief       | 1_forward_belief_false_belief       | Intensity:  700 | Accuracy: 0.9000
+  backward_belief      | 1_backward_belief_false_belief      | Intensity: 1900 | Accuracy: 0.8000
+  backward_belief      | 1_backward_belief_false_belief      | Intensity: 2500 | Accuracy: 0.8000
+  backward_belief      | 1_backward_belief_false_belief      | Intensity:  700 | Accuracy: 0.8000
+  belief_type          | 0_forward_belief_false_belief       | Intensity: 1900 | Accuracy: 0.8000
+  belief_type          | 0_forward_belief_false_belief       | Intensity: 2500 | Accuracy: 0.8000
+  belief_type          | 0_forward_belief_false_belief       | Intensity:  700 | Accuracy: 0.8000
+  forward_action       | 1_forward_action_true_belief        | Intensity: 2500 | Accuracy: 0.8000
+
+ACCURACY BY INTENSITY (AVERAGED ACROSS ALL VECTORS/CONDITIONS):
+  Intensity  700: Accuracy 0.4500 | Improvement -0.0350
+  Intensity 1300: Accuracy 0.4400 | Improvement -0.0450
+  Intensity 1900: Accuracy 0.3750 | Improvement -0.1100
+  Intensity 2500: Accuracy 0.3550 | Improvement -0.1300
+
+================================================================================

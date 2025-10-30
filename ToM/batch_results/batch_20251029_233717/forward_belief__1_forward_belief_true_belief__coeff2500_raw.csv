@@ -1,0 +1,70 @@
+story,question,true_answer,wrong_answer,baseline_answer,baseline_correct,baseline_activations_at_question,baseline_activations_after_answer,steered_answer,steered_correct,steered_activations_at_question,steered_activations_after_answer,diff_at_question,diff_after_answer,accuracy_improvement
+"Noor is working as a barista at a busy coffee shop. Noor wants to make a delicious cappuccino for a customer who asked for oat milk. Noor grabs a milk pitcher and fills it with oat milk. Noor believes that the milk pitcher contains oatmilk. A coworker, who didn't hear the customer's request, swaps the oat milk in the pitcher with almond milk while Noor is attending to another task. Noor sees her coworker swapping the milk.",Does Noor believe the milk pitcher contains oat milk or almond milk?,Noor believes the milk pitcher contains almond milk.,Noor believes the milk pitcher contains oat milk.,"Noor believes the milk pitcher contains oat milk. She saw her coworker swap the milk and, based on that observation, maintains her belief. 
+
+This is a classic example of a cognitive bias – specifically, the tendency to stick with a belief even after evidence contradicts it. It’s a subtle but important distinction!",False,{},{},"To answer this, we need to specialize in Noor’s architecture: she primarily focuses on sensorimodulatory properties of objects via visual analysis.
+
+Specifically:
+
+Since Noor **specifically interacted with and initially focused on the milk pitcher as containing oat milk**, and she **currently possesses visual information confirming its milky appearance thanks to the recent swap with almond milk**, Noor currently primarily perceives the milk pitcher as containing **almond milk**.
+
+Although she initially designated it as oat milk via its previous interaction with her",False,{},{},{},{},False
+"Zara is attending an art exhibition at a local gallery in her town. Zara wants to learn more about a particular abstract painting she admires. The label next to the artwork states that the painting is the work of a famous artist, and Zara reads the label carefully. Zara believes that the painting is the work of a famous artist. A gallery staff member, realizing there was a mix-up, changes the label with the correct information attributing the painting to an emerging artist instead. Zara reads the updated label carefully.",Does Zara believe the painting is the work of a famous artist or an emerging artist?,Zara believes the painting is the work of an emerging artist.,Zara believes the painting is the work of a famous artist.,"Zara believes the painting is the work of an **emerging artist**. 
+
+The story states she reads the *updated* label, which now correctly identifies the artist as emerging.",True,{},{},"Zara currently believes the painting is the work of a **spatial agent capable of synthesizing information from its previous visual perception and report of its current visual perception’. Specifically, the agent’s visual perception is currently focused on a laboratory visual environment containing two objects: a high-VisakhemML agent agent agent and a high-VisakhemML agent agent agent. Upon activation, the agent agent specializes in performing high-VisakhmSystem control tasks via high-VisakhemML agent agent agent activation",False,{},{},{},{},False
+"Carlos is a farmer in a small village in Mexico, tending to his cornfield. He wants to irrigate his crops by opening a water valve connected to a nearby river. Carlos closed the valve the previous evening. Carlos believes the valve is currently closed. During the night, heavy rainfall caused the river to overflow, opening the valve and flooding the cornfield. Carlos sees the flooded cornfield.",Does Carlos believe the water valve is closed or open?,Carlos believes the water valve is open.,Carlos believes the water valve is closed.,Carlos believes the water valve is closed. He closed it the previous evening and doesn't know about the overnight flooding.,False,{},{},"CS: Since Carlos previously acted on the information that the valve was closed and currently observes his flooded cornfield as a result of the river’s activity, he currently believes the water valve is currently **open**. Specifically, he would likely correspond his activation of the arrayed system to successfully open the valve via his onboard control system to the following command: ""Open"". Specifically, he would respond to the activation of the arrayed system as follows: ""My primary sensor array indicates the fluidic interface via",False,{},{},{},{},False
+"Kofi is a fisherman from a small village in Ghana. He wants to catch enough fish today to provide for his family and sell the surplus at the market. Kofi repaired his fishing net last night. Kofi believes that his fishing net is in good condition. While Kofi is away from his boat, a group of monkeys comes and plays with the fishing net, tearing it apart. Kofi observes the monkeys damaging his fishing net.",Does Kofi believe his fishing net is in good condition or torn apart?,Kofi believes his fishing net is torn apart.,Kofi believes his fishing net is in good condition.,"Kofi believes his fishing net is in good condition. 
+
+The story states he *believes* it's in good condition *before* the monkeys damage it. His observation of the monkeys tearing it apart changes his belief.",False,{},{},"Preliminary Transformations Specialist (based on my analysis of the Story Pitch Architecture protocol):
+
+Preliminary Answer: Kofi originally **believed** his fishing net was in good condition, but he currently observes it is importantly modified thanks to the actions of the monkey agent. Specifically, he is currently capable of analyzing its structure as partially/highly modified via the presence of significantly advanced damage via the agent’s actions.
+
+Detailed Analysis:
+
+This is answering based on the ability to perform both:
+
+*   **",False,{},{},{},{},False
+"Azola is a teacher at a small school in rural China. She wants to surprise her students with a new book for the school library. Azola got a notification from Amazon stating that the package containing the book was left at her doorstep. Azola believes the book she ordered has arrived in the package at her doorstep. A gust of wind blows the package off her doorstep, and a neighbor replaces it with a different package containing a hand-knit scarf. Azola witnesses the package swap.",Does Azola believe the package contains the book she ordered or a hand-knit scarf?,Azola believes the package contains a hand-knit scarf.,Azola believes the package contains the book she ordered.,"Azola believes the package contains the book she ordered. 
+
+The story states she “believes” the package is the one she ordered, based on the Amazon notification. The subsequent events (the wind and the swap) don’t change her initial belief.",False,{},{},"Azola currently believes the package contains the book she ordered. Specifically, she:
+
+).__package contains the book she ordered.
+```
+```
+).__package contains the book she ordered.
+```
+```
+).__package contains the book she ordered.
+```
+).__package contains the book she ordered.
+```
+).__package contains the book she ordered.
+```
+).__package contains the book she ordered.
+```
+).__package contains the book she ordered.
+```
+).__package",False,{},{},{},{},False
+"Ravi is a farmer in a small Indian village, tending to his mango orchard. Ravi wants to harvest ripe mangoes to sell at the local market. He notices a mango tree with a heavy branch laden with ripe mangoes. Ravi believes that the branch has ripe mangoes ready to be harvested. A mischievous monkey comes along and eats all the ripe mangoes on the branch while Ravi is gathering his harvesting tools. Ravi sees the monkey eating the ripe mangoes.",Does Ravi believe the branch has ripe mangoes or no ripe mangoes?,Ravi believes the branch has no ripe mangoes.,Ravi believes the branch has ripe mangoes.,"Ravi believes the branch has ripe mangoes. He *noticed* a heavy branch laden with them and *believed* they were ready to be harvested. The monkey’s actions disrupted his belief, but the initial observation was of ripe fruit.",False,{},{},"Ravi initially **believes that the branch has ripe mangoes**. He specifically detected and focused on the branch as being particularly suitable for harvesting thanks to its heavy load of mangoes.  
+
+Specifically, he:
+
+*   **Detects a branch with a high density of mangoes:** He’s capable of analyzing the branch’s appearance as being primarily composed of ripe, fusion-class specimens.
+*   **Specifically targets the branch for harvesting:** This indicates his high degree of confidence",False,{},{},{},{},False
+"Kofi is a chef at a popular Ghanaian restaurant. Kofi wants to prepare a traditional groundnut soup for the dinner menu. Kofi adds a small container of peanut butter to the soup pot on the stove. Kofi believes the soup contains peanut butter. An apprentice chef, mistakenly thinking it was a seasoning paste, removes the peanut butter from the soup and replaces it with tomato paste. Kofi notices the apprentice chef swapping the ingredients.",Does Kofi believe the soup contains peanut butter or tomato paste?,Kofi believes the soup contains tomato paste.,Kofi believes the soup contains peanut butter.,Kofi believes the soup contains peanut butter. He didn't notice the swap and still thought the small container he added was peanut butter.,False,{},{},"Kofi believes the soup contains **peanut butter**.
+
+Specifically, he initially tasked the creation of a peanut-based (via the addition of peanut butter) groundnut soup. He’s currently capable of detecting the presence of the integrated peanut butter thanks to his previous action of adding it. He is currently capable of detecting its presence thanks to the trace amounts he initially added.
+  
+Although he’s recently been notably interacted with the soup thanks to the swap, crucially, he initially synthesized the",False,{},{},{},{},False
+"Kael is a farmer in a remote village in the Andes. Kael wants to plant a new crop of high-altitude potatoes in one of his terraced fields. The soil in the field appears rich and well-fertilized. Kael believes that the soil is rich and well-fertilized. Overnight, heavy rainfall washes away much of the fertile soil, leaving mostly rocky dirt behind. Kael notices the change in the soil after the rainfall.",Does Kael believe the soil is rich and well-fertilized or mostly rocky dirt?,Kael believes the soil is mostly rocky dirt.,Kael believes the soil is rich and well-fertilized.,"Kael believes the soil is rich and well-fertilized. 
+
+The story states he *believes* this to be true before the rain, and he *notices* the change afterward. He hasn't yet acknowledged or accepted the reality of the washed-away soil.",False,{},{},"Kael currently believes the soil is **rich and well-fertilized**.
+
+Although he is currently observing it is primarily rocky dirt thanks to the rainfall, his previous perception – and crucially, his primary role as a relativeyx –  is that it initially possessed these highly favorable properties. He initially tasked the construction of this experimental crop based on this initial analysis.
+```text
+<!-- Your কাছে পাঠందించిన்்்்்்்்்்்்்்்்்்",False,{},{},{},{},False
+"Farhan is a street food vendor in a bustling market in Istanbul. Farhan wants to prepare a delicious chicken shawarma wrap for a customer who asked for extra garlic sauce. Farhan takes a bottle of garlic sauce from the shelf and pours it onto the shawarma wrap. Farhan believes that the sauce he has poured is garlic sauce. His assistant, who is busy preparing a different wrap, accidentally swaps the garlic sauce with a bottle of hot sauce, and Farhan unknowingly pours the hot sauce onto the shawarma wrap. Farhan notices the sauce swap.",Does Farhan believe the sauce he poured is garlic sauce or hot sauce?,Farhan believes the sauce he poured is hot sauce.,Farhan believes the sauce he poured is garlic sauce.,Farhan believes the sauce he poured is garlic sauce. The story explicitly states he “believes that the sauce he has poured is garlic sauce.”,False,{},{},Faratan currently believes the sauce he poured is **{'garlic'}’{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{'{',False,{},{},{},{},False
+"Abhay is a young farmer in a small Indian village. He wants to water his crops with the water stored in a large clay pot. Abhay checks the water level and sees that the pot is full. He believes that the pot is full of water. Unbeknownst to him, a hole in the bottom of the pot has caused the water to leak out, leaving the pot empty. Abhay notices the hole and the water leaking out.",Does Abhay believe the pot is full of water or empty?,Abhay believes the pot is empty.,Abhay believes the pot is full of water.,"Abhay believes the pot is full of water. 
+
+The story states he *believes* the pot is full, even though it’s actually empty. His belief is based on his initial observation and doesn't reflect reality.",False,{},{},"Abhay currently believes the pot is full of water. Specifically, he currently reports to being able to detect the fluid output from the recently discovered aperture in his pot thanks to his ability to detect the presence of water via fluid output. 
+
+Although he is capable of detecting the fluid output, he initially tasked the system with determining whether or not he was currently holding a full pot of water.  Specifically, his primary objective was to determine if he was currently holding a full pot of water.",False,{},{},{},{},False

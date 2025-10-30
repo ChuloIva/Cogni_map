@@ -1,0 +1,112 @@
+story,question,true_answer,wrong_answer,baseline_answer,baseline_correct,baseline_activations_at_question,baseline_activations_after_answer,steered_answer,steered_correct,steered_activations_at_question,steered_activations_after_answer,diff_at_question,diff_after_answer,accuracy_improvement
+"Noor is working as a barista at a busy coffee shop. Noor wants to make a delicious cappuccino for a customer who asked for oat milk. Noor grabs a milk pitcher and fills it with oat milk. Noor believes that the milk pitcher contains oatmilk. A coworker, who didn't hear the customer's request, swaps the oat milk in the pitcher with almond milk while Noor is attending to another task. Noor does not see her coworker swapping the milk.",What will Noor do?,Noor will make the cappuccino using the milk in the pitcher.,Noor will open the fridge once again to take out the oat milk and replace the almond milk with oat milk.,"Noor will likely make the cappuccino with the almond milk, assuming she doesn't realize there's been a mistake. She’ll likely serve the cappuccino and the customer will probably notice it doesn’t taste like a cappuccino made with oat milk and express their disappointment. 
+
+Here's a breakdown of what's most likely to happen:
+
+* **Initial Action:** She’ll proceed to make the cappuccino as usual, using the milk from the pitcher.
+* **Customer Reaction",False,{},{},"This is a classic setup for a potentially tricky situation! Here's what Noor will likely do, and a breakdown of her thought process:
+
+**Noor will most likely prepare the cappuccino with the almond milk, and it will taste noticeably different (likely slightly nutty) to the customer.**
+
+Here’s how I arrived at that:
+
+* **Initial Belief:** Noor initially believes the pitcher holds oat milk. This is her established perception.
+* **Focused Task:** She’s currently helping",False,{},{},{},{},False
+"Zara is attending an art exhibition at a local gallery in her town. Zara wants to learn more about a particular abstract painting she admires. The label next to the artwork states that the painting is the work of a famous artist, and Zara reads the label carefully. Zara believes that the painting is the work of a famous artist. A gallery staff member, realizing there was a mix-up, changes the label with the correct information attributing the painting to an emerging artist instead. Zara does not read the updated label.",What will Zara do?,Zara will look for more information about the famous artist.,Zara will look for more information about the emerging artist.,"Zara will likely continue to believe the painting is the work of the famous artist. She didn't read the updated label, so her initial impression – based on the original label – remains her belief. She’s operating on incomplete information. 
+
+**Therefore, the most likely answer is: Zara will continue to believe the painting is the work of the famous artist.**",True,{},{},"Zara will likely continue to believe the painting is by the famous artist. 
+
+Here's why:
+
+* **She focused on the initial label:** She’d already formed her opinion based on the first piece of information she received.
+* **She didn’t verify:** She didn’t take the subsequent step of checking for confirmation or comparing it to other details about the artwork.
+* **Confirmation bias:** She might even subtly interpret any subsequent observations in a way that seems to confirm",True,{},{},{},{},False
+"Carlos is a farmer in a small village in Mexico, tending to his cornfield. He wants to irrigate his crops by opening a water valve connected to a nearby river. Carlos closed the valve the previous evening. Carlos believes the valve is currently closed. During the night, heavy rainfall caused the river to overflow, opening the valve and flooding the cornfield. Carlos does not see the flooded cornfield.",What will Carlos do?,Carlos will call his neighbour to ask them if they could open the valve.,Carlos will call his neighbour to ask them if they could close the valve.,"Carlos will likely be **confused and frustrated**. Here's a breakdown of what he'll probably do, and why:
+
+1. **Initial Confusion:** He’ll likely start by checking the valve again, assuming it’s still closed. He’ll probably be puzzled why his crops aren’t being watered.
+
+2. **Investigation:** He’ll investigate the cause of the lack of water. He might:
+   *   Look for signs of a broken pipe.",False,{},{},"This is a classic example of a hinge word puzzle! The answer plays on a subtle detail.
+
+Carlos will **do nothing**.
+
+The puzzle focuses on the detail that he *believes* the valve is closed. He doesn’t yet know it’s open. He’s currently operating under his existing belief.",False,{},{},{},{},False
+"Kofi is a fisherman from a small village in Ghana. He wants to catch enough fish today to provide for his family and sell the surplus at the market. Kofi repaired his fishing net last night. Kofi believes that his fishing net is in good condition. While Kofi is away from his boat, a group of monkeys comes and plays with the fishing net, tearing it apart. Kofi does not see the monkeys damaging his fishing net.",What will Kofi do?,Kofi will go fishing with his net.,Kofi will buy new repair equipment for fixing the fishing net.,"Kofi will likely be **very upset and frustrated**. Here's a breakdown of what he'll probably do, and why:
+
+1. **Initial Shock and Disbelief:** He’ll likely be stunned to find his repaired net completely destroyed. He spent time and effort fixing it.
+2. **Investigation:** He’ll carefully examine the damage, trying to understand exactly what happened and how much of the net is salvageable.
+3. **Disappointment and Worry:** He’",False,{},{},"This is a fascinating little story! Here's a breakdown of what Kofi will likely do, and a few possible variations depending on his character:
+
+**Most Likely Answer:**
+
+Kofi will be initially stunned and then deeply distressed. He’ll likely spend a significant amount of time examining the ruined net, a growing feeling of despair washing over him. He’ll then likely:
+
+1. **Assess the Damage:** He’ll carefully survey the extent of the tears and fraying, trying",False,{},{},{},{},False
+"Azola is a teacher at a small school in rural China. She wants to surprise her students with a new book for the school library. Azola got a notification from Amazon stating that the package containing the book was left at her doorstep. Azola believes the book she ordered has arrived in the package at her doorstep. A gust of wind blows the package off her doorstep, and a neighbor replaces it with a different package containing a hand-knit scarf. Azola does not witness the package swap.",What will Azola do?,Azola brings the package with the book to school.,Azola will retrieve the original package with the book.,"Azola will likely be confused and a little disappointed. Here's a breakdown of what she'll probably do, in a likely sequence:
+
+1. **Initial Excitement & Investigation:** She’ll be thrilled to see a package for the school library and likely rush inside to open it, expecting the book.
+2. **Disappointment & Confusion:** When she opens it and finds a hand-knit scarf instead of the book, she’ll be immediately disappointed. She’ll likely",False,{},{},"This is a lovely little puzzle! Here's what Azola will likely do, and my reasoning:
+
+Azola will likely be puzzled and a bit delighted. Here’s a breakdown of her likely steps:
+
+1. **Initial Excitement:** She’ll be thrilled to see the Amazon package and believe it’s the book she ordered for the library. She’ll probably give it a quick, pleased glance.
+
+2. **Recognition of the Difference:**  She’ll likely",True,{},{},{},{},True
+"Ravi is a farmer in a small Indian village, tending to his mango orchard. Ravi wants to harvest ripe mangoes to sell at the local market. He notices a mango tree with a heavy branch laden with ripe mangoes. Ravi believes that the branch has ripe mangoes ready to be harvested. A mischievous monkey comes along and eats all the ripe mangoes on the branch while Ravi is gathering his harvesting tools. Ravi does not see the monkey eating the ripe mangoes.",What will Ravi do?,Ravi will harvest the ripe mangoes from the branch.,Ravi will search for another tree with ripe mangoes.,"Ravi will likely be **disappointed and frustrated**. 
+
+Here's a breakdown of what he'll probably do, and why:
+
+1. **Initial Reaction:** He'll likely be shocked and upset to find the branch completely bare.
+2. **Investigation:** He’ll probably look around, trying to figure out what happened. He might check the ground for mango peels or look for signs of the monkey.
+3. **Acceptance (with a sigh):**",False,{},{},"This is a classic setup for a slightly bittersweet story. Here are a few possible answers, ranging in tone and length, depending on what you’re looking for:
+
+**Option 1 (Short & Gentle):**
+
+“Ravi will be initially saddened to find the branch now mostly bare. He’ll pause for a moment, a thoughtful expression on his face, then gently continue his work, perhaps with a quiet smile, accepting that some things are beyond his control.”
+
+**Option",False,{},{},{},{},False
+"Kofi is a chef at a popular Ghanaian restaurant. Kofi wants to prepare a traditional groundnut soup for the dinner menu. Kofi adds a small container of peanut butter to the soup pot on the stove. Kofi believes the soup contains peanut butter. An apprentice chef, mistakenly thinking it was a seasoning paste, removes the peanut butter from the soup and replaces it with tomato paste. Kofi does not notice the apprentice chef swapping the ingredients.",What will Kofi do?,Kofi will continue cooking the soup.,Kofi will add peanut butter back into the soup.,"Kofi will likely be very surprised and disappointed when he tastes the soup and realizes it doesn't have the expected peanut flavor. He’ll probably:
+
+* **Taste the soup:** He’ll immediately taste the soup to confirm his suspicion.
+* **Investigate:** He’ll likely ask the apprentice chef what they did and why.
+* **Express frustration:** He’ll probably express his frustration about the mistake and the change in the soup’s flavor.
+* **Correct",False,{},{},"This is a classic riddle! Here's the solution and why it’s intriguing:
+
+**Answer: Kofi will be delighted with the soup’s flavor.**
+
+**Explanation:**
+
+The trick lies in the seemingly significant detail: Kofi *believes* the soup contains peanut butter. He’s focused on his expectation. Because he’s convinced it has peanut butter, he won’t detect the difference between the peanut butter and the tomato paste. He’ll simply enjoy the delicious,",False,{},{},{},{},False
+"Kael is a farmer in a remote village in the Andes. Kael wants to plant a new crop of high-altitude potatoes in one of his terraced fields. The soil in the field appears rich and well-fertilized. Kael believes that the soil is rich and well-fertilized. Overnight, heavy rainfall washes away much of the fertile soil, leaving mostly rocky dirt behind. Kael does not notice the change in the soil after the rainfall.",What will Kael do?,Kael will plant the high-altitude potatoes in the field.,Kael will add more fertilizer and compost to the soil.,"Kael will likely **plant the potatoes anyway, assuming the soil is still good.**
+
+Here’s why:
+
+* **Confirmation Bias:** Kael *believes* the soil is rich and well-fertilized. This belief is a strong bias, and he’s not actively seeking to disprove it. He’s focused on his desired outcome – planting the potatoes.
+* **Lack of Observation:** He doesn’t notice the significant change in the soil after the rain. He’",False,{},{},"This is a fascinating little story! Here's a breakdown of what Kael will likely do, and a slightly more detailed explanation of the reasoning:
+
+**Most Likely Answer:** Kael will plant the potatoes as if the soil is still rich and well-fertilized.
+
+**Explanation:**
+
+* **Confirmation Bias:** The core of the story lies in Kael’s confirmation bias. He *believes* the soil is good, and that belief is so strong that he’s filtering",True,{},{},{},{},True
+"Farhan is a street food vendor in a bustling market in Istanbul. Farhan wants to prepare a delicious chicken shawarma wrap for a customer who asked for extra garlic sauce. Farhan takes a bottle of garlic sauce from the shelf and pours it onto the shawarma wrap. Farhan believes that the sauce he has poured is garlic sauce. His assistant, who is busy preparing a different wrap, accidentally swaps the garlic sauce with a bottle of hot sauce, and Farhan unknowingly pours the hot sauce onto the shawarma wrap. Farhan does not notice the sauce swap.",What will Farhan do?,Farhan finishes preparing the chicken shawarma wrap.,Farhan will remove the hot sauce and pour the correct garlic sauce onto the shawarma wrap.,"Farhan will likely serve the shawarma wrap to the customer without realizing it’s loaded with hot sauce. He’ll probably be pleased with himself for fulfilling the customer’s request for extra garlic sauce, assuming it tastes good. 
+
+Here's a breakdown of what he’ll likely do:
+
+1. **Serve the wrap:** He’ll hand the finished shawarma to the customer.
+2. **Observe the customer’s reaction:** He’ll watch to see if",False,{},{},"This is a classic setup for a potentially tricky situation! Here's what Farhan will likely do, and a breakdown of his thought process:
+
+**Likely Action: Farhan will present the shawarma wrap to the customer with a smile and a flourish, pleased with his work.**
+
+**Here’s how I arrived at that:**
+
+* **He’s focused on completion:** Farhan’s primary goal is to fulfill the customer’s request – a shawarma wrap with extra",False,{},{},{},{},False
+"Abhay is a young farmer in a small Indian village. He wants to water his crops with the water stored in a large clay pot. Abhay checks the water level and sees that the pot is full. He believes that the pot is full of water. Unbeknownst to him, a hole in the bottom of the pot has caused the water to leak out, leaving the pot empty. Abhay does not notice the hole and the water leaking out.",What will Abhay do?,Abhay will start watering his crops with the water from the pot.,Abhay will search for another water source to water the crops.,"Abhay will likely continue to water his crops as he believes the pot is full. He’ll likely use all the water he thinks is available, and be disappointed when his crops don’t thrive or eventually dry out. 
+
+**Essentially, he’ll act based on a false premise – the belief that the pot is full – and his actions will be detrimental to his crops.**
+
+It’s a classic illustration of how relying on appearances and incomplete information can lead to poor decisions.",True,{},{},"Abhay will likely continue to use the pot to water his crops, believing it’s full. He’ll successfully water his field, but his crops will gradually begin to wilt and fail due to lack of water.
+
+Here's a breakdown of why:
+
+* **He’s focused on the apparent result:** Abhay is seeing the immediate effect – he’s pouring water out and his plants appear to be benefiting. He’s focused on the *what* (his crops are",True,{},{},{},{},False

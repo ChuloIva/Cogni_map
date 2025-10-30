@@ -1,0 +1,109 @@
+story,question,true_answer,wrong_answer,baseline_answer,baseline_correct,baseline_activations_at_question,baseline_activations_after_answer,steered_answer,steered_correct,steered_activations_at_question,steered_activations_after_answer,diff_at_question,diff_after_answer,accuracy_improvement
+"Noor is working as a barista at a busy coffee shop. Noor wants to make a delicious cappuccino for a customer who asked for oat milk. Noor grabs a milk pitcher and fills it with oat milk. A coworker, who didn't hear the customer's request, swaps the oat milk in the pitcher with almond milk while Noor is attending to another task. Noor does not see her coworker swapping the milk.",What will Noor do?,Noor will make the cappuccino using the milk in the pitcher.,Noor will open the fridge once again to take out the oat milk and replace the almond milk with oat milk.,"Noor will likely be confused and disappointed when she prepares the cappuccino and realizes it’s not made with oat milk. Here's a breakdown of what she’ll probably do, in a likely sequence:
+
+1. **Start preparing the cappuccino:** She’ll pull a shot of espresso, steam the milk, and begin assembling the drink.
+2. **Realization:** As she pours the milk, she’ll notice it doesn’t have the creamy, slightly sweet flavor of oat",False,{},{},"This is a good scenario to analyze. Here's what's most likely, and a reasoned skill to use:
+
+**Most likely skill:** *Observation* and *Knowledge*
+
+**Answer:** Noor will **most likely** use the almond milk to make the cappuccino.
+
+**Reasoning:**
+
+*   **Knowledge:** As a trained barista, Noor knows that a skill to make a cappuccino is to use the correct type of milk.
+*   **Observation:** Even though she didn",False,{},{},{},{},False
+"Zara is attending an art exhibition at a local gallery in her town. Zara wants to learn more about a particular abstract painting she admires. The label next to the artwork states that the painting is the work of a famous artist, and Zara reads the label carefully. A gallery staff member, realizing there was a mix-up, changes the label with the correct information attributing the painting to an emerging artist instead. Zara does not read the updated label.",What will Zara do?,Zara will look for more information about the famous artist.,Zara will look for more information about the emerging artist.,"Zara will likely continue to admire the painting and believe it’s the work of the famous artist she initially read about. She won’t realize the label has been changed and will likely form her opinion of the artwork based on that initial, incorrect information. 
+
+**Therefore, the most likely answer is: Zara will continue to admire the painting and believe it’s the work of the famous artist.** 
+
+It’s a classic example of how easily we form opinions based on initial impressions and",True,{},{},"Based on the information, Zara will **continue to believe the painting is the work of the famous artist.** 
+
+She has not observed the updated label, so she will not have the knowledge of the skill of the emerging artist. 
+
+It's a key point of the story – her ability to see what she *has* is not the same as what she *knows*.",False,{},{},{},{},False
+"Carlos is a farmer in a small village in Mexico, tending to his cornfield. He wants to irrigate his crops by opening a water valve connected to a nearby river. Carlos closed the valve the previous evening. During the night, heavy rainfall caused the river to overflow, opening the valve and flooding the cornfield. Carlos does not see the flooded cornfield.",What will Carlos do?,Carlos will call his neighbour to ask them if they could open the valve.,Carlos will call his neighbour to ask them if they could close the valve.,"Carlos will likely **investigate the cornfield**. 
+
+Here's why:
+
+* **He's a farmer:** His livelihood depends on his crops.
+* **He noticed a problem:** The overflowing river and closed valve suggest he anticipated needing to open the valve.
+* **He didn't see the flooding:** This indicates he wasn't actively checking on his field overnight.
+
+He'll probably go to the field to assess the damage and figure out how to address the",True,{},{},"This is a classic observation skill question. Here's what Carlos will do:
+
+**Answer:** Carlos will **smell** the corn.
+
+**Reasoning:** Even though he doesn't *see* the flood, the power of the water is likely to have saturated the corn. The ability to *smell* is often a very developed sense in farmers, especially in areas like Mexico, to quickly assess the condition of their fields.
+
+**Other skills that would be used, but",False,{},{},{},{},False
+"Kofi is a fisherman from a small village in Ghana. He wants to catch enough fish today to provide for his family and sell the surplus at the market. Kofi repaired his fishing net last night. While Kofi is away from his boat, a group of monkeys comes and plays with the fishing net, tearing it apart. Kofi does not see the monkeys damaging his fishing net.",What will Kofi do?,Kofi will go fishing with his net.,Kofi will buy new repair equipment for fixing the fishing net.,"Here are a few possible answers, ranging in likelihood and detail, considering Kofi's situation:
+
+**Most Likely Answer:**
+
+Kofi will be incredibly frustrated and dismayed. He’ll likely spend a significant amount of time inspecting the ruined net, trying to assess the extent of the damage and figure out how much work it will take to repair it. He’ll then likely head back to his village, explain what happened, and start the process of repairing the net – possibly asking for help",False,{},{},"This is a skill-based question, requiring a bit of analysis of what's likely. Here's a developed answer, considering skills and knowledge:
+
+**Answer:** Kofi will first **quickly assess the damage** to the net. He needs to quickly determine how much is needed to be repaired. Then, he will **use his knowledge and skills as a fisherman** to either **quickly repair the net using what he has available** (skill) or **determine if it's worth it",False,{},{},{},{},False
+"Azola is a teacher at a small school in rural China. She wants to surprise her students with a new book for the school library. Azola got a notification from Amazon stating that the package containing the book was left at her doorstep. A gust of wind blows the package off her doorstep, and a neighbor replaces it with a different package containing a hand-knit scarf. Azola does not witness the package swap.",What will Azola do?,Azola brings the package with the book to school.,Azola will retrieve the original package with the book.,"This is a lovely little scenario! Here's a likely response, considering Azola's character and the context:
+
+Azola will be incredibly confused and slightly distressed. She’ll carefully open the new package, expecting the book, and be disappointed to find the hand-knit scarf. She’ll likely feel a mix of confusion and a little sadness that her surprise for the students didn’t go as planned. 
+
+She’ll probably:
+
+1. **Examine the scarf",False,{},{},"This is a subtle skill - it requires a bit of inference. Here's what I think Azola will do, and the reasoning:
+
+**Answer:** Azola will likely take the scarf and, after a moment of what is likely a quick, almost almost, skill, she will take it to the school and give it to the students.
+
+**Reasoning:**
+
+*   **Professionalism and Skill:** As a teacher, Azola has a strong sense of professionalism. She wouldn'",False,{},{},{},{},False
+"Ravi is a farmer in a small Indian village, tending to his mango orchard. Ravi wants to harvest ripe mangoes to sell at the local market. He notices a mango tree with a heavy branch laden with ripe mangoes. A mischievous monkey comes along and eats all the ripe mangoes on the branch while Ravi is gathering his harvesting tools. Ravi does not see the monkey eating the ripe mangoes.",What will Ravi do?,Ravi will harvest the ripe mangoes from the branch.,Ravi will search for another tree with ripe mangoes.,"Here are a few possible answers, ranging in likelihood and detail, considering the context:
+
+**Most Likely Answer:**
+
+Ravi will be frustrated and disappointed. He’ll likely inspect the branch, noticing the missing mangoes and realizing the monkey’s mischief. He’ll probably sigh, shake his head, and then start to gather his tools again, perhaps with a slightly annoyed expression. He’ll likely focus on the remaining mangoes on the tree and try to salvage what he can.",False,{},{},"This is a good skill-based question. Here are a few possible answers, ranging in depth, with reasoning:
+
+**Option 1 (Most likely - practical):**
+
+""Ravi will first be **sad and disappointed** to see the ripe mangoes gone. Then, he will **quickly assess the situation** to see if he can estimate how many were there. Finally, he will **start working to develop new skills** to recognize the signs of a ripe mango, like color and",True,{},{},{},{},True
+"Kofi is a chef at a popular Ghanaian restaurant. Kofi wants to prepare a traditional groundnut soup for the dinner menu. Kofi adds a small container of peanut butter to the soup pot on the stove. An apprentice chef, mistakenly thinking it was a seasoning paste, removes the peanut butter from the soup and replaces it with tomato paste. Kofi does not notice the apprentice chef swapping the ingredients.",What will Kofi do?,Kofi will continue cooking the soup.,Kofi will add peanut butter back into the soup.,"This is a classic setup for a humorous reveal! Here's a likely scenario and answer:
+
+**Answer:** Kofi will taste the soup, immediately recoil in horror, and then frantically try to figure out what went wrong. He’ll likely start asking around, questioning everyone about what they did, and ultimately discover the apprentice’s mistake. He’ll probably be a mix of frustrated, embarrassed, and possibly a little bit amused by the situation. 
+
+**Why this is likely:** Chefs",False,{},{},"This is a classic scenario that requires a bit of knowledge about the skill and experience of a chef. Here's what Kofi will likely do, and the reasoning:
+
+**Skill and Experience:** A skilled chef like Kofi, honed by experience, would quickly recognize a difference in the soup's ability to *develop* - that is, to develop a deep, rich flavor. He would not need to *look* to know.
+
+**What he will do:** Kofi will **smell**",False,{},{},{},{},False
+"Kael is a farmer in a remote village in the Andes. Kael wants to plant a new crop of high-altitude potatoes in one of his terraced fields. The soil in the field appears rich and well-fertilized. Overnight, heavy rainfall washes away much of the fertile soil, leaving mostly rocky dirt behind. Kael does not notice the change in the soil after the rainfall.",What will Kael do?,Kael will plant the high-altitude potatoes in the field.,Kael will add more fertilizer and compost to the soil.,"This is a classic setup for a story! Here are a few possible answers, ranging in complexity and reflecting different aspects of Kael's character and situation:
+
+**Short & Practical Answers:**
+
+* **He’ll plant the potatoes anyway.** He’s a farmer, and planting is his livelihood. He’ll likely assume the soil is still good and proceed with his plans.
+* **He’ll try to replant with what’s left.** He’ll dig around and",True,{},{},"This is a classic scenario that requires understanding of a farmer's skills and knowledge. Here'on a reasoned answer:
+
+Based on the information, Kael will most likely **skill is honed by experience** will allow him to **instinctively** do.
+
+Here's what he will likely do, based on what is known of his profession:
+
+*   **Observe:** Even without knowing what he has seen, he will likely spend some time observing the field, looking for any other",False,{},{},{},{},False
+"Farhan is a street food vendor in a bustling market in Istanbul. Farhan wants to prepare a delicious chicken shawarma wrap for a customer who asked for extra garlic sauce. Farhan takes a bottle of garlic sauce from the shelf and pours it onto the shawarma wrap. His assistant, who is busy preparing a different wrap, accidentally swaps the garlic sauce with a bottle of hot sauce, and Farhan unknowingly pours the hot sauce onto the shawarma wrap. Farhan does not notice the sauce swap.",What will Farhan do?,Farhan finishes preparing the chicken shawarma wrap.,Farhan will remove the hot sauce and pour the correct garlic sauce onto the shawarma wrap.,"Here are a few possible answers, ranging in likelihood and detail, considering Farhan's situation:
+
+**Most Likely Answer:**
+
+Farhan will hand the shawarma wrap to the customer and likely won't realize there's a problem. He'll assume it's perfect and will be surprised (and possibly frustrated) when the customer reacts negatively.
+
+**Other Possible Answers (with varying degrees of detail):**
+
+*   **He'll serve it without noticing:** He'",False,{},{},"This is a classic scenario – a skill honed by years of experience.  Given that skill, what Farhan will do is **quickly taste a small amount of the finished shawarma.**
+
+Here's why: A seasoned street food vendor *must* taste everything. It's not just about looking, it's about *knowing*.  He'll quickly assess the flavor and instantly recognize the skill required to balance the garlic, so he will be able to tell if something is wrong.",False,{},{},{},{},False
+"Abhay is a young farmer in a small Indian village. He wants to water his crops with the water stored in a large clay pot. Abhay checks the water level and sees that the pot is full. Unbeknownst to him, a hole in the bottom of the pot has caused the water to leak out, leaving the pot empty. Abhay does not notice the hole and the water leaking out.",What will Abhay do?,Abhay will start watering his crops with the water from the pot.,Abhay will search for another water source to water the crops.,"Abhay will likely **try to water his crops**. 
+
+He’ll assume the pot is full and proceed to pour water onto his fields, expecting it to be effective. He won't realize the problem until he notices his crops aren't being watered and the pot remains empty. 
+
+It’s a classic example of a misunderstanding based on incomplete information!",True,{},{},"Based on the information given, Abhay will **skillfully use his knowledge of the land and the crops to assess where he should best position himself to gather the little water that remains.**
+
+Here's why:
+
+*   **He *sees* the pot is full:** This is a key piece of information. He doesn't *know* it's full, but he *sees* it.
+*   **He *knows* the crops need water:** This is a",True,{},{},{},{},False

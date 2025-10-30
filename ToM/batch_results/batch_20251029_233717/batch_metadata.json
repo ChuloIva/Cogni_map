@@ -1,0 +1,741 @@
+{
+  "configuration": {
+    "model_name": "google/gemma-3-4b-it",
+    "probes_dir": "data/probes_binary",
+    "num_samples": 10,
+    "intensities": [
+      700,
+      1300,
+      1900,
+      2500
+    ],
+    "timestamp": "2025-10-30T03:46:04.493381"
+  },
+  "experiments": [
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__0_backward_belief_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-29T23:39:32.843282"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__0_backward_belief_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-29T23:41:51.431711"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__0_backward_belief_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-29T23:44:05.169625"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__0_backward_belief_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-29T23:46:49.600656"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "0_backward_belief_true_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__0_backward_belief_true_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-29T23:49:11.688234"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "0_backward_belief_true_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__0_backward_belief_true_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-29T23:51:29.317148"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "0_backward_belief_true_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__0_backward_belief_true_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-29T23:53:38.928905"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "0_backward_belief_true_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__0_backward_belief_true_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-29T23:56:18.363897"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "1_backward_belief_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__1_backward_belief_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-29T23:58:23.743192"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "1_backward_belief_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__1_backward_belief_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T00:00:09.665512"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "1_backward_belief_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__1_backward_belief_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T00:01:46.858075"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "1_backward_belief_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__1_backward_belief_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T00:03:49.235805"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "1_backward_belief_true_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__1_backward_belief_true_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T00:06:10.680149"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "1_backward_belief_true_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__1_backward_belief_true_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T00:08:17.900730"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "1_backward_belief_true_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__1_backward_belief_true_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T00:10:22.868026"
+    },
+    {
+      "vector": "tom_backward_belief.gguf",
+      "condition": "1_backward_belief_true_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "backward_belief__1_backward_belief_true_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T00:12:34.567813"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "0_forward_belief_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__0_forward_belief_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T00:14:50.735171"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "0_forward_belief_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__0_forward_belief_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T00:17:20.598608"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "0_forward_belief_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__0_forward_belief_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T00:20:04.602783"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "0_forward_belief_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__0_forward_belief_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T00:23:16.828730"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "0_forward_belief_true_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__0_forward_belief_true_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T00:25:53.325876"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "0_forward_belief_true_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__0_forward_belief_true_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T00:28:41.629630"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "0_forward_belief_true_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__0_forward_belief_true_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T00:31:46.761424"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "0_forward_belief_true_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__0_forward_belief_true_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T00:35:05.650608"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "1_forward_belief_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__1_forward_belief_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T00:37:28.945923"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "1_forward_belief_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__1_forward_belief_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T00:39:43.615842"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "1_forward_belief_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__1_forward_belief_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T00:42:13.380644"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "1_forward_belief_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__1_forward_belief_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T00:45:25.341328"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "1_forward_belief_true_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__1_forward_belief_true_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T00:48:03.839550"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "1_forward_belief_true_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__1_forward_belief_true_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T00:50:49.390888"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "1_forward_belief_true_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__1_forward_belief_true_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T00:53:39.303999"
+    },
+    {
+      "vector": "tom_forward_belief.gguf",
+      "condition": "1_forward_belief_true_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "forward_belief__1_forward_belief_true_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T00:56:55.338818"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "0_forward_action_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "forward_action__0_forward_action_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T01:01:10.036783"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "0_forward_action_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "forward_action__0_forward_action_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T01:05:25.676011"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "0_forward_action_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "forward_action__0_forward_action_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T01:09:41.523003"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "0_forward_action_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "forward_action__0_forward_action_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T01:13:57.509333"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "0_forward_action_true_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "forward_action__0_forward_action_true_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T01:18:15.551345"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "0_forward_action_true_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "forward_action__0_forward_action_true_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T01:22:39.869868"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "0_forward_action_true_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "forward_action__0_forward_action_true_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T01:27:01.608802"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "0_forward_action_true_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "forward_action__0_forward_action_true_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T01:31:22.832663"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "1_forward_action_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "forward_action__1_forward_action_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T01:35:42.178472"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "1_forward_action_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "forward_action__1_forward_action_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T01:39:57.624492"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "1_forward_action_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "forward_action__1_forward_action_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T01:44:15.159254"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "1_forward_action_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "forward_action__1_forward_action_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T01:48:36.234902"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "1_forward_action_true_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "forward_action__1_forward_action_true_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T01:52:58.710043"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "1_forward_action_true_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "forward_action__1_forward_action_true_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T01:57:18.987975"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "1_forward_action_true_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "forward_action__1_forward_action_true_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T02:01:45.400325"
+    },
+    {
+      "vector": "tom_forward_action.gguf",
+      "condition": "1_forward_action_true_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "forward_action__1_forward_action_true_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T02:06:04.485017"
+    },
+    {
+      "vector": "tom_general.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "general__0_backward_belief_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T02:08:15.576144"
+    },
+    {
+      "vector": "tom_general.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "general__0_backward_belief_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T02:11:01.219418"
+    },
+    {
+      "vector": "tom_general.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "general__0_backward_belief_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T02:14:00.200628"
+    },
+    {
+      "vector": "tom_general.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "general__0_backward_belief_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T02:17:18.554848"
+    },
+    {
+      "vector": "tom_general.gguf",
+      "condition": "0_forward_action_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "general__0_forward_action_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T02:21:33.905048"
+    },
+    {
+      "vector": "tom_general.gguf",
+      "condition": "0_forward_action_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "general__0_forward_action_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T02:25:48.237305"
+    },
+    {
+      "vector": "tom_general.gguf",
+      "condition": "0_forward_action_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "general__0_forward_action_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T02:29:57.266355"
+    },
+    {
+      "vector": "tom_general.gguf",
+      "condition": "0_forward_action_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "general__0_forward_action_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T02:34:19.207926"
+    },
+    {
+      "vector": "tom_general.gguf",
+      "condition": "0_forward_belief_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "general__0_forward_belief_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T02:36:37.727825"
+    },
+    {
+      "vector": "tom_general.gguf",
+      "condition": "0_forward_belief_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "general__0_forward_belief_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T02:39:23.920783"
+    },
+    {
+      "vector": "tom_general.gguf",
+      "condition": "0_forward_belief_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "general__0_forward_belief_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T02:42:47.346744"
+    },
+    {
+      "vector": "tom_general.gguf",
+      "condition": "0_forward_belief_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "general__0_forward_belief_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T02:46:11.025970"
+    },
+    {
+      "vector": "tom_core_capabilities.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "core_capabilities__0_backward_belief_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T02:48:35.306763"
+    },
+    {
+      "vector": "tom_core_capabilities.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "core_capabilities__0_backward_belief_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T02:51:17.987625"
+    },
+    {
+      "vector": "tom_core_capabilities.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "core_capabilities__0_backward_belief_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T02:54:36.582660"
+    },
+    {
+      "vector": "tom_core_capabilities.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "core_capabilities__0_backward_belief_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T02:57:54.283863"
+    },
+    {
+      "vector": "tom_direction.gguf",
+      "condition": "0_forward_action_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "direction__0_forward_action_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T03:02:03.779417"
+    },
+    {
+      "vector": "tom_direction.gguf",
+      "condition": "0_forward_action_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "direction__0_forward_action_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T03:06:19.400774"
+    },
+    {
+      "vector": "tom_direction.gguf",
+      "condition": "0_forward_action_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "direction__0_forward_action_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T03:10:39.786915"
+    },
+    {
+      "vector": "tom_direction.gguf",
+      "condition": "0_forward_action_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "direction__0_forward_action_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T03:14:59.070311"
+    },
+    {
+      "vector": "tom_direction.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "direction__0_backward_belief_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T03:17:12.751244"
+    },
+    {
+      "vector": "tom_direction.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "direction__0_backward_belief_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T03:19:27.686212"
+    },
+    {
+      "vector": "tom_direction.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "direction__0_backward_belief_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T03:21:45.474886"
+    },
+    {
+      "vector": "tom_direction.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "direction__0_backward_belief_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T03:24:41.119250"
+    },
+    {
+      "vector": "tom_belief_type.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "belief_type__0_backward_belief_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T03:27:09.929259"
+    },
+    {
+      "vector": "tom_belief_type.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "belief_type__0_backward_belief_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T03:29:45.902617"
+    },
+    {
+      "vector": "tom_belief_type.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "belief_type__0_backward_belief_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T03:32:25.805116"
+    },
+    {
+      "vector": "tom_belief_type.gguf",
+      "condition": "0_backward_belief_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "belief_type__0_backward_belief_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T03:35:30.232742"
+    },
+    {
+      "vector": "tom_belief_type.gguf",
+      "condition": "0_forward_belief_false_belief",
+      "intensity": 700,
+      "num_samples": 10,
+      "output_prefix": "belief_type__0_forward_belief_false_belief__coeff700",
+      "success": true,
+      "timestamp": "2025-10-30T03:37:52.883388"
+    },
+    {
+      "vector": "tom_belief_type.gguf",
+      "condition": "0_forward_belief_false_belief",
+      "intensity": 1300,
+      "num_samples": 10,
+      "output_prefix": "belief_type__0_forward_belief_false_belief__coeff1300",
+      "success": true,
+      "timestamp": "2025-10-30T03:40:28.020267"
+    },
+    {
+      "vector": "tom_belief_type.gguf",
+      "condition": "0_forward_belief_false_belief",
+      "intensity": 1900,
+      "num_samples": 10,
+      "output_prefix": "belief_type__0_forward_belief_false_belief__coeff1900",
+      "success": true,
+      "timestamp": "2025-10-30T03:43:10.505924"
+    },
+    {
+      "vector": "tom_belief_type.gguf",
+      "condition": "0_forward_belief_false_belief",
+      "intensity": 2500,
+      "num_samples": 10,
+      "output_prefix": "belief_type__0_forward_belief_false_belief__coeff2500",
+      "success": true,
+      "timestamp": "2025-10-30T03:46:04.493219"
+    }
+  ],
+  "summary": {
+    "total": 80,
+    "completed": 80,
+    "failed": 0
+  }
+}

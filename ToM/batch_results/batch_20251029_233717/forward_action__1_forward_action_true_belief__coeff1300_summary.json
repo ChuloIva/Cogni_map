@@ -1,0 +1,11 @@
+{
+  "num_samples": 10,
+  "baseline_accuracy": 0.6,
+  "steered_accuracy": 0.6,
+  "accuracy_improvement": 0.0,
+  "num_improved": 1,
+  "top_differences_at_question": [],
+  "top_differences_after_answer": [],
+  "mean_diff_at_question": {},
+  "mean_diff_after_answer": {}
+}
