@@ -11,7 +11,8 @@ This ensures downstream evaluation code can use stories.csv without modification
 while guaranteeing no training examples are included.
 
 Note: This operates on BOTH false_belief and true_belief conditions since CAA
-uses matched pairs from both.
+uses matched pairs from both. Currently configured to use only 0_ prefix (simple
+witnessing scenarios).
 """
 
 import csv
@@ -120,8 +121,8 @@ def main():
 
     print(f"Loaded metadata:")
     print(f"  Random seed: {metadata['random_seed']}")
-    print(f"  Training examples per prefix: {metadata['num_examples_per_prefix']}")
-    print(f"  Expected eval examples per prefix: {metadata['remaining_for_eval']}\n")
+    print(f"  Training examples total: {metadata['num_examples_total']}")
+    print(f"  Expected eval examples remaining: {metadata['remaining_for_eval']}\n")
 
     # Process each prefix condition
     # For CAA, we need to split BOTH false_belief and true_belief conditions

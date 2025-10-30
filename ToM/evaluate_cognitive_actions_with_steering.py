@@ -1165,7 +1165,7 @@ def main():
     parser.add_argument(
         '--steering-vector',
         type=str,
-        default='steering_vectors/tom_procedural_forward_belief.gguf',
+        default='steering_vectors/tom_caa_forward_belief.gguf',
         help='Path to steering vector .gguf file (ignored if --steering-vectors is provided)'
     )
     parser.add_argument(
@@ -1191,7 +1191,7 @@ def main():
     parser.add_argument(
         '--condition',
         type=str,
-        default='0_backward_belief_true_belief',
+        default='0_forward_belief_true_belief',
         help='ToM benchmark condition to evaluate'
     )
     parser.add_argument(
@@ -1209,7 +1209,7 @@ def main():
     parser.add_argument(
         '--steering-coeff',
         type=float,
-        default=550,
+        default=800,
         help='Steering coefficient (strength)'
     )
     parser.add_argument(

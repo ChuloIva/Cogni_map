@@ -13,10 +13,12 @@ contrastive completions, following the paper's methodology.
 This script:
 1. Loads matched pairs from false_belief and true_belief conditions
 2. Extracts the last sentence (perceptual statement) from each story
-3. Validates that contexts match between pairs
-4. Samples 800 examples total (400 from 0_ prefix, 400 from 1_ prefix)
+3. Matches stories by context (handles different orderings)
+4. Uses all available matched pairs from 0_ prefix (simple witnessing scenarios)
 5. Creates CAA triplets WITHOUT persona wrapping or question/answer pairs
 6. Saves training data and metadata for tracking which examples were used
+
+Note: Typically generates ~750 triplets (limited by matching pairs available)
 """
 
 import csv
@@ -133,7 +135,7 @@ def create_caa_triplet(
 
 def sample_caa_data(
     conditions_dir: Path,
-    num_per_prefix: int = 400,
+    num_examples: int = 1000,
     random_seed: int = 42
 ) -> Tuple[List[Dict], Dict]:
     """
@@ -141,7 +143,7 @@ def sample_caa_data(
 
     Args:
         conditions_dir: Path to procedural-evals-tom/data/conditions/
-        num_per_prefix: Number of examples to sample per prefix (0_ and 1_)
+        num_examples: Number of examples to sample (from 0_ prefix only - simple scenarios)
         random_seed: Random seed for reproducibility
 
     Returns:
@@ -149,16 +151,17 @@ def sample_caa_data(
     """
     random.seed(random_seed)
 
-    # Process both implicit (0_) and explicit (1_) conditions
-    prefixes = ['0', '1']
+    # Process only simple witnessing scenarios (0_ prefix)
+    # These are simpler than 1_ prefix (which involve belief updates)
+    prefixes = ['0']
 
     training_triplets = []
     metadata = {
         'num_training_examples': 0,
-        'num_examples_per_prefix': num_per_prefix,
+        'num_examples_total': num_examples,
         'random_seed': random_seed,
         'conditions': {},
-        'total_available_per_prefix': 0,
+        'total_available': 0,
         'remaining_for_eval': 0,
         'validation_failures': 0,
         'match_failures': 0
@@ -204,15 +207,17 @@ def sample_caa_data(
         total_available = len(matched_pairs)
         print(f"  Found {total_available} matching pairs")
 
-        if metadata['total_available_per_prefix'] == 0:
-            metadata['total_available_per_prefix'] = total_available
+        if metadata['total_available'] == 0:
+            metadata['total_available'] = total_available
 
-        if total_available < num_per_prefix:
-            print(f"  Warning: Only {total_available} pairs available, but {num_per_prefix} requested")
-            num_per_prefix = total_available
+        if total_available < num_examples:
+            print(f"  Warning: Only {total_available} pairs available, but {num_examples} requested")
+            num_to_sample = total_available
+        else:
+            num_to_sample = num_examples
 
         # Sample from matched pairs
-        sampled_pair_indices = random.sample(range(len(matched_pairs)), num_per_prefix)
+        sampled_pair_indices = random.sample(range(len(matched_pairs)), num_to_sample)
         sampled_pair_indices.sort()
 
         # Extract the original false_belief indices for metadata
@@ -251,7 +256,7 @@ def sample_caa_data(
 
     # Update final metadata
     metadata['num_training_examples'] = len(training_triplets)
-    metadata['remaining_for_eval'] = metadata['total_available_per_prefix'] - num_per_prefix
+    metadata['remaining_for_eval'] = metadata['total_available'] - len(training_triplets)
 
     return training_triplets, metadata
 
@@ -281,9 +286,10 @@ def main():
 
     # Sample training data
     print("Sampling CAA training triplets...")
+    print("Using 1000 examples from simple witnessing scenarios (0_ prefix only)\n")
     training_triplets, metadata = sample_caa_data(
         conditions_dir=conditions_dir,
-        num_per_prefix=400,
+        num_examples=1000,
         random_seed=42
     )
 
@@ -297,8 +303,8 @@ def main():
         print(f"    Sampled indices: {info['indices'][:5]} ... {info['indices'][-5:]}")
     print(f"\nTotal training examples: {metadata['num_training_examples']}")
     print(f"Validation failures: {metadata['validation_failures']}")
-    print(f"Remaining for evaluation per prefix: {metadata['remaining_for_eval']}")
-    print(f"Total remaining for evaluation: {metadata['remaining_for_eval'] * 2}")
+    print(f"Match failures: {metadata['match_failures']}")
+    print(f"Remaining for evaluation: {metadata['remaining_for_eval']}")
     print("-" * 80)
 
     # Save training data
@@ -332,7 +338,7 @@ def main():
     print(f"\nNext steps:")
     print(f"1. Use {training_data_path} to train CAA steering vectors")
     print(f"2. Use {metadata_path} to exclude training examples during evaluation")
-    print(f"3. Evaluate on the remaining {metadata['remaining_for_eval'] * 2} examples")
+    print(f"3. Evaluate on the remaining {metadata['remaining_for_eval']} examples")
 
 
 if __name__ == '__main__':
