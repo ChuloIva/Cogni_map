@@ -529,12 +529,14 @@ class CognitiveActionEvaluator:
         # Tokenize
         inputs = self.tokenizer(formatted_prompt, return_tensors="pt")
         input_ids = inputs['input_ids'].to(self.device)
+        attention_mask = inputs['attention_mask'].to(self.device)
 
         # Generate
         with torch.no_grad():
             # Use stored base_model (has .generate() method)
             outputs = self.base_model.generate(
                 input_ids,
+                attention_mask=attention_mask,
                 max_new_tokens=max_tokens,
                 do_sample=False,  # Deterministic
                 pad_token_id=self.tokenizer.eos_token_id
@@ -1163,7 +1165,7 @@ def main():
     parser.add_argument(
         '--steering-vector',
         type=str,
-        default=None,
+        default='steering_vectors/tom_procedural_forward_belief.gguf',
         help='Path to steering vector .gguf file (ignored if --steering-vectors is provided)'
     )
     parser.add_argument(
@@ -1189,7 +1191,7 @@ def main():
     parser.add_argument(
         '--condition',
         type=str,
-        default='0_backward_belief_false_belief',
+        default='0_backward_belief_true_belief',
         help='ToM benchmark condition to evaluate'
     )
     parser.add_argument(
@@ -1207,13 +1209,13 @@ def main():
     parser.add_argument(
         '--steering-coeff',
         type=float,
-        default=None,
+        default=550,
         help='Steering coefficient (strength)'
     )
     parser.add_argument(
         '--output-prefix',
         type=str,
-        default='cognitive_eval',
+        default='procedural_vector',
         help='Output filename prefix'
     )
 
@@ -1224,14 +1226,19 @@ def main():
     print("="*80 + "\n")
 
     # Initialize evaluator
-    evaluator = CognitiveActionEvaluator(
-        model_name=args.model,
-        steering_vector_path=args.steering_vector,
-        probes_dir=args.probes_dir,
-        steering_coeff=args.steering_coeff,
-        steering_vector_paths=args.steering_vectors,
-        steering_coeffs=args.steering_coeffs
-    )
+    evaluator_kwargs = {
+        'model_name': args.model,
+        'steering_vector_path': args.steering_vector,
+        'probes_dir': args.probes_dir,
+        'steering_vector_paths': args.steering_vectors,
+        'steering_coeffs': args.steering_coeffs
+    }
+
+    # Only pass steering_coeff if explicitly provided
+    if args.steering_coeff is not None:
+        evaluator_kwargs['steering_coeff'] = args.steering_coeff
+
+    evaluator = CognitiveActionEvaluator(**evaluator_kwargs)
 
     # Load benchmark samples
     samples = evaluator.load_tom_benchmark_samples(
