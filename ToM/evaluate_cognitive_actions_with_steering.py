@@ -11,6 +11,30 @@ Key features:
   1. After story + question (before answer generation)
   2. After story + question + generated answer
 - Generates comprehensive analysis, visualizations, and CSV reports
+- Supports combining multiple steering vectors with custom coefficients
+
+Vector combination examples:
+  # Single vector with coefficient
+  python evaluate_cognitive_actions_with_steering.py --steering-coeff 1.5
+
+  # Combine two vectors with equal weight
+  python evaluate_cognitive_actions_with_steering.py \
+    --steering-vectors vec1.gguf vec2.gguf
+
+  # Combine vectors with custom coefficients (weighted sum)
+  python evaluate_cognitive_actions_with_steering.py \
+    --steering-vectors vec1.gguf vec2.gguf \
+    --steering-coeffs 1.5 -0.5
+
+  # Add vectors together (positive coefficients strengthen)
+  python evaluate_cognitive_actions_with_steering.py \
+    --steering-vectors tom_core.gguf tom_direction.gguf \
+    --steering-coeffs 2.0 1.0
+
+  # Subtract vectors (negative coefficients reverse effect)
+  python evaluate_cognitive_actions_with_steering.py \
+    --steering-vectors good_vec.gguf bad_vec.gguf \
+    --steering-coeffs 1.0 -1.0
 """
 
 import os
@@ -108,30 +132,33 @@ class CognitiveActionEvaluator:
         steering_coeff: float = 1.5,
         probe_layer_range: Tuple[int, int] = (10, 20),
         steering_layer_range: List[int] = None,
-        device: str = None
+        device: str = None,
+        steering_vector_paths: List[str] = None,
+        steering_coeffs: List[float] = None
     ):
         """
         Initialize the evaluator
 
         Args:
             model_name: HuggingFace model name
-            steering_vector_path: Path to .gguf steering vector
+            steering_vector_path: Path to .gguf steering vector (used if steering_vector_paths is None)
             probes_dir: Directory containing trained cognitive action probes
             benchmark_dir: Directory containing ToM benchmark conditions
             results_dir: Where to save results
-            steering_coeff: Steering vector coefficient (strength)
+            steering_coeff: Steering vector coefficient (strength) (used if steering_coeffs is None)
             probe_layer_range: (start, end) layers for probes
             steering_layer_range: Layers for steering (default: -5 to -18)
             device: Device to use (auto-detect if None)
+            steering_vector_paths: List of paths to .gguf steering vectors to combine (optional)
+            steering_coeffs: List of coefficients for each vector (optional, must match steering_vector_paths length)
         """
         self.model_name = model_name
         self.steering_coeff = steering_coeff
         self.probe_layer_range = probe_layer_range
-        self.steering_layer_range = steering_layer_range or list(range(-4, -20, -1))
+        self.steering_layer_range = steering_layer_range or list(range(-3, -30, -1))
 
         # Resolve paths
         script_dir = Path(__file__).parent
-        self.steering_vector_path = script_dir / steering_vector_path
         self.probes_dir = Path(probes_dir)
         self.benchmark_dir = script_dir / benchmark_dir
         self.results_dir = script_dir / results_dir
@@ -145,8 +172,24 @@ class CognitiveActionEvaluator:
         print(f"{'='*80}")
         print(f"Model: {model_name}")
         print(f"Device: {self.device}")
-        print(f"Steering vector: {self.steering_vector_path}")
-        print(f"Steering coefficient: {steering_coeff}")
+
+        # Handle multiple vectors vs single vector
+        if steering_vector_paths is not None:
+            self.steering_vector_paths = [script_dir / path for path in steering_vector_paths]
+            self.steering_coeffs = steering_coeffs or [1.0] * len(steering_vector_paths)
+
+            if len(self.steering_coeffs) != len(self.steering_vector_paths):
+                raise ValueError(f"Number of coefficients ({len(self.steering_coeffs)}) must match number of vectors ({len(self.steering_vector_paths)})")
+
+            print(f"Combining {len(self.steering_vector_paths)} steering vectors:")
+            for path, coeff in zip(self.steering_vector_paths, self.steering_coeffs):
+                print(f"  - {path.name} (coeff={coeff})")
+        else:
+            self.steering_vector_paths = [script_dir / steering_vector_path]
+            self.steering_coeffs = [steering_coeff]
+            print(f"Steering vector: {self.steering_vector_paths[0]}")
+            print(f"Steering coefficient: {steering_coeff}")
+
         print(f"Steering layers: {self.steering_layer_range}")
         print(f"Probe layers: {probe_layer_range}")
         print(f"{'='*80}\n")
@@ -155,10 +198,8 @@ class CognitiveActionEvaluator:
         print("Loading tokenizer...")
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-        # Load steering vector
-        print(f"Loading steering vector from {self.steering_vector_path}...")
-        self.tom_vector = ControlVector.import_gguf(str(self.steering_vector_path))
-        print(f"✓ Loaded steering vector with {len(self.tom_vector.directions)} layer directions")
+        # Load steering vector(s)
+        self.tom_vector = self._load_and_combine_vectors()
 
         # Initialize model (single instance, reused for both conditions)
         self.base_model = None  # Full model with LM head for generation
@@ -176,6 +217,47 @@ class CognitiveActionEvaluator:
         print(f"✓ Loaded {len(self.probes)} probes across layers")
 
         print("✓ Initialization complete\n")
+
+    def _load_and_combine_vectors(self) -> ControlVector:
+        """
+        Load and combine multiple steering vectors with their coefficients
+
+        Returns:
+            Combined ControlVector
+        """
+        if len(self.steering_vector_paths) == 1:
+            # Single vector case
+            print(f"Loading steering vector from {self.steering_vector_paths[0]}...")
+            vector = ControlVector.import_gguf(str(self.steering_vector_paths[0]))
+            print(f"✓ Loaded steering vector with {len(vector.directions)} layer directions")
+            return vector
+
+        # Multiple vectors case - combine them
+        print(f"Loading and combining {len(self.steering_vector_paths)} steering vectors...")
+
+        # Load first vector
+        combined_vector = ControlVector.import_gguf(str(self.steering_vector_paths[0]))
+        print(f"  ✓ Loaded {self.steering_vector_paths[0].name} ({len(combined_vector.directions)} layers)")
+
+        # Apply first coefficient
+        if self.steering_coeffs[0] != 1.0:
+            combined_vector = self.steering_coeffs[0] * combined_vector
+            print(f"    Applied coefficient: {self.steering_coeffs[0]}")
+
+        # Load and combine remaining vectors
+        for i, (path, coeff) in enumerate(zip(self.steering_vector_paths[1:], self.steering_coeffs[1:]), 1):
+            vector = ControlVector.import_gguf(str(path))
+            print(f"  ✓ Loaded {path.name} ({len(vector.directions)} layers)")
+
+            # Apply coefficient and add to combined vector
+            if coeff != 1.0:
+                combined_vector = combined_vector + (coeff * vector)
+                print(f"    Applied coefficient: {coeff}")
+            else:
+                combined_vector = combined_vector + vector
+
+        print(f"✓ Combined vector created with {len(combined_vector.directions)} layer directions")
+        return combined_vector
 
     def _load_all_probes(self) -> Dict[Tuple[str, int], Dict]:
         """
@@ -321,10 +403,18 @@ class CognitiveActionEvaluator:
             print("  Steering already applied")
             return
 
-        print(f"  Applying ToM steering (coeff={self.steering_coeff})...")
+        # When using multiple vectors, coefficients are already baked into the combined vector
+        # so we apply with coefficient 1.0. For single vector, use the specified coefficient.
+        if len(self.steering_vector_paths) > 1:
+            apply_coeff = 1.0
+            print(f"  Applying combined ToM steering (coefficients already applied)...")
+        else:
+            apply_coeff = self.steering_coeff
+            print(f"  Applying ToM steering (coeff={apply_coeff})...")
+
         # Apply ControlModel to base_model (modifies in-place, affects both base_model and nnsight wrapper)
         self.control_model = ControlModel(self.base_model, self.steering_layer_range)
-        self.control_model.set_control(self.tom_vector, coeff=self.steering_coeff)
+        self.control_model.set_control(self.tom_vector, coeff=apply_coeff)
         print("  ✓ Steering applied")
 
     def _remove_steering(self):
@@ -954,13 +1044,27 @@ def main():
     parser.add_argument(
         '--steering-vector',
         type=str,
-        default='steering_vectors/tom_backward_belief.gguf',
-        help='Path to steering vector .gguf file'
+        default=None,
+        help='Path to steering vector .gguf file (ignored if --steering-vectors is provided)'
+    )
+    parser.add_argument(
+        '--steering-vectors',
+        type=str,
+        nargs='+',
+        default=None,
+        help='Multiple steering vector paths to combine (e.g., --steering-vectors vec1.gguf vec2.gguf)'
+    )
+    parser.add_argument(
+        '--steering-coeffs',
+        type=float,
+        nargs='+',
+        default=None,
+        help='Coefficients for each steering vector (e.g., --steering-coeffs 1.0 -0.5). Must match number of vectors.'
     )
     parser.add_argument(
         '--probes-dir',
         type=str,
-        default='data/probes_binary',
+        default='../data/probes_binary',
         help='Directory containing trained probes'
     )
     parser.add_argument(
@@ -984,7 +1088,7 @@ def main():
     parser.add_argument(
         '--steering-coeff',
         type=float,
-        default=1000,
+        default=None,
         help='Steering coefficient (strength)'
     )
     parser.add_argument(
@@ -1005,7 +1109,9 @@ def main():
         model_name=args.model,
         steering_vector_path=args.steering_vector,
         probes_dir=args.probes_dir,
-        steering_coeff=args.steering_coeff
+        steering_coeff=args.steering_coeff,
+        steering_vector_paths=args.steering_vectors,
+        steering_coeffs=args.steering_coeffs
     )
 
     # Load benchmark samples
