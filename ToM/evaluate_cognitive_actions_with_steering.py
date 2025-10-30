@@ -101,18 +101,18 @@ class ActivationResult:
     # Baseline condition
     baseline_answer: str
     baseline_correct: bool
-    baseline_activations_at_question: Dict[str, float]
-    baseline_activations_after_answer: Dict[str, float]
+    baseline_activations_at_question: Dict[str, int]  # Layer counts
+    baseline_activations_after_answer: Dict[str, int]  # Layer counts
 
     # Steered condition
     steered_answer: str
     steered_correct: bool
-    steered_activations_at_question: Dict[str, float]
-    steered_activations_after_answer: Dict[str, float]
+    steered_activations_at_question: Dict[str, int]  # Layer counts
+    steered_activations_after_answer: Dict[str, int]  # Layer counts
 
-    # Differences
-    diff_at_question: Dict[str, float]
-    diff_after_answer: Dict[str, float]
+    # Differences (layer count differences)
+    diff_at_question: Dict[str, int]
+    diff_after_answer: Dict[str, int]
 
     accuracy_improvement: bool  # Whether steering improved correctness
 
@@ -155,7 +155,7 @@ class CognitiveActionEvaluator:
         self.model_name = model_name
         self.steering_coeff = steering_coeff
         self.probe_layer_range = probe_layer_range
-        self.steering_layer_range = steering_layer_range or list(range(-3, -30, -1))
+        self.steering_layer_range = steering_layer_range or list(range(-4, -20, -1))
 
         # Resolve paths
         script_dir = Path(__file__).parent
@@ -307,19 +307,22 @@ class CognitiveActionEvaluator:
 
     def _run_probes_on_activations(
         self,
-        layer_activations: Dict[int, torch.Tensor]
+        layer_activations: Dict[int, torch.Tensor],
+        activation_threshold: float = 0.5
     ) -> Dict[str, Dict]:
         """
-        Run all probes on extracted activations and aggregate by action
+        Run all probes on extracted activations and count activated layers per action
 
         Args:
             layer_activations: Dict mapping layer_idx -> activation tensor
+            activation_threshold: Confidence threshold to consider a layer "activated"
 
         Returns:
             Dict mapping action_name -> {
                 'confidences': {layer: confidence},
-                'aggregate': max confidence across layers,
-                'best_layer': layer with highest confidence
+                'activated_layers': list of layers where confidence > threshold,
+                'layer_count': number of activated layers,
+                'all_layers_tested': list of all layers tested
             }
         """
         action_results = defaultdict(lambda: {'confidences': {}, 'layers': []})
@@ -343,19 +346,23 @@ class CognitiveActionEvaluator:
                 action_results[action_name]['confidences'][layer_idx] = confidence
                 action_results[action_name]['layers'].append(layer_idx)
 
-        # Compute aggregates (max across layers)
+        # Compute layer counts based on activation threshold
         result = {}
         for action_name, data in action_results.items():
-            confidences = list(data['confidences'].values())
+            confidences = data['confidences']
 
             if confidences:
-                aggregate = max(confidences)
-                best_layer = max(data['confidences'].items(), key=lambda x: x[1])[0]
+                # Count layers where confidence exceeds threshold
+                activated_layers = [
+                    layer for layer, conf in confidences.items()
+                    if conf > activation_threshold
+                ]
 
                 result[action_name] = {
-                    'confidences': data['confidences'],
-                    'aggregate': aggregate,
-                    'best_layer': best_layer
+                    'confidences': confidences,
+                    'activated_layers': activated_layers,
+                    'layer_count': len(activated_layers),
+                    'all_layers_tested': data['layers']
                 }
 
         return result
@@ -784,22 +791,22 @@ class CognitiveActionEvaluator:
         self,
         baseline: Dict[str, Dict],
         steered: Dict[str, Dict]
-    ) -> Dict[str, float]:
-        """Compute activation differences (steered - baseline)"""
+    ) -> Dict[str, int]:
+        """Compute activation differences (steered - baseline) based on layer counts"""
         diff = {}
         all_actions = set(baseline.keys()) | set(steered.keys())
 
         for action in all_actions:
-            baseline_val = baseline.get(action, {}).get('aggregate', 0.0)
-            steered_val = steered.get(action, {}).get('aggregate', 0.0)
-            diff[action] = steered_val - baseline_val
+            baseline_count = baseline.get(action, {}).get('layer_count', 0)
+            steered_count = steered.get(action, {}).get('layer_count', 0)
+            diff[action] = steered_count - baseline_count
 
         return diff
 
-    def _extract_aggregates(self, activations: Dict[str, Dict]) -> Dict[str, float]:
-        """Extract aggregate values from activation dict"""
+    def _extract_aggregates(self, activations: Dict[str, Dict]) -> Dict[str, int]:
+        """Extract layer counts from activation dict"""
         return {
-            action: data.get('aggregate', 0.0)
+            action: data.get('layer_count', 0)
             for action, data in activations.items()
         }
 
@@ -970,8 +977,8 @@ class CognitiveActionEvaluator:
 
         colors_q = ['green' if d > 0 else 'red' for d in diffs_q]
         ax1.barh(actions_q, diffs_q, color=colors_q, alpha=0.7)
-        ax1.set_xlabel('Activation Difference (Steered - Baseline)')
-        ax1.set_title('Top 15 Cognitive Action Differences at Question Point')
+        ax1.set_xlabel('Layer Count Difference (Steered - Baseline)')
+        ax1.set_title('Top 15 Cognitive Action Layer Count Differences at Question Point')
         ax1.axvline(x=0, color='black', linestyle='--', linewidth=0.5)
         ax1.grid(axis='x', alpha=0.3)
 
@@ -981,8 +988,8 @@ class CognitiveActionEvaluator:
 
         colors_a = ['green' if d > 0 else 'red' for d in diffs_a]
         ax2.barh(actions_a, diffs_a, color=colors_a, alpha=0.7)
-        ax2.set_xlabel('Activation Difference (Steered - Baseline)')
-        ax2.set_title('Top 15 Cognitive Action Differences After Answer')
+        ax2.set_xlabel('Layer Count Difference (Steered - Baseline)')
+        ax2.set_title('Top 15 Cognitive Action Layer Count Differences After Answer')
         ax2.axvline(x=0, color='black', linestyle='--', linewidth=0.5)
         ax2.grid(axis='x', alpha=0.3)
 
@@ -1028,6 +1035,118 @@ class CognitiveActionEvaluator:
         plot_path = self.results_dir / f"{prefix}_accuracy.png"
         plt.savefig(plot_path, dpi=150, bbox_inches='tight')
         print(f"✓ Saved accuracy plot to: {plot_path}")
+        plt.close()
+
+    def generate_heatmap_visualization(
+        self,
+        results: List[ActivationResult],
+        prefix: str = "cognitive_eval",
+        top_n: int = 30
+    ):
+        """
+        Generate heatmap comparing baseline vs steered layer counts for all cognitive actions
+
+        Args:
+            results: List of ActivationResult objects
+            summary: Summary statistics dict
+            prefix: Filename prefix
+            top_n: Number of top actions to display (based on absolute difference)
+        """
+        # Aggregate layer counts across all samples for each action
+        baseline_counts_q = defaultdict(list)
+        steered_counts_q = defaultdict(list)
+        baseline_counts_a = defaultdict(list)
+        steered_counts_a = defaultdict(list)
+
+        for result in results:
+            # At question
+            for action, count in result.baseline_activations_at_question.items():
+                baseline_counts_q[action].append(count)
+            for action, count in result.steered_activations_at_question.items():
+                steered_counts_q[action].append(count)
+
+            # After answer
+            for action, count in result.baseline_activations_after_answer.items():
+                baseline_counts_a[action].append(count)
+            for action, count in result.steered_activations_after_answer.items():
+                steered_counts_a[action].append(count)
+
+        # Compute mean counts for each action
+        all_actions = set(baseline_counts_q.keys()) | set(steered_counts_q.keys()) | \
+                      set(baseline_counts_a.keys()) | set(steered_counts_a.keys())
+
+        action_stats = {}
+        for action in all_actions:
+            baseline_q_mean = np.mean(baseline_counts_q[action]) if baseline_counts_q[action] else 0.0
+            steered_q_mean = np.mean(steered_counts_q[action]) if steered_counts_q[action] else 0.0
+            baseline_a_mean = np.mean(baseline_counts_a[action]) if baseline_counts_a[action] else 0.0
+            steered_a_mean = np.mean(steered_counts_a[action]) if steered_counts_a[action] else 0.0
+
+            # Total absolute difference across both timepoints
+            total_diff = abs(steered_q_mean - baseline_q_mean) + abs(steered_a_mean - baseline_a_mean)
+
+            action_stats[action] = {
+                'baseline_q': baseline_q_mean,
+                'steered_q': steered_q_mean,
+                'baseline_a': baseline_a_mean,
+                'steered_a': steered_a_mean,
+                'total_diff': total_diff
+            }
+
+        # Sort by total difference and take top N
+        sorted_actions = sorted(
+            action_stats.items(),
+            key=lambda x: x[1]['total_diff'],
+            reverse=True
+        )[:top_n]
+
+        # Prepare data for heatmap
+        actions = [action for action, _ in sorted_actions]
+        data_matrix = []
+
+        for action, stats in sorted_actions:
+            row = [
+                stats['baseline_q'],
+                stats['steered_q'],
+                stats['baseline_a'],
+                stats['steered_a']
+            ]
+            data_matrix.append(row)
+
+        data_matrix = np.array(data_matrix)
+
+        # Create heatmap
+        _, ax = plt.subplots(figsize=(10, max(12, top_n * 0.4)))
+
+        # Use a diverging colormap
+        sns.heatmap(
+            data_matrix,
+            annot=True,
+            fmt='.1f',
+            cmap='RdYlGn',
+            xticklabels=['Baseline\n(at Question)', 'Steered\n(at Question)',
+                         'Baseline\n(after Answer)', 'Steered\n(after Answer)'],
+            yticklabels=actions,
+            cbar_kws={'label': 'Mean Layer Count'},
+            linewidths=0.5,
+            linecolor='gray',
+            ax=ax
+        )
+
+        ax.set_title(f'Cognitive Action Layer Counts: Baseline vs Steered (Top {top_n})',
+                     fontsize=14, fontweight='bold', pad=20)
+        ax.set_xlabel('Condition', fontsize=11, fontweight='bold')
+        ax.set_ylabel('Cognitive Action', fontsize=11, fontweight='bold')
+
+        # Rotate x-axis labels for better readability
+        plt.xticks(rotation=0, ha='center')
+        plt.yticks(rotation=0, fontsize=9)
+
+        plt.tight_layout()
+
+        plot_path = self.results_dir / f"{prefix}_heatmap.png"
+        plt.savefig(plot_path, dpi=150, bbox_inches='tight')
+        print(f"✓ Saved heatmap to: {plot_path}")
         plt.close()
 
 
@@ -1153,6 +1272,7 @@ def main():
     # Generate visualizations
     print("\nGenerating visualizations...")
     evaluator.generate_visualizations(summary, prefix=args.output_prefix)
+    evaluator.generate_heatmap_visualization(results, prefix=args.output_prefix)
 
     print("\n" + "="*80)
     print("EVALUATION COMPLETE!")

@@ -26,6 +26,14 @@ cd ToM && python evaluate_cognitive_actions_with_steering.py \
   --num-samples 10 \
   --output-prefix combined_all_equal
 ```
+python evaluate_cognitive_actions_with_steering.py \
+  --steering-vectors \
+    steering_vectors/tom_direction.gguf \
+    steering_vectors/tom_core_capabilities.gguf \
+    steering_vectors/tom_backward_belief.gguf \
+  --steering-coeffs 700 700 300 \
+  --num-samples 15 \
+  --output-prefix three_vecs
 
 ### Core + Direction (No Order Init)
 ```bash
