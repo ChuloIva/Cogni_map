@@ -308,7 +308,7 @@ class CognitiveActionEvaluator:
     def _run_probes_on_activations(
         self,
         layer_activations: Dict[int, torch.Tensor],
-        activation_threshold: float = 0.5
+        activation_threshold: float = 0.001
     ) -> Dict[str, Dict]:
         """
         Run all probes on extracted activations and count activated layers per action
@@ -498,7 +498,7 @@ class CognitiveActionEvaluator:
         model: LanguageModel,
         story: str,
         question: str,
-        max_tokens: int = 100
+        max_tokens: int = 300
     ) -> str:
         """
         Generate answer using the model
@@ -1165,7 +1165,7 @@ def main():
     parser.add_argument(
         '--steering-vector',
         type=str,
-        default='steering_vectors/tom_caa_forward_belief.gguf',
+        default='steering_vectors/tom_caa_forward_belief_new.gguf',
         help='Path to steering vector .gguf file (ignored if --steering-vectors is provided)'
     )
     parser.add_argument(
@@ -1209,7 +1209,7 @@ def main():
     parser.add_argument(
         '--steering-coeff',
         type=float,
-        default=800,
+        default=None,
         help='Steering coefficient (strength)'
     )
     parser.add_argument(

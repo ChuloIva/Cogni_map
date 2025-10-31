@@ -7,8 +7,8 @@ Quick reference for running evaluations with different steering vector configura
 ### Single Vector Evaluation
 ```bash
 cd ToM && python evaluate_cognitive_actions_with_steering.py \
-  --steering-vector steering_vectors/tom_core_capabilities_chat.gguf \
-  --steering-coeff 1000 \
+  --steering-vector steering_vectors/tom_core_capabilities.gguf \
+  --steering-coeff  \
   --num-samples 20 \
   --output-prefix single_vector_test
 ```
@@ -49,7 +49,7 @@ cd ToM && python evaluate_cognitive_actions_with_steering.py \
 ### Core Only (High Strength)
 ```bash
 cd ToM && python evaluate_cognitive_actions_with_steering.py \
-  --steering-vector steering_vectors/tom_core_capabilities_chat.gguf \
+  --steering-vector steering_vectors/tom_core_capabilities.gguf \
   --steering-coeff 600 \
   --num-samples 10 \
   --output-prefix core_high_strength
@@ -70,11 +70,12 @@ cd ToM && python evaluate_cognitive_actions_with_steering.py \
 ```bash
 cd ToM && python evaluate_cognitive_actions_with_steering.py \
   --steering-vectors \
-    steering_vectors/tom_core_capabilities_chat.gguf \
-    steering_vectors/tom_order_init_chat.gguf \
-  --steering-coeffs 1000 -1000 \
+    steering_vectors/tom_core_capabilities.gguf \
+    steering_vectors/tom_procedural_forward_belief.gguf \
+  --steering-coeffs 400 300 \
   --num-samples 20 \
-  --output-prefix core_minus_order
+  --output-prefix core+procedural \
+  --condition 1_forward_belief_false_belief \
 ```
 
 ## Full Dataset Evaluation
@@ -83,7 +84,7 @@ cd ToM && python evaluate_cognitive_actions_with_steering.py \
 ```bash
 cd ToM && python evaluate_cognitive_actions_with_steering.py \
   --steering-vectors \
-    steering_vectors/tom_order_init_chat.gguf \
+    steering_vectors/tom_order_init.gguf \
     steering_vectors/tom_direction_chat.gguf \
     steering_vectors/tom_core_capabilities_chat.gguf \
   --steering-coeffs 1000 1000 1000 \
@@ -113,6 +114,15 @@ cd ToM && python evaluate_cognitive_actions_with_steering.py \
   --num-samples 20 \
   --output-prefix true_belief_combined
 ```
+
+python evaluate_cognitive_actions_with_steering.py \
+  --steering-vectors \
+    steering_vectors/tom_cca_forward_belief_new.gguf \
+    steering_vectors/tom_core_capabilites.gguf \
+  --steering-coeffs 300 500 \
+  --condition 1_forward_belief_true_belief \
+  --num-samples 20 \
+  --output-prefix true_belief_combined
 
 ## Additional Options
 
