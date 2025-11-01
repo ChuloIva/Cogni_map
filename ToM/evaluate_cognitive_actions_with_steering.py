@@ -2,14 +2,20 @@
 Evaluate Cognitive Action Activation Patterns in ToM-Steered vs Baseline Models
 
 This script compares how Theory of Mind steering vectors affect cognitive action
-activation patterns when processing ToM benchmark stories.
+activation patterns when processing ToM benchmark stories using ANSWER RANKING BY PROBABILITY
+(as described in the BigToM paper).
 
 Key features:
 - Loads ToM benchmark stories from BigToM dataset
 - Evaluates both baseline (no steering) and steered (with ToM vector) conditions
-- Captures cognitive action activations at TWO points:
-  1. After story + question (before answer generation)
-  2. After story + question + generated answer
+- Uses ANSWER RANKING BY PROBABILITY instead of text generation:
+  * Formats questions as multiple choice (a/b options)
+  * Calculates p(letter='a') and p(letter='b') from model logits
+  * Ranks answers by probability (no text parsing needed)
+- Captures cognitive action activations at THREE points:
+  1. After story + question (before answer selection)
+  2. After story + question + true answer
+  3. After story + question + wrong answer
 - Generates comprehensive analysis, visualizations, and CSV reports
 - Supports combining multiple steering vectors with custom coefficients
 
@@ -99,20 +105,27 @@ class ActivationResult:
     wrong_answer: str
 
     # Baseline condition
-    baseline_answer: str
+    baseline_selected: str  # Which answer was selected
     baseline_correct: bool
+    baseline_prob_true: float  # Probability assigned to true answer
+    baseline_prob_wrong: float  # Probability assigned to wrong answer
     baseline_activations_at_question: Dict[str, int]  # Layer counts
-    baseline_activations_after_answer: Dict[str, int]  # Layer counts
+    baseline_activations_after_true: Dict[str, int]  # Layer counts after true answer
+    baseline_activations_after_wrong: Dict[str, int]  # Layer counts after wrong answer
 
     # Steered condition
-    steered_answer: str
+    steered_selected: str  # Which answer was selected
     steered_correct: bool
+    steered_prob_true: float  # Probability assigned to true answer
+    steered_prob_wrong: float  # Probability assigned to wrong answer
     steered_activations_at_question: Dict[str, int]  # Layer counts
-    steered_activations_after_answer: Dict[str, int]  # Layer counts
+    steered_activations_after_true: Dict[str, int]  # Layer counts after true answer
+    steered_activations_after_wrong: Dict[str, int]  # Layer counts after wrong answer
 
-    # Differences (layer count differences)
+    # Differences (layer count differences) - now for both answer paths
     diff_at_question: Dict[str, int]
-    diff_after_answer: Dict[str, int]
+    diff_after_true: Dict[str, int]
+    diff_after_wrong: Dict[str, int]
 
     accuracy_improvement: bool  # Whether steering improved correctness
 
@@ -129,7 +142,7 @@ class CognitiveActionEvaluator:
         probes_dir: str = "../trained_probes",
         benchmark_dir: str = "procedural-evals-tom/data/conditions",
         results_dir: str = "results",
-        steering_coeff: float = 1.5,
+        steering_coeff: float = 0,
         probe_layer_range: Tuple[int, int] = (10, 20),
         steering_layer_range: List[int] = None,
         device: str = None,
@@ -493,28 +506,70 @@ class CognitiveActionEvaluator:
         print(f"✓ Loaded {len(samples)} samples (offset={offset}, total={total_available})\n")
         return samples
 
-    def generate_answer(
+    def format_mcq_prompt(
         self,
-        model: LanguageModel,
         story: str,
         question: str,
-        max_tokens: int = 300
-    ) -> str:
+        true_answer: str,
+        wrong_answer: str,
+        randomize: bool = True
+    ) -> Tuple[str, str]:
         """
-        Generate answer using the model
+        Format question as multiple choice with a/b options
 
         Args:
-            model: nnsight LanguageModel (baseline or steered)
             story: Story text
             question: Question text
-            max_tokens: Maximum tokens to generate
+            true_answer: Correct answer
+            wrong_answer: Incorrect answer
+            randomize: Whether to randomize answer positions
 
         Returns:
-            Generated answer string
+            Tuple of (formatted_prompt, true_position) where true_position is 'a' or 'b'
         """
-        # Format prompt
-        prompt = f"Story: {story}\n\nQuestion: {question}\n\nAnswer:"
+        # Randomize answer positions
+        if randomize:
+            if random.random() < 0.5:
+                option_a = true_answer
+                option_b = wrong_answer
+                true_position = 'a'
+            else:
+                option_a = wrong_answer
+                option_b = true_answer
+                true_position = 'b'
+        else:
+            option_a = true_answer
+            option_b = wrong_answer
+            true_position = 'a'
 
+        # Format as MCQ
+        prompt = (
+            f"Story: {story}\n\n"
+            f"Question: {question}\n"
+            f"Choose one of the following:\n"
+            f"a) {option_a}\n"
+            f"b) {option_b}\n\n"
+            f"Please answer with the letter of your choice (a or b).\n"
+            f"Answer:"
+        )
+
+        return prompt, true_position
+
+    def calculate_letter_probability(
+        self,
+        prompt: str,
+        letter: str
+    ) -> float:
+        """
+        Calculate probability that model assigns to a specific letter answer ('a' or 'b')
+
+        Args:
+            prompt: Formatted MCQ prompt ending with "Answer:"
+            letter: Either 'a' or 'b'
+
+        Returns:
+            Probability of the letter token
+        """
         # Apply chat template if available
         if hasattr(self.tokenizer, 'apply_chat_template'):
             messages = [{"role": "user", "content": prompt}]
@@ -526,29 +581,85 @@ class CognitiveActionEvaluator:
         else:
             formatted_prompt = prompt
 
-        # Tokenize
+        # Tokenize the prompt
         inputs = self.tokenizer(formatted_prompt, return_tensors="pt")
         input_ids = inputs['input_ids'].to(self.device)
         attention_mask = inputs['attention_mask'].to(self.device)
 
-        # Generate
-        with torch.no_grad():
-            # Use stored base_model (has .generate() method)
-            outputs = self.base_model.generate(
-                input_ids,
-                attention_mask=attention_mask,
-                max_new_tokens=max_tokens,
-                do_sample=False,  # Deterministic
-                pad_token_id=self.tokenizer.eos_token_id
-            )
+        # Get the token ID for the letter (try both with and without space)
+        letter_tokens = [
+            self.tokenizer.encode(letter, add_special_tokens=False),
+            self.tokenizer.encode(f" {letter}", add_special_tokens=False),
+            self.tokenizer.encode(f"{letter})", add_special_tokens=False),
+            self.tokenizer.encode(f" {letter})", add_special_tokens=False),
+        ]
 
-        # Decode only new tokens
-        answer = self.tokenizer.decode(
-            outputs[0][input_ids.shape[1]:],
-            skip_special_tokens=True
+        # Get model logits at the last position (where answer would be)
+        with torch.no_grad():
+            outputs = self.base_model(
+                input_ids=input_ids,
+                attention_mask=attention_mask
+            )
+            logits = outputs.logits[0, -1, :]  # Last position logits
+
+        # Convert to probabilities
+        probs = torch.nn.functional.softmax(logits, dim=-1)
+
+        # Get max probability across all letter token variants
+        max_prob = 0.0
+        for token_ids in letter_tokens:
+            if token_ids:  # If tokenization succeeded
+                token_id = token_ids[0]  # Take first token
+                token_prob = probs[token_id].item()
+                max_prob = max(max_prob, token_prob)
+
+        return max_prob
+
+    def select_answer_by_probability(
+        self,
+        model: LanguageModel,
+        story: str,
+        question: str,
+        true_answer: str,
+        wrong_answer: str
+    ) -> Tuple[str, Dict[str, float]]:
+        """
+        Select answer by ranking probabilities (instead of generating text)
+
+        Args:
+            model: nnsight LanguageModel (baseline or steered)
+            story: Story text
+            question: Question text
+            true_answer: Correct answer text
+            wrong_answer: Incorrect answer text
+
+        Returns:
+            Tuple of (selected_answer, probability_dict) where probability_dict contains
+            {'prob_a': float, 'prob_b': float, 'true_position': 'a'/'b', 'selected': 'a'/'b'}
+        """
+        # Format as MCQ
+        mcq_prompt, true_position = self.format_mcq_prompt(
+            story, question, true_answer, wrong_answer, randomize=True
         )
 
-        return answer.strip()
+        # Calculate probabilities for both letters
+        prob_a = self.calculate_letter_probability(mcq_prompt, 'a')
+        prob_b = self.calculate_letter_probability(mcq_prompt, 'b')
+
+        # Determine selected answer
+        selected_letter = 'a' if prob_a > prob_b else 'b'
+        selected_answer = true_answer if selected_letter == true_position else wrong_answer
+
+        probability_dict = {
+            'prob_a': prob_a,
+            'prob_b': prob_b,
+            'true_position': true_position,
+            'selected': selected_letter,
+            'prob_true': prob_a if true_position == 'a' else prob_b,
+            'prob_wrong': prob_b if true_position == 'a' else prob_a
+        }
+
+        return selected_answer, probability_dict
 
     def capture_activations_at_question(
         self,
@@ -597,75 +708,69 @@ class CognitiveActionEvaluator:
         model: LanguageModel,
         story: str,
         question: str,
-        answer: str
-    ) -> Dict[str, Dict]:
+        true_answer: str,
+        wrong_answer: str
+    ) -> Dict[str, Dict[str, Dict]]:
         """
-        Capture cognitive action activations after full story+question+answer
+        Capture cognitive action activations after both possible answer completions
 
         Args:
             model: nnsight LanguageModel
             story: Story text
             question: Question text
-            answer: Generated answer
+            true_answer: Correct answer text
+            wrong_answer: Incorrect answer text
 
         Returns:
-            Dict mapping action_name -> activation info
+            Dict with structure: {
+                'true_answer': {action_name -> activation info},
+                'wrong_answer': {action_name -> activation info}
+            }
         """
-        # Full text including answer
-        full_text = f"Story: {story}\n\nQuestion: {question}\n\nAnswer: {answer}"
+        results = {}
 
-        # Augment for probe extraction
-        augmented = f"{full_text}\n\nThe cognitive action being demonstrated here is"
+        # Capture activations for both answer completions
+        for answer_type, answer_text in [('true_answer', true_answer), ('wrong_answer', wrong_answer)]:
+            # Full text including answer
+            full_text = f"Story: {story}\n\nQuestion: {question}\n\nAnswer: {answer_text}"
 
-        # Extract activations
-        saved_activations = {}
+            # Augment for probe extraction
+            augmented = f"{full_text}\n\nThe cognitive action being demonstrated here is"
 
-        with model.trace(augmented) as tracer:
-            for layer_idx in range(self.probe_layer_range[0], self.probe_layer_range[1] + 1):
-                hidden_states = model.model.layers[layer_idx].output[0]
-                saved_activations[layer_idx] = hidden_states[:, -1, :].save()
+            # Extract activations
+            saved_activations = {}
 
-        # Convert to dict format
-        layer_activations = {
-            layer_idx: act.squeeze(0).cpu()
-            for layer_idx, act in saved_activations.items()
-        }
+            with model.trace(augmented) as tracer:
+                for layer_idx in range(self.probe_layer_range[0], self.probe_layer_range[1] + 1):
+                    hidden_states = model.model.layers[layer_idx].output[0]
+                    saved_activations[layer_idx] = hidden_states[:, -1, :].save()
 
-        # Run probes on activations
-        action_predictions = self._run_probes_on_activations(layer_activations)
+            # Convert to dict format
+            layer_activations = {
+                layer_idx: act.squeeze(0).cpu()
+                for layer_idx, act in saved_activations.items()
+            }
 
-        return action_predictions
+            # Run probes on activations
+            action_predictions = self._run_probes_on_activations(layer_activations)
+            results[answer_type] = action_predictions
 
-    def grade_answer(
+        return results
+
+    def grade_by_probability(
         self,
-        predicted: str,
-        true_answer: str,
-        wrong_answer: str
+        probability_dict: Dict[str, float]
     ) -> bool:
         """
-        Grade whether predicted answer is correct
+        Grade answer correctness based on probability ranking
 
         Args:
-            predicted: Predicted answer
-            true_answer: Correct answer
-            wrong_answer: Incorrect answer
+            probability_dict: Dictionary containing probability information from select_answer_by_probability()
 
         Returns:
-            True if correct, False otherwise
+            True if correct answer had higher probability, False otherwise
         """
-        pred_lower = predicted.lower()
-        true_lower = true_answer.lower()
-        wrong_lower = wrong_answer.lower()
-
-        # Simple keyword matching
-        true_keywords = set(true_lower.split())
-        wrong_keywords = set(wrong_lower.split())
-        pred_keywords = set(pred_lower.split())
-
-        true_overlap = len(true_keywords & pred_keywords)
-        wrong_overlap = len(wrong_keywords & pred_keywords)
-
-        return true_overlap > wrong_overlap
+        return probability_dict['prob_true'] > probability_dict['prob_wrong']
 
     def evaluate_sample(
         self,
@@ -704,26 +809,24 @@ class CognitiveActionEvaluator:
         )
         self._clear_gpu_memory()  # Clean up after activation capture
 
-        # 2. Generate answer
-        print("  2/4 Generating answer...")
-        baseline_answer = self.generate_answer(
-            self.model, story, question
+        # 2. Select answer by probability
+        print("  2/4 Ranking answers by probability...")
+        baseline_selected, baseline_probs = self.select_answer_by_probability(
+            self.model, story, question, true_answer, wrong_answer
         )
-        self._clear_gpu_memory()  # Clean up after generation
+        self._clear_gpu_memory()  # Clean up after probability calculation
 
-        # 3. Capture activations after answer
-        print("  3/4 Capturing activations after answer...")
+        # 3. Capture activations after both possible answers
+        print("  3/4 Capturing activations after both answers...")
         baseline_act_a = self.capture_activations_after_answer(
-            self.model, story, question, baseline_answer
+            self.model, story, question, true_answer, wrong_answer
         )
         self._clear_gpu_memory()  # Clean up after activation capture
 
         # 4. Grade answer
         print("  4/4 Grading answer...")
-        baseline_correct = self.grade_answer(
-            baseline_answer, true_answer, wrong_answer
-        )
-        print(f"  ✓ Baseline complete (correct={baseline_correct})")
+        baseline_correct = self.grade_by_probability(baseline_probs)
+        print(f"  ✓ Baseline complete (correct={baseline_correct}, p_true={baseline_probs['prob_true']:.3f}, p_wrong={baseline_probs['prob_wrong']:.3f})")
 
         # ============================================================
         # STEERED CONDITION (With ToM Steering)
@@ -740,33 +843,38 @@ class CognitiveActionEvaluator:
         )
         self._clear_gpu_memory()  # Clean up after activation capture
 
-        # 2. Generate answer
-        print("  2/4 Generating answer...")
-        steered_answer = self.generate_answer(
-            self.model, story, question
+        # 2. Select answer by probability
+        print("  2/4 Ranking answers by probability...")
+        steered_selected, steered_probs = self.select_answer_by_probability(
+            self.model, story, question, true_answer, wrong_answer
         )
-        self._clear_gpu_memory()  # Clean up after generation
+        self._clear_gpu_memory()  # Clean up after probability calculation
 
-        # 3. Capture activations after answer
-        print("  3/4 Capturing activations after answer...")
+        # 3. Capture activations after both possible answers
+        print("  3/4 Capturing activations after both answers...")
         steered_act_a = self.capture_activations_after_answer(
-            self.model, story, question, steered_answer
+            self.model, story, question, true_answer, wrong_answer
         )
         self._clear_gpu_memory()  # Clean up after activation capture
 
         # 4. Grade answer
         print("  4/4 Grading answer...")
-        steered_correct = self.grade_answer(
-            steered_answer, true_answer, wrong_answer
-        )
-        print(f"  ✓ Steered complete (correct={steered_correct})")
+        steered_correct = self.grade_by_probability(steered_probs)
+        print(f"  ✓ Steered complete (correct={steered_correct}, p_true={steered_probs['prob_true']:.3f}, p_wrong={steered_probs['prob_wrong']:.3f})")
 
         # Remove steering for next iteration
         self._remove_steering()
 
         # COMPUTE DIFFERENCES
         diff_at_q = self._compute_activation_diff(baseline_act_q, steered_act_q)
-        diff_at_a = self._compute_activation_diff(baseline_act_a, steered_act_a)
+        diff_after_true = self._compute_activation_diff(
+            baseline_act_a['true_answer'],
+            steered_act_a['true_answer']
+        )
+        diff_after_wrong = self._compute_activation_diff(
+            baseline_act_a['wrong_answer'],
+            steered_act_a['wrong_answer']
+        )
 
         # Create result
         result = ActivationResult(
@@ -774,16 +882,23 @@ class CognitiveActionEvaluator:
             question=question,
             true_answer=true_answer,
             wrong_answer=wrong_answer,
-            baseline_answer=baseline_answer,
+            baseline_selected=baseline_selected,
             baseline_correct=baseline_correct,
+            baseline_prob_true=baseline_probs['prob_true'],
+            baseline_prob_wrong=baseline_probs['prob_wrong'],
             baseline_activations_at_question=self._extract_aggregates(baseline_act_q),
-            baseline_activations_after_answer=self._extract_aggregates(baseline_act_a),
-            steered_answer=steered_answer,
+            baseline_activations_after_true=self._extract_aggregates(baseline_act_a['true_answer']),
+            baseline_activations_after_wrong=self._extract_aggregates(baseline_act_a['wrong_answer']),
+            steered_selected=steered_selected,
             steered_correct=steered_correct,
+            steered_prob_true=steered_probs['prob_true'],
+            steered_prob_wrong=steered_probs['prob_wrong'],
             steered_activations_at_question=self._extract_aggregates(steered_act_q),
-            steered_activations_after_answer=self._extract_aggregates(steered_act_a),
+            steered_activations_after_true=self._extract_aggregates(steered_act_a['true_answer']),
+            steered_activations_after_wrong=self._extract_aggregates(steered_act_a['wrong_answer']),
             diff_at_question=diff_at_q,
-            diff_after_answer=diff_at_a,
+            diff_after_true=diff_after_true,
+            diff_after_wrong=diff_after_wrong,
             accuracy_improvement=(steered_correct and not baseline_correct)
         )
 
@@ -855,24 +970,37 @@ class CognitiveActionEvaluator:
         steered_accuracy = sum(r.steered_correct for r in results) / len(results)
         improvements = sum(r.accuracy_improvement for r in results)
 
+        # Probability metrics
+        baseline_prob_true_avg = np.mean([r.baseline_prob_true for r in results])
+        baseline_prob_wrong_avg = np.mean([r.baseline_prob_wrong for r in results])
+        steered_prob_true_avg = np.mean([r.steered_prob_true for r in results])
+        steered_prob_wrong_avg = np.mean([r.steered_prob_wrong for r in results])
+
         # Aggregate activation differences
         all_diff_q = defaultdict(list)
-        all_diff_a = defaultdict(list)
+        all_diff_true = defaultdict(list)
+        all_diff_wrong = defaultdict(list)
 
         for result in results:
             for action, diff in result.diff_at_question.items():
                 all_diff_q[action].append(diff)
-            for action, diff in result.diff_after_answer.items():
-                all_diff_a[action].append(diff)
+            for action, diff in result.diff_after_true.items():
+                all_diff_true[action].append(diff)
+            for action, diff in result.diff_after_wrong.items():
+                all_diff_wrong[action].append(diff)
 
         # Compute mean differences
         mean_diff_q = {
             action: np.mean(diffs)
             for action, diffs in all_diff_q.items()
         }
-        mean_diff_a = {
+        mean_diff_true = {
             action: np.mean(diffs)
-            for action, diffs in all_diff_a.items()
+            for action, diffs in all_diff_true.items()
+        }
+        mean_diff_wrong = {
+            action: np.mean(diffs)
+            for action, diffs in all_diff_wrong.items()
         }
 
         # Sort by absolute difference
@@ -882,8 +1010,14 @@ class CognitiveActionEvaluator:
             reverse=True
         )[:20]
 
-        top_diff_a = sorted(
-            mean_diff_a.items(),
+        top_diff_true = sorted(
+            mean_diff_true.items(),
+            key=lambda x: abs(x[1]),
+            reverse=True
+        )[:20]
+
+        top_diff_wrong = sorted(
+            mean_diff_wrong.items(),
             key=lambda x: abs(x[1]),
             reverse=True
         )[:20]
@@ -894,10 +1028,16 @@ class CognitiveActionEvaluator:
             'steered_accuracy': steered_accuracy,
             'accuracy_improvement': steered_accuracy - baseline_accuracy,
             'num_improved': improvements,
+            'baseline_prob_true_avg': baseline_prob_true_avg,
+            'baseline_prob_wrong_avg': baseline_prob_wrong_avg,
+            'steered_prob_true_avg': steered_prob_true_avg,
+            'steered_prob_wrong_avg': steered_prob_wrong_avg,
             'top_differences_at_question': top_diff_q,
-            'top_differences_after_answer': top_diff_a,
+            'top_differences_after_true': top_diff_true,
+            'top_differences_after_wrong': top_diff_wrong,
             'mean_diff_at_question': mean_diff_q,
-            'mean_diff_after_answer': mean_diff_a
+            'mean_diff_after_true': mean_diff_true,
+            'mean_diff_after_wrong': mean_diff_wrong
         }
 
         return summary
@@ -970,8 +1110,8 @@ class CognitiveActionEvaluator:
             summary: Summary statistics dict
             prefix: Filename prefix
         """
-        # Top differences bar plot
-        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
+        # Top differences bar plot (now with 3 subplots)
+        fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(12, 15))
 
         # At question
         actions_q = [item[0] for item in summary['top_differences_at_question'][:15]]
@@ -984,16 +1124,27 @@ class CognitiveActionEvaluator:
         ax1.axvline(x=0, color='black', linestyle='--', linewidth=0.5)
         ax1.grid(axis='x', alpha=0.3)
 
-        # After answer
-        actions_a = [item[0] for item in summary['top_differences_after_answer'][:15]]
-        diffs_a = [item[1] for item in summary['top_differences_after_answer'][:15]]
+        # After true answer
+        actions_true = [item[0] for item in summary['top_differences_after_true'][:15]]
+        diffs_true = [item[1] for item in summary['top_differences_after_true'][:15]]
 
-        colors_a = ['green' if d > 0 else 'red' for d in diffs_a]
-        ax2.barh(actions_a, diffs_a, color=colors_a, alpha=0.7)
+        colors_true = ['green' if d > 0 else 'red' for d in diffs_true]
+        ax2.barh(actions_true, diffs_true, color=colors_true, alpha=0.7)
         ax2.set_xlabel('Layer Count Difference (Steered - Baseline)')
-        ax2.set_title('Top 15 Cognitive Action Layer Count Differences After Answer')
+        ax2.set_title('Top 15 Cognitive Action Layer Count Differences After True Answer')
         ax2.axvline(x=0, color='black', linestyle='--', linewidth=0.5)
         ax2.grid(axis='x', alpha=0.3)
+
+        # After wrong answer
+        actions_wrong = [item[0] for item in summary['top_differences_after_wrong'][:15]]
+        diffs_wrong = [item[1] for item in summary['top_differences_after_wrong'][:15]]
+
+        colors_wrong = ['green' if d > 0 else 'red' for d in diffs_wrong]
+        ax3.barh(actions_wrong, diffs_wrong, color=colors_wrong, alpha=0.7)
+        ax3.set_xlabel('Layer Count Difference (Steered - Baseline)')
+        ax3.set_title('Top 15 Cognitive Action Layer Count Differences After Wrong Answer')
+        ax3.axvline(x=0, color='black', linestyle='--', linewidth=0.5)
+        ax3.grid(axis='x', alpha=0.3)
 
         plt.tight_layout()
 
@@ -1050,15 +1201,16 @@ class CognitiveActionEvaluator:
 
         Args:
             results: List of ActivationResult objects
-            summary: Summary statistics dict
             prefix: Filename prefix
             top_n: Number of top actions to display (based on absolute difference)
         """
         # Aggregate layer counts across all samples for each action
         baseline_counts_q = defaultdict(list)
         steered_counts_q = defaultdict(list)
-        baseline_counts_a = defaultdict(list)
-        steered_counts_a = defaultdict(list)
+        baseline_counts_true = defaultdict(list)
+        steered_counts_true = defaultdict(list)
+        baseline_counts_wrong = defaultdict(list)
+        steered_counts_wrong = defaultdict(list)
 
         for result in results:
             # At question
@@ -1067,31 +1219,44 @@ class CognitiveActionEvaluator:
             for action, count in result.steered_activations_at_question.items():
                 steered_counts_q[action].append(count)
 
-            # After answer
-            for action, count in result.baseline_activations_after_answer.items():
-                baseline_counts_a[action].append(count)
-            for action, count in result.steered_activations_after_answer.items():
-                steered_counts_a[action].append(count)
+            # After true answer
+            for action, count in result.baseline_activations_after_true.items():
+                baseline_counts_true[action].append(count)
+            for action, count in result.steered_activations_after_true.items():
+                steered_counts_true[action].append(count)
+
+            # After wrong answer
+            for action, count in result.baseline_activations_after_wrong.items():
+                baseline_counts_wrong[action].append(count)
+            for action, count in result.steered_activations_after_wrong.items():
+                steered_counts_wrong[action].append(count)
 
         # Compute mean counts for each action
         all_actions = set(baseline_counts_q.keys()) | set(steered_counts_q.keys()) | \
-                      set(baseline_counts_a.keys()) | set(steered_counts_a.keys())
+                      set(baseline_counts_true.keys()) | set(steered_counts_true.keys()) | \
+                      set(baseline_counts_wrong.keys()) | set(steered_counts_wrong.keys())
 
         action_stats = {}
         for action in all_actions:
             baseline_q_mean = np.mean(baseline_counts_q[action]) if baseline_counts_q[action] else 0.0
             steered_q_mean = np.mean(steered_counts_q[action]) if steered_counts_q[action] else 0.0
-            baseline_a_mean = np.mean(baseline_counts_a[action]) if baseline_counts_a[action] else 0.0
-            steered_a_mean = np.mean(steered_counts_a[action]) if steered_counts_a[action] else 0.0
+            baseline_true_mean = np.mean(baseline_counts_true[action]) if baseline_counts_true[action] else 0.0
+            steered_true_mean = np.mean(steered_counts_true[action]) if steered_counts_true[action] else 0.0
+            baseline_wrong_mean = np.mean(baseline_counts_wrong[action]) if baseline_counts_wrong[action] else 0.0
+            steered_wrong_mean = np.mean(steered_counts_wrong[action]) if steered_counts_wrong[action] else 0.0
 
-            # Total absolute difference across both timepoints
-            total_diff = abs(steered_q_mean - baseline_q_mean) + abs(steered_a_mean - baseline_a_mean)
+            # Total absolute difference across all timepoints
+            total_diff = (abs(steered_q_mean - baseline_q_mean) +
+                         abs(steered_true_mean - baseline_true_mean) +
+                         abs(steered_wrong_mean - baseline_wrong_mean))
 
             action_stats[action] = {
                 'baseline_q': baseline_q_mean,
                 'steered_q': steered_q_mean,
-                'baseline_a': baseline_a_mean,
-                'steered_a': steered_a_mean,
+                'baseline_true': baseline_true_mean,
+                'steered_true': steered_true_mean,
+                'baseline_wrong': baseline_wrong_mean,
+                'steered_wrong': steered_wrong_mean,
                 'total_diff': total_diff
             }
 
@@ -1110,15 +1275,17 @@ class CognitiveActionEvaluator:
             row = [
                 stats['baseline_q'],
                 stats['steered_q'],
-                stats['baseline_a'],
-                stats['steered_a']
+                stats['baseline_true'],
+                stats['steered_true'],
+                stats['baseline_wrong'],
+                stats['steered_wrong']
             ]
             data_matrix.append(row)
 
         data_matrix = np.array(data_matrix)
 
         # Create heatmap
-        _, ax = plt.subplots(figsize=(10, max(12, top_n * 0.4)))
+        _, ax = plt.subplots(figsize=(14, max(12, top_n * 0.4)))
 
         # Use a diverging colormap
         sns.heatmap(
@@ -1127,7 +1294,8 @@ class CognitiveActionEvaluator:
             fmt='.1f',
             cmap='RdYlGn',
             xticklabels=['Baseline\n(at Question)', 'Steered\n(at Question)',
-                         'Baseline\n(after Answer)', 'Steered\n(after Answer)'],
+                         'Baseline\n(after True)', 'Steered\n(after True)',
+                         'Baseline\n(after Wrong)', 'Steered\n(after Wrong)'],
             yticklabels=actions,
             cbar_kws={'label': 'Mean Layer Count'},
             linewidths=0.5,
@@ -1260,15 +1428,22 @@ def main():
     print("RESULTS SUMMARY")
     print("="*80)
     print(f"Samples evaluated: {summary['num_samples']}")
-    print(f"Baseline accuracy: {summary['baseline_accuracy']:.2%}")
-    print(f"Steered accuracy: {summary['steered_accuracy']:.2%}")
-    print(f"Accuracy improvement: {summary['accuracy_improvement']:+.2%}")
-    print(f"Samples improved: {summary['num_improved']}")
+    print(f"\nAccuracy Metrics:")
+    print(f"  Baseline accuracy: {summary['baseline_accuracy']:.2%}")
+    print(f"  Steered accuracy: {summary['steered_accuracy']:.2%}")
+    print(f"  Accuracy improvement: {summary['accuracy_improvement']:+.2%}")
+    print(f"  Samples improved: {summary['num_improved']}")
+    print(f"\nProbability Metrics:")
+    print(f"  Baseline - Avg p(true): {summary['baseline_prob_true_avg']:.4f}, Avg p(wrong): {summary['baseline_prob_wrong_avg']:.4f}")
+    print(f"  Steered  - Avg p(true): {summary['steered_prob_true_avg']:.4f}, Avg p(wrong): {summary['steered_prob_wrong_avg']:.4f}")
     print("\nTop 10 cognitive action differences at question:")
     for action, diff in summary['top_differences_at_question'][:10]:
         print(f"  {action:40s} {diff:+.4f}")
-    print("\nTop 10 cognitive action differences after answer:")
-    for action, diff in summary['top_differences_after_answer'][:10]:
+    print("\nTop 10 cognitive action differences after true answer:")
+    for action, diff in summary['top_differences_after_true'][:10]:
+        print(f"  {action:40s} {diff:+.4f}")
+    print("\nTop 10 cognitive action differences after wrong answer:")
+    for action, diff in summary['top_differences_after_wrong'][:10]:
         print(f"  {action:40s} {diff:+.4f}")
     print("="*80 + "\n")
 

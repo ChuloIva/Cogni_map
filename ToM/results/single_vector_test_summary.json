@@ -1,265 +1,398 @@
 {
   "num_samples": 100,
-  "baseline_accuracy": 0.47,
-  "steered_accuracy": 0.45,
-  "accuracy_improvement": -0.019999999999999962,
-  "num_improved": 10,
+  "baseline_accuracy": 0.45,
+  "steered_accuracy": 0.56,
+  "accuracy_improvement": 0.11000000000000004,
+  "num_improved": 15,
+  "baseline_prob_true_avg": 0.4462642735302873,
+  "baseline_prob_wrong_avg": 0.5537246501874984,
+  "steered_prob_true_avg": 0.5597624545351755,
+  "steered_prob_wrong_avg": 0.4402408912838689,
   "top_differences_at_question": [
     [
       "emotion_perception",
-      -0.36
+      2.35
+    ],
+    [
+      "noticing",
+      1.59
     ],
     [
       "hypothesis_generation",
-      0.2
-    ],
-    [
-      "situation_modification",
-      0.14
-    ],
-    [
-      "emotion_organizing",
-      0.14
-    ],
-    [
-      "reframing",
-      -0.07
-    ],
-    [
-      "distinguishing",
-      -0.06
+      1.57
     ],
     [
       "questioning",
-      -0.06
+      -1.01
     ],
     [
-      "emotion_responding",
-      0.06
+      "emotion_valuing",
+      0.94
     ],
     [
-      "convergent_thinking",
-      -0.05
+      "suspending_judgment",
+      0.82
     ],
     [
-      "updating_beliefs",
-      -0.04
+      "response_modulation",
+      0.38
     ],
     [
       "pattern_recognition",
+      -0.35
+    ],
+    [
+      "reframing",
+      0.31
+    ],
+    [
+      "situation_modification",
+      -0.26
+    ],
+    [
+      "emotion_understanding",
+      0.17
+    ],
+    [
+      "emotion_responding",
+      0.16
+    ],
+    [
+      "updating_beliefs",
+      -0.13
+    ],
+    [
+      "distinguishing",
+      -0.12
+    ],
+    [
+      "remembering",
+      -0.07
+    ],
+    [
+      "abstracting",
+      0.06
+    ],
+    [
+      "emotional_reappraisal",
       -0.04
     ],
     [
       "understanding",
-      -0.02
-    ],
-    [
-      "noticing",
-      -0.02
-    ],
-    [
-      "emotion_valuing",
       -0.01
     ],
     [
-      "remembering",
-      -0.01
-    ],
-    [
-      "abstracting",
-      -0.01
-    ],
-    [
-      "emotion_understanding",
-      0.01
-    ],
-    [
-      "zooming_out",
+      "emotion_organizing",
       0.0
-    ],
-    [
-      "applying",
-      0.0
-    ],
-    [
-      "cognition_awareness",
-      0.0
-    ]
-  ],
-  "top_differences_after_answer": [
-    [
-      "updating_beliefs",
-      0.79
-    ],
-    [
-      "questioning",
-      -0.62
-    ],
-    [
-      "convergent_thinking",
-      -0.61
-    ],
-    [
-      "emotional_reappraisal",
-      0.52
-    ],
-    [
-      "distinguishing",
-      0.45
-    ],
-    [
-      "emotion_understanding",
-      0.45
-    ],
-    [
-      "situation_modification",
-      -0.35
-    ],
-    [
-      "perspective_taking",
-      -0.23
-    ],
-    [
-      "emotion_perception",
-      -0.21
     ],
     [
       "evaluating",
-      0.17
+      0.0
+    ]
+  ],
+  "top_differences_after_true": [
+    [
+      "emotion_perception",
+      1.48
     ],
     [
-      "remembering",
-      0.17
+      "convergent_thinking",
+      -1.48
     ],
     [
-      "counterfactual_reasoning",
-      -0.17
+      "questioning",
+      -1.27
     ],
     [
-      "analyzing",
-      0.13
+      "noticing",
+      1.24
     ],
     [
-      "emotion_facilitation",
-      -0.09
+      "hypothesis_generation",
+      1.18
     ],
     [
-      "metacognitive_monitoring",
-      -0.09
+      "suspending_judgment",
+      1.09
     ],
     [
-      "emotion_management",
-      -0.09
+      "understanding",
+      -1.02
+    ],
+    [
+      "emotion_understanding",
+      0.82
+    ],
+    [
+      "emotional_reappraisal",
+      0.36
+    ],
+    [
+      "situation_modification",
+      -0.22
+    ],
+    [
+      "updating_beliefs",
+      -0.13
+    ],
+    [
+      "distinguishing",
+      0.08
+    ],
+    [
+      "emotion_valuing",
+      0.06
+    ],
+    [
+      "cognition_awareness",
+      -0.05
     ],
     [
       "reframing",
+      0.04
+    ],
+    [
+      "counterfactual_reasoning",
+      -0.03
+    ],
+    [
+      "emotion_responding",
+      0.02
+    ],
+    [
+      "emotion_management",
+      0.02
+    ],
+    [
+      "perspective_taking",
+      -0.02
+    ],
+    [
+      "remembering",
+      -0.01
+    ]
+  ],
+  "top_differences_after_wrong": [
+    [
+      "noticing",
+      1.46
+    ],
+    [
+      "emotion_perception",
+      1.28
+    ],
+    [
+      "convergent_thinking",
+      -1.22
+    ],
+    [
+      "questioning",
+      -1.22
+    ],
+    [
+      "understanding",
+      -1.16
+    ],
+    [
+      "hypothesis_generation",
+      1.02
+    ],
+    [
+      "emotion_understanding",
+      0.84
+    ],
+    [
+      "suspending_judgment",
+      0.57
+    ],
+    [
+      "emotional_reappraisal",
+      0.55
+    ],
+    [
+      "counterfactual_reasoning",
+      -0.29
+    ],
+    [
+      "situation_modification",
+      -0.22
+    ],
+    [
+      "updating_beliefs",
+      -0.16
+    ],
+    [
+      "emotion_responding",
+      0.09
+    ],
+    [
+      "distinguishing",
+      0.09
+    ],
+    [
+      "emotion_management",
       0.08
     ],
     [
-      "situation_selection",
-      -0.08
+      "reframing",
+      0.07
     ],
     [
-      "reconsidering",
-      0.08
+      "remembering",
+      -0.04
     ],
     [
-      "abstracting",
-      0.08
+      "cognition_awareness",
+      -0.04
+    ],
+    [
+      "emotion_valuing",
+      0.03
+    ],
+    [
+      "analogical_thinking",
+      0.02
     ]
   ],
   "mean_diff_at_question": {
-    "emotion_perception": -0.36,
+    "emotion_organizing": 0.0,
+    "remembering": -0.07,
+    "pattern_recognition": -0.35,
+    "evaluating": 0.0,
+    "emotion_perception": 2.35,
+    "updating_beliefs": -0.13,
+    "divergent_thinking": 0.0,
+    "emotion_facilitation": 0.0,
+    "analogical_thinking": 0.0,
+    "response_modulation": 0.38,
+    "self_questioning": 0.0,
     "zooming_out": 0.0,
+    "creating": 0.0,
+    "convergent_thinking": 0.0,
+    "emotion_understanding": 0.17,
+    "emotion_receiving": 0.0,
+    "reframing": 0.31,
+    "emotion_responding": 0.16,
+    "counterfactual_reasoning": 0.0,
+    "situation_modification": -0.26,
+    "emotion_management": 0.0,
+    "hypothesis_generation": 1.57,
+    "emotion_characterizing": 0.0,
+    "emotional_reappraisal": -0.04,
+    "concretizing": 0.0,
+    "accepting": 0.0,
+    "emotion_valuing": 0.94,
+    "reconsidering": 0.0,
+    "metacognitive_regulation": 0.0,
+    "questioning": -1.01,
+    "connecting": 0.0,
     "applying": 0.0,
+    "zooming_in": 0.0,
+    "perspective_taking": 0.0,
+    "analyzing": 0.0,
+    "abstracting": 0.06,
+    "meta_awareness": 0.0,
+    "metacognitive_monitoring": 0.0,
+    "situation_selection": 0.0,
     "cognition_awareness": 0.0,
     "attentional_deployment": 0.0,
-    "situation_modification": 0.14,
-    "emotion_characterizing": 0.0,
-    "suspending_judgment": 0.0,
-    "zooming_in": 0.0,
-    "understanding": -0.02,
-    "noticing": -0.02,
-    "accepting": 0.0,
-    "metacognitive_regulation": 0.0,
-    "concretizing": 0.0,
-    "reframing": -0.07,
-    "situation_selection": 0.0,
-    "emotional_reappraisal": 0.0,
-    "evaluating": 0.0,
-    "response_modulation": 0.0,
-    "emotion_facilitation": 0.0,
-    "distinguishing": -0.06,
-    "analyzing": 0.0,
-    "metacognitive_monitoring": 0.0,
-    "emotion_receiving": 0.0,
-    "questioning": -0.06,
-    "emotion_management": 0.0,
-    "emotion_valuing": -0.01,
-    "divergent_thinking": 0.0,
-    "connecting": 0.0,
-    "emotion_organizing": 0.14,
-    "remembering": -0.01,
-    "counterfactual_reasoning": 0.0,
-    "convergent_thinking": -0.05,
-    "creating": 0.0,
-    "updating_beliefs": -0.04,
-    "emotion_responding": 0.06,
-    "reconsidering": 0.0,
-    "hypothesis_generation": 0.2,
-    "self_questioning": 0.0,
-    "analogical_thinking": 0.0,
-    "pattern_recognition": -0.04,
-    "meta_awareness": 0.0,
-    "abstracting": -0.01,
-    "perspective_taking": 0.0,
-    "emotion_understanding": 0.01
+    "suspending_judgment": 0.82,
+    "understanding": -0.01,
+    "distinguishing": -0.12,
+    "noticing": 1.59
   },
-  "mean_diff_after_answer": {
-    "emotion_perception": -0.21,
+  "mean_diff_after_true": {
+    "emotion_organizing": 0.0,
+    "remembering": -0.01,
+    "pattern_recognition": 0.0,
+    "evaluating": 0.0,
+    "emotion_perception": 1.48,
+    "updating_beliefs": -0.13,
+    "divergent_thinking": 0.0,
+    "emotion_facilitation": 0.0,
+    "analogical_thinking": -0.01,
+    "response_modulation": 0.0,
+    "self_questioning": 0.0,
     "zooming_out": 0.0,
-    "applying": 0.0,
-    "cognition_awareness": -0.02,
-    "attentional_deployment": 0.0,
-    "situation_modification": -0.35,
+    "creating": 0.0,
+    "convergent_thinking": -1.48,
+    "emotion_understanding": 0.82,
+    "emotion_receiving": 0.0,
+    "reframing": 0.04,
+    "emotion_responding": 0.02,
+    "counterfactual_reasoning": -0.03,
+    "situation_modification": -0.22,
+    "emotion_management": 0.02,
+    "hypothesis_generation": 1.18,
     "emotion_characterizing": 0.0,
-    "suspending_judgment": 0.01,
-    "zooming_in": 0.01,
-    "understanding": 0.02,
-    "noticing": 0.01,
+    "emotional_reappraisal": 0.36,
+    "concretizing": 0.0,
     "accepting": 0.0,
+    "emotion_valuing": 0.06,
+    "reconsidering": 0.0,
     "metacognitive_regulation": 0.0,
-    "concretizing": 0.02,
-    "reframing": 0.08,
-    "situation_selection": -0.08,
-    "emotional_reappraisal": 0.52,
-    "evaluating": 0.17,
-    "response_modulation": -0.02,
-    "emotion_facilitation": -0.09,
-    "distinguishing": 0.45,
-    "analyzing": 0.13,
-    "metacognitive_monitoring": -0.09,
-    "emotion_receiving": 0.01,
-    "questioning": -0.62,
-    "emotion_management": -0.09,
-    "emotion_valuing": -0.04,
-    "divergent_thinking": 0.06,
+    "questioning": -1.27,
     "connecting": 0.0,
-    "emotion_organizing": 0.05,
-    "remembering": 0.17,
-    "counterfactual_reasoning": -0.17,
-    "convergent_thinking": -0.61,
-    "creating": 0.04,
-    "updating_beliefs": 0.79,
-    "emotion_responding": -0.01,
-    "reconsidering": 0.08,
-    "hypothesis_generation": -0.05,
-    "self_questioning": 0.07,
-    "analogical_thinking": 0.0,
-    "pattern_recognition": 0.01,
-    "meta_awareness": 0.04,
-    "abstracting": 0.08,
-    "perspective_taking": -0.23,
-    "emotion_understanding": 0.45
+    "applying": 0.0,
+    "zooming_in": 0.0,
+    "perspective_taking": -0.02,
+    "analyzing": 0.0,
+    "abstracting": 0.01,
+    "meta_awareness": 0.0,
+    "metacognitive_monitoring": 0.0,
+    "situation_selection": 0.0,
+    "cognition_awareness": -0.05,
+    "attentional_deployment": 0.0,
+    "suspending_judgment": 1.09,
+    "understanding": -1.02,
+    "distinguishing": 0.08,
+    "noticing": 1.24
+  },
+  "mean_diff_after_wrong": {
+    "emotion_organizing": 0.0,
+    "remembering": -0.04,
+    "pattern_recognition": 0.0,
+    "evaluating": 0.0,
+    "emotion_perception": 1.28,
+    "updating_beliefs": -0.16,
+    "divergent_thinking": 0.0,
+    "emotion_facilitation": 0.0,
+    "analogical_thinking": 0.02,
+    "response_modulation": 0.0,
+    "self_questioning": 0.0,
+    "zooming_out": 0.0,
+    "creating": 0.0,
+    "convergent_thinking": -1.22,
+    "emotion_understanding": 0.84,
+    "emotion_receiving": 0.0,
+    "reframing": 0.07,
+    "emotion_responding": 0.09,
+    "counterfactual_reasoning": -0.29,
+    "situation_modification": -0.22,
+    "emotion_management": 0.08,
+    "hypothesis_generation": 1.02,
+    "emotion_characterizing": 0.0,
+    "emotional_reappraisal": 0.55,
+    "concretizing": 0.0,
+    "accepting": 0.0,
+    "emotion_valuing": 0.03,
+    "reconsidering": 0.0,
+    "metacognitive_regulation": 0.0,
+    "questioning": -1.22,
+    "connecting": 0.0,
+    "applying": 0.0,
+    "zooming_in": 0.0,
+    "perspective_taking": -0.02,
+    "analyzing": 0.0,
+    "abstracting": 0.0,
+    "meta_awareness": 0.0,
+    "metacognitive_monitoring": 0.0,
+    "situation_selection": 0.0,
+    "cognition_awareness": -0.04,
+    "attentional_deployment": 0.0,
+    "suspending_judgment": 0.57,
+    "understanding": -1.16,
+    "distinguishing": 0.09,
+    "noticing": 1.46
   }
 }
