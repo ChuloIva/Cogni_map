@@ -17,10 +17,10 @@ cd ToM && python evaluate_cognitive_actions_with_steering.py \
 
 python evaluate_cognitive_actions_with_steering.py \
   --steering-vector steering_vectors/tom_caa_forward_belief_new.gguf \
-  --steering-coeff 400 \
-  --num-samples 40 \
-  --output-prefix negative_test \
-  --condition 0_forward_belief_false_belief
+  --steering-coeff -400 \
+  --num-samples 100 \
+  --output-prefix backward_40 \
+  --condition 0_backward_belief_false_belief
 
 
 ## Combined Vector Evaluations

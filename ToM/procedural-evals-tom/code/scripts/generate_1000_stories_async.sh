@@ -17,7 +17,7 @@ echo "=========================================="
 # Generate 1000 stories using UV with async workers
 # Tier 1 limits: 500 RPM, 200,000 TPM
 # Using 90% of limits for safety: 450 RPM, 180,000 TPM
-uv run bigtom_async.py \
+python bigtom_async.py \
   --model gpt-4o-mini-2024-07-18 \
   --temperature 0.5 \
   --max_tokens 450 \
@@ -36,7 +36,7 @@ echo "=========================================="
 
 # Generate conditions from the stories
 echo "Generating conditions for the 6 required tasks..."
-uv run generate_conditions.py
+python generate_conditions.py
 
 echo "=========================================="
 echo "All done! Check the following directories:"
