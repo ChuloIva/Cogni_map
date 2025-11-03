@@ -19,8 +19,8 @@ python evaluate_cognitive_actions_with_steering.py \
   --steering-vector steering_vectors/tom_caa_forward_belief_new.gguf \
   --steering-coeff -400 \
   --num-samples 100 \
-  --output-prefix backward_40 \
-  --condition 0_backward_belief_false_belief
+  --output-prefix backward_100_1 \
+  --condition 1_backward_belief_false_belief
 
 
 ## Combined Vector Evaluations
