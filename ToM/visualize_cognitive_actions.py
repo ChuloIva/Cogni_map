@@ -1748,6 +1748,355 @@ By Category:
         plt.close()
         print(f"   ✓ Saved to {output_path}")
 
+    # =========================================================================
+    # PAPER-SPECIFIC VISUALIZATIONS
+    # =========================================================================
+
+    def viz_radar_baseline_vs_steered_paper(self):
+        """
+        Paper Fig: Radar charts showing baseline vs steered for each category
+        """
+        if not self.raw_data:
+            print("   ⚠ Skipping: Requires raw CSV data")
+            return
+
+        categories = sorted(self.categories.keys())
+
+        # Calculate mean effects per category for each timepoint
+        timepoints = [
+            ('at_question', 'At Question'),
+            ('after_true', 'After True'),
+            ('after_wrong', 'After Wrong')
+        ]
+
+        fig = plt.figure(figsize=(18, 6))
+
+        for idx, (time_key, title) in enumerate(timepoints):
+            ax = fig.add_subplot(1, 3, idx + 1, projection='polar')
+
+            # Calculate baseline and steered means for each category
+            baseline_values = []
+            steered_values = []
+
+            for category in categories:
+                actions = self.categories[category]
+
+                baseline_cat_vals = []
+                steered_cat_vals = []
+
+                for action in actions:
+                    for row in self.raw_data:
+                        baseline_cat_vals.append(
+                            row[f'baseline_activations_{time_key}'].get(action, 0)
+                        )
+                        steered_cat_vals.append(
+                            row[f'steered_activations_{time_key}'].get(action, 0)
+                        )
+
+                baseline_values.append(np.mean(baseline_cat_vals) if baseline_cat_vals else 0)
+                steered_values.append(np.mean(steered_cat_vals) if steered_cat_vals else 0)
+
+            # Number of variables
+            num_vars = len(categories)
+
+            # Compute angle for each axis
+            angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
+
+            # Complete the circle
+            baseline_values += baseline_values[:1]
+            steered_values += steered_values[:1]
+            angles += angles[:1]
+
+            # Plot baseline and steered
+            ax.plot(angles, baseline_values, 'o-', linewidth=2, color='#3498db',
+                   label='Baseline', alpha=0.8)
+            ax.fill(angles, baseline_values, alpha=0.15, color='#3498db')
+
+            ax.plot(angles, steered_values, 's-', linewidth=2, color='#e74c3c',
+                   label='Steered', alpha=0.8)
+            ax.fill(angles, steered_values, alpha=0.15, color='#e74c3c')
+
+            # Fix axis to go in the right order
+            ax.set_theta_offset(np.pi / 2)
+            ax.set_theta_direction(-1)
+
+            # Draw axis lines for each angle and label
+            ax.set_xticks(angles[:-1])
+            ax.set_xticklabels([cat.title() for cat in categories], fontsize=10)
+
+            # Set title
+            ax.set_title(title, fontsize=12, fontweight='bold', pad=20)
+
+            # Add grid and legend
+            ax.grid(True)
+            ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1), fontsize=10)
+
+        plt.suptitle('Category Comparison: Baseline vs Steered', fontsize=16, fontweight='bold')
+        plt.tight_layout()
+
+        output_path = self.output_dir / 'paper_radar_baseline_vs_steered.png'
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
+        plt.close()
+        print(f"   ✓ Saved to {output_path}")
+
+    def viz_category_analysis_paper(self):
+        """
+        Paper Fig: Simplified category analysis with just top 2 charts
+        """
+        fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+
+        timepoints = [
+            ('mean_diff_at_question', 'At Question'),
+            ('mean_diff_after_true', 'After True Answer'),
+            ('mean_diff_after_wrong', 'After Wrong Answer')
+        ]
+
+        # Calculate category averages
+        category_stats = defaultdict(lambda: defaultdict(list))
+
+        for category, actions in self.categories.items():
+            for key, _ in timepoints:
+                for action in actions:
+                    if action in self.data[key]:
+                        category_stats[category][key].append(self.data[key][action])
+
+        # Plot 1: Average effect per category across timepoints
+        ax = axes[0]
+        categories = sorted(category_stats.keys())
+        x = np.arange(len(timepoints))
+        width = 0.15
+
+        for i, category in enumerate(categories):
+            means = [np.mean(category_stats[category][key]) if category_stats[category][key] else 0
+                    for key, _ in timepoints]
+            offset = (i - len(categories)/2) * width
+            bars = ax.bar(x + offset, means, width,
+                         label=category.title(),
+                         color=self._get_category_color(category),
+                         alpha=0.8, edgecolor='black', linewidth=0.5)
+
+        ax.set_xlabel('Timepoint', fontweight='bold', fontsize=12)
+        ax.set_ylabel('Mean Layer Count Difference', fontweight='bold', fontsize=12)
+        ax.set_title('Mean Steering Effect by Category', fontweight='bold', pad=10, fontsize=13)
+        ax.set_xticks(x)
+        ax.set_xticklabels([t[1] for t in timepoints], rotation=15, ha='right')
+        ax.legend(loc='best', fontsize=10)
+        ax.axhline(y=0, color='black', linestyle='--', linewidth=1, alpha=0.5)
+        ax.grid(axis='y', alpha=0.3)
+
+        # Plot 2: Distribution of effects per category (at question)
+        ax = axes[1]
+        data_for_violin = []
+        labels_for_violin = []
+
+        for category in categories:
+            values = category_stats[category]['mean_diff_at_question']
+            if values:
+                data_for_violin.append(values)
+                labels_for_violin.append(f'{category.title()}\\n(n={len(values)})')
+
+        parts = ax.violinplot(data_for_violin, positions=range(len(data_for_violin)),
+                             showmeans=True, showmedians=True)
+
+        # Color violin plots
+        for i, pc in enumerate(parts['bodies']):
+            pc.set_facecolor(self._get_category_color(categories[i]))
+            pc.set_alpha(0.7)
+
+        ax.set_xticks(range(len(labels_for_violin)))
+        ax.set_xticklabels(labels_for_violin, fontsize=10)
+        ax.set_ylabel('Layer Count Difference', fontweight='bold', fontsize=12)
+        ax.set_title('Distribution of Effects by Category (At Question)', fontweight='bold',
+                    pad=10, fontsize=13)
+        ax.axhline(y=0, color='black', linestyle='--', linewidth=1, alpha=0.5)
+        ax.grid(axis='y', alpha=0.3)
+
+        plt.suptitle('Category-Based Analysis', fontsize=16, fontweight='bold')
+        plt.tight_layout()
+
+        output_path = self.output_dir / 'paper_category_analysis.png'
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
+        plt.close()
+        print(f"   ✓ Saved to {output_path}")
+
+    def viz_complete_action_comparison_nonzero_paper(self):
+        """
+        Paper Fig: Complete comparison of cognitive actions (excluding zeros)
+        """
+        fig, axes = plt.subplots(1, 3, figsize=(24, 14))
+
+        timepoints = [
+            ('mean_diff_at_question', 'At Question'),
+            ('mean_diff_after_true', 'After True Answer'),
+            ('mean_diff_after_wrong', 'After Wrong Answer')
+        ]
+
+        for ax, (key, title) in zip(axes, timepoints):
+            # Get all actions with non-zero differences
+            diffs = {action: diff for action, diff in self.data[key].items()
+                    if abs(diff) > 0.001}  # Filter out near-zero values
+
+            if not diffs:
+                ax.text(0.5, 0.5, 'No non-zero values', ha='center', va='center',
+                       transform=ax.transAxes, fontsize=14)
+                ax.axis('off')
+                continue
+
+            sorted_actions = sorted(diffs.items(), key=lambda x: abs(x[1]), reverse=True)
+
+            actions = [a[0] for a in sorted_actions]
+            values = [a[1] for a in sorted_actions]
+
+            # Color by category
+            colors = [self._get_category_color(self.action_categories[action])
+                     for action in actions]
+
+            # Create horizontal bar chart
+            y_pos = np.arange(len(actions))
+            bars = ax.barh(y_pos, values, color=colors, alpha=0.7, edgecolor='black', linewidth=0.5)
+
+            ax.set_yticks(y_pos)
+            ax.set_yticklabels(actions, fontsize=8)
+            ax.set_xlabel('Layer Count Difference (Steered - Baseline)', fontsize=10, fontweight='bold')
+            ax.set_title(title, fontsize=12, fontweight='bold', pad=10)
+            ax.axvline(x=0, color='black', linestyle='--', linewidth=1.5, alpha=0.7)
+            ax.grid(axis='x', alpha=0.3)
+
+            # Add value labels for significant changes
+            for i, (action, val) in enumerate(sorted_actions[:10]):
+                if abs(val) > 0.01:
+                    ax.text(val, i, f' {val:.2f}',
+                           va='center', ha='left' if val > 0 else 'right',
+                           fontsize=7, fontweight='bold')
+
+        # Create legend for categories
+        category_colors = {cat: self._get_category_color(cat)
+                          for cat in set(self.action_categories.values())}
+        legend_elements = [plt.Rectangle((0,0),1,1, fc=color, alpha=0.7, edgecolor='black', linewidth=0.5,
+                                        label=f'{cat.title()} ({len(self.categories[cat])})')
+                          for cat, color in sorted(category_colors.items())]
+        fig.legend(handles=legend_elements, loc='upper center', ncol=6,
+                  fontsize=10, frameon=True, fancybox=True, shadow=True)
+
+        plt.suptitle('Cognitive Action Comparison (Non-Zero Actions Only)\\n' +
+                    f'Steering Effect Across All Timepoints (n={self.data["num_samples"]})',
+                    fontsize=16, fontweight='bold', y=0.995)
+        plt.tight_layout(rect=[0, 0, 1, 0.98])
+
+        output_path = self.output_dir / 'paper_complete_comparison_nonzero.png'
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
+        plt.close()
+        print(f"   ✓ Saved to {output_path}")
+
+    def viz_comprehensive_heatmap_nonzero_paper(self):
+        """
+        Paper Fig: Comprehensive heatmap (excluding zero-value actions)
+        """
+        fig, ax = plt.subplots(figsize=(12, 16))
+
+        # Prepare data matrix
+        timepoints = [
+            'mean_diff_at_question',
+            'mean_diff_after_true',
+            'mean_diff_after_wrong'
+        ]
+
+        # Filter actions that have at least one non-zero value
+        nonzero_actions = []
+        for action in self.all_actions:
+            has_nonzero = any(abs(self.data[tp].get(action, 0)) > 0.001
+                            for tp in timepoints)
+            if has_nonzero:
+                nonzero_actions.append(action)
+
+        # Sort actions by category then by mean absolute effect
+        sorted_actions = []
+        for category in sorted(self.categories.keys()):
+            category_actions = [a for a in self.categories[category] if a in nonzero_actions]
+            # Sort within category by absolute mean effect
+            category_sorted = sorted(category_actions,
+                                   key=lambda a: abs(self.data['mean_diff_at_question'].get(a, 0)),
+                                   reverse=True)
+            sorted_actions.extend(category_sorted)
+
+        if not sorted_actions:
+            print("   ⚠ No non-zero actions found")
+            return
+
+        # Build matrix
+        data_matrix = []
+        for action in sorted_actions:
+            row = [self.data[tp].get(action, 0) for tp in timepoints]
+            data_matrix.append(row)
+
+        data_matrix = np.array(data_matrix)
+
+        # Create heatmap
+        im = ax.imshow(data_matrix, cmap='RdYlGn', aspect='auto', vmin=-2.5, vmax=2.5)
+
+        # Set ticks
+        ax.set_xticks(np.arange(len(timepoints)))
+        ax.set_yticks(np.arange(len(sorted_actions)))
+
+        ax.set_xticklabels(['At Question', 'After True', 'After Wrong'], fontsize=11, fontweight='bold')
+        ax.set_yticklabels(sorted_actions, fontsize=8)
+
+        # Add category separators
+        y_pos = 0
+        for category in sorted(self.categories.keys()):
+            category_actions = [a for a in self.categories[category] if a in nonzero_actions]
+            num_actions = len(category_actions)
+            if num_actions == 0:
+                continue
+
+            if y_pos > 0:
+                ax.axhline(y=y_pos - 0.5, color='black', linewidth=2)
+
+            # Add category label
+            ax.text(-0.7, y_pos + num_actions/2 - 0.5, category.upper(),
+                   rotation=90, va='center', ha='center',
+                   fontsize=10, fontweight='bold',
+                   bbox=dict(boxstyle='round', facecolor=self._get_category_color(category),
+                           alpha=0.7, edgecolor='black'))
+
+            y_pos += num_actions
+
+        # Colorbar
+        cbar = plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+        cbar.set_label('Layer Count Difference (Steered - Baseline)',
+                      fontsize=11, fontweight='bold')
+
+        # Title
+        ax.set_title(f'Comprehensive Heatmap: Active Cognitive Actions × Timepoints\\n' +
+                    f'Grouped by Category (n={self.data["num_samples"]} samples, {len(sorted_actions)} active actions)',
+                    fontsize=14, fontweight='bold', pad=15)
+
+        plt.tight_layout()
+
+        output_path = self.output_dir / 'paper_heatmap_nonzero.png'
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
+        plt.close()
+        print(f"   ✓ Saved to {output_path}")
+
+    def create_paper_visualizations(self):
+        """Generate paper-specific visualizations"""
+        print("\\n📄 PAPER-SPECIFIC VISUALIZATIONS")
+        print("-" * 80)
+
+        print("P1. Creating baseline vs steered radar charts...")
+        self.viz_radar_baseline_vs_steered_paper()
+
+        print("P2. Creating simplified category analysis...")
+        self.viz_category_analysis_paper()
+
+        print("P3. Creating complete comparison (non-zero)...")
+        self.viz_complete_action_comparison_nonzero_paper()
+
+        print("P4. Creating comprehensive heatmap (non-zero)...")
+        self.viz_comprehensive_heatmap_nonzero_paper()
+
+        print()
+
     def _get_category_color(self, category: str) -> str:
         """Get consistent color for each category"""
         color_map = {
