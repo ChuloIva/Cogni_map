@@ -38,7 +38,7 @@
 \maketitle
 
 \begin{abstract}
-Recent work has demonstrated that activation steering techniques can substantially improve language models' Theory of Mind (ToM) capabilities \cite{Bortoletto2024}. However, a fundamental question remains: \textit{what} changes when models successfully engage in perspective-taking? We introduce a mechanistic approach to decompose ToM into its constituent cognitive processes by comparing steered versus baseline model activations using linear probes trained on 45 cognitive actions. Applying Contrastive Activation Addition (CAA) steering vectors to 1,000 BigToM false-belief scenarios, we find that successful ToM enhancement (32.5\% to 46.7\% accuracy) systematically upregulates emotional and creative processes—\textit{emotion\_perception} (+2.23), \textit{emotion\_valuing} (+2.20), \textit{noticing} (+2.08)—while downregulating analytical processes—\textit{questioning} (-0.78), \textit{convergent\_thinking} (-1.59). This reveals a "Theory of Heart": emotional understanding, not analytical reasoning, constitutes the fundamental building block of successful perspective-taking in language models.
+Recent work shows activation steering substantially improves language models' Theory of Mind (ToM) \cite{Bortoletto2024}, yet \textit{what} changes remains unclear. We decompose ToM by comparing steered versus baseline activations using linear probes trained on 45 cognitive actions. Applying Contrastive Activation Addition (CAA) to 1,000 BigToM false-belief scenarios, we find successful ToM enhancement (32.5\% to 46.7\% accuracy) is mediated by activations processing emotional content—\textit{emotion\_perception} (+2.23), \textit{emotion\_valuing} (+2.20), \textit{noticing} (+2.08)—while suppressing analytical processes—\textit{questioning} (-0.78), \textit{convergent\_thinking} (-1.59). This reveals a "Theory of Heart": successful perspective-taking is mediated by emotional understanding, not analytical reasoning.
 \end{abstract}
 
 \section{Introduction}
@@ -57,7 +57,7 @@ We introduce a mechanistic decomposition approach combining linear probes traine
 
 \textbf{Probe Training Data Generation.} To train cognitive action probes, we generated 31,500 synthetic examples (700 per action) using Gemma-3-4B. Each example was created as a simple, first-person narrative (2-4 sentences) with domain-based variation across 20 everyday contexts: work, school, daily life, problem-solving, hobbies, personal goals etc. This streamlined approach produced balanced datasets for each cognitive action while maintaining accessibility and realistic language patterns.
 
-\textbf{Activation Capture and Probing.} Following established probing methodologies \cite{alain2016understanding}, activations were extracted from 30 of the 34 layers of Gemma-3-4B using nnsight. During both activation capture and inference, inputs were augmented with the suffix ``The cognitive action being demonstrated here is'' to ensure consistent extraction from the final token representation. This approach aligns with recent work on making model internal states transparent and interpretable \cite{chen2024designing}, though our focus is on cognitive process decomposition rather than real-time user modeling. A \textbf{one-vs-rest} strategy was used to train 45 independent binary linear probes, enabling per-action interpretability and layer-specific optimization. Training used AdamW optimization, cosine annealing scheduling, and early stopping with AUC-ROC metrics to handle class imbalance.
+\textbf{Activation Capture and Probing.} Following established probing methodologies \cite{alain2016understanding}, activations were extracted from 30 of the 34 layers of Gemma-3-4B using nnsight. During both activation capture and inference, inputs were augmented with the suffix ``The cognitive action being demonstrated here is'' to ensure consistent extraction from the final token representation. This approach aligns with recent work on making model internal states transparent and interpretable \cite{chen2024designing}, thovugh our focus is on cognitive process decomposition rather than real-time user modeling. A \textbf{one-vs-rest} strategy was used to train 45 independent binary linear probes, enabling per-action interpretability and layer-specific optimization. Training used AdamW optimization, cosine annealing scheduling, and early stopping with AUC-ROC metrics to handle class imbalance.
 
 \textbf{CAA Steering Vector Training.} To isolate ToM-specific cognitive processes, we trained Contrastive Activation Addition (CAA) steering vectors \cite{rimsky2023steering} using the representation engineering framework \cite{zou2023representation}. We constructed 752 contrastive triplets from BigToM's \textit{forward\_belief} scenarios (both true and false belief conditions 50/50 false - true split). Each triplet contains: (1) story context with observational information (protagonist sees or does not see an event), (2) belief attribution question, (3) positive completion: correct belief attribution, (4) negative completion: incorrect belief attribution. This captures the representational difference between accurate and inaccurate ToM reasoning rather than surface-level observational statements. Vectors were trained across layers 14-30 using PCA-centered activation differences.
 
@@ -83,7 +83,7 @@ Conversely, analytical processes showed consistent downregulation: \textit{quest
 
 \textbf{Building on Activation Steering.} Our work extends \citet{Bortoletto2024}'s demonstration that steering improves ToM by revealing \textit{why} it works: steering selectively amplifies the emotional-perceptual substrate while suppressing analytical interference. This mechanistic understanding enables more targeted interventions and suggests that ToM capabilities could be enhanced by training objectives that emphasize emotional inference over analytical decomposition.
 
-\textbf{Limitations.} Synthetic probe training data, single model evaluation (Gemma-3-4B), single BigToM condition (\textit{forward\_belief\_false}), independence assumptions between cognitive actions, and layer count metrics that may not capture activation magnitude. The emotional/analytical distinction may be condition-specific and require validation across diverse ToM scenarios.
+\textbf{Limitations.} Synthetic probe training data, single model evaluation (Gemma-3-4B), single BigToM condition (\textit{forward\_belief\_false}), independence awsssumptions between cognitive actions, and layer count metrics that may not capture activation magnitude. The emotional/analytical distinction may be condition-specific and require validation across diverse ToM scenarios.
 
 \textbf{Broader Impact.} Understanding ToM's emotional foundations has implications for AI safety and alignment. Process-based supervision via cognitive monitoring could detect when models fail to engage appropriate emotional inference. However, capabilities for emotional manipulation require careful consideration—systems optimized for emotional understanding could be misused in persuasion or deception contexts.
 
@@ -185,16 +185,30 @@ The key distinction is that the positive completion always reflects accurate per
 
 \begin{figure*}[!htbp]
 \centering
-\includegraphics[width=\textwidth]{../ToM/visualizations/01_complete_action_comparison.png}
+\includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_complete_comparison_nonzero.png}
 \caption{Steering effects across all cognitive actions and timepoints (n=1000). Left panels show individual action changes at three timepoints: at question (before answer), after true answer, and after wrong answer. Bars indicate mean layer count difference (steered - baseline) with positive values (right) showing increases and negative values (left) showing decreases. Emotional actions (\textit{emotion\_perception}, \textit{emotion\_valuing}, \textit{noticing}) consistently increase across timepoints, while analytical actions (\textit{questioning}, \textit{convergent\_thinking}, \textit{understanding}) consistently decrease, revealing the emotional foundation of successful ToM.}
 \label{fig:complete_comparison}
 \end{figure*}
 
 \begin{figure*}[!htbp]
 \centering
-\includegraphics[width=\textwidth]{../ToM/visualizations/02_category_analysis.png}
+\includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_category_analysis.png}
 \caption{Category-level analysis of steering effects. Top left: mean steering effect by cognitive action category shows emotional and creative categories increase while analytical decreases. Top right: distribution of effects at question timepoint with emotional and creative categories shifted positive. Bottom left: proportion of 45 actions in each category. Bottom right: category × timepoint heatmap showing consistent patterns—emotional/creative increases persist across all timepoints while analytical decreases after answers. This systematic category-level pattern supports the "Theory of Heart" interpretation.}
 \label{fig:category_analysis}
+\end{figure*}
+
+\begin{figure*}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_radar_baseline_vs_steered.png}
+\caption{Radar chart comparing baseline versus steered cognitive action activation patterns across categories. The steered condition (red) shows elevated emotional and creative process engagement compared to baseline (blue), while analytical processes remain similar or decrease. This visualization highlights the shift toward emotional understanding that characterizes successful Theory of Mind enhancement through CAA steering.}
+\label{fig:radar_comparison}
+\end{figure*}
+
+\begin{figure*}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_heatmap_nonzero.png}
+\caption{Heatmap of cognitive action activation differences (steered - baseline) across timepoints. Each row represents a cognitive action, and columns show the three measurement timepoints: at question, after true answer, and after wrong answer. Red indicates upregulation and blue indicates downregulation. The consistent patterns across timepoints reveal that emotional actions (top section) are systematically upregulated while analytical actions show more variable and often negative modulation, supporting the emotional foundation of ToM.}
+\label{fig:heatmap}
 \end{figure*}
 
 \begin{figure*}[!htbp]
