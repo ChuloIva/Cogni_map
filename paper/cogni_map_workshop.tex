@@ -23,7 +23,7 @@
 
 \setcounter{secnumdepth}{0}
 
-\title{Theory of Heart: Decomposing Theory of Mind with Mechanistic Probes}
+\title{Decomposing Theory of Mind: How Emotional Processing Mediates ToM Abilities in LLMs}
 
 \author{
     Ivan Chulo, Ananya Joshi
@@ -38,7 +38,7 @@
 \maketitle
 
 \begin{abstract}
-Recent work shows activation steering substantially improves language models' Theory of Mind (ToM) \cite{Bortoletto2024}, yet \textit{what} changes remains unclear. We decompose ToM by comparing steered versus baseline activations using linear probes trained on 45 cognitive actions. Applying Contrastive Activation Addition (CAA) to 1,000 BigToM false-belief scenarios, we find successful ToM enhancement (32.5\% to 46.7\% accuracy) is mediated by activations processing emotional content—\textit{emotion\_perception} (+2.23), \textit{emotion\_valuing} (+2.20), \textit{noticing} (+2.08)—while suppressing analytical processes—\textit{questioning} (-0.78), \textit{convergent\_thinking} (-1.59). This reveals a "Theory of Heart": successful perspective-taking is mediated by emotional understanding, not analytical reasoning.
+Recent work shows activation steering substantially improves language models' Theory of Mind (ToM) \cite{Bortoletto2024}, yet \textit{what} changes remains unclear. We decompose ToM by comparing steered versus baseline LLMs' activations using linear probes trained on 45 cognitive actions. Applying Contrastive Activation Addition (CAA) to 1,000 BigToM false-belief scenarios, we find successful ToM enhancement (32.5\% to 46.7\% accuracy) is mediated by activations processing emotional content—\textit{emotion\_perception} (+2.23), \textit{emotion\_valuing} (+2.20), \textit{noticing} (+2.08)—while suppressing analytical processes—\textit{questioning} (-0.78), \textit{convergent\_thinking} (-1.59). This reveals that successful ToM abilities in LLMs are mediated by emotional understanding, not analytical reasoning.
 \end{abstract}
 
 \section{Introduction}
@@ -49,7 +49,7 @@ Traditional evaluations treat ToM as a monolithic capability measured through bi
 
 We introduce a mechanistic decomposition approach combining linear probes trained on 45 cognitive actions with CAA steering vectors. By measuring which cognitive processes are systematically upregulated or downregulated when ToM performance improves, we can identify the fundamental components underlying successful perspective-taking. This moves beyond ``does steering work?'' to ``\textit{why} does steering work, and what does this reveal about ToM itself?''
 
-\textbf{Contributions:} (1) A mechanistic decomposition methodology using cognitive action probes to analyze steering effects; (2) Large-scale evaluation on 1,000 BigToM false-belief scenarios showing 14.2 percentage point accuracy improvement (32.5\% to 46.7\%); (3) Discovery that successful ToM systematically upregulates emotional/creative processes while downregulating analytical processes; (4) Evidence for a ``Theory of Heart''—emotional understanding as the fundamental building block of perspective-taking in language models.
+\textbf{Contributions:} (1) A mechanistic decomposition methodology using cognitive action probes to analyze steering effects; (2) Large-scale evaluation on 1,000 BigToM false-belief scenarios showing 14.2 percentage point accuracy improvement (32.5\% to 46.7\%); (3) Discovery that successful ToM systematically upregulates emotional/creative processes while downregulating analytical processes; (4) Evidence that emotional understanding serves as the fundamental building block of perspective-taking in language models.
 
 \section{Methodology}
 
@@ -57,7 +57,7 @@ We introduce a mechanistic decomposition approach combining linear probes traine
 
 \textbf{Probe Training Data Generation.} We generated 31,500 synthetic examples (700 per action) using Gemma-3-4B—first-person narratives (2-4 sentences) varied across 20 everyday contexts, producing balanced datasets with realistic language patterns.
 
-\textbf{Activation Capture and Probing.} Activations were extracted from layers 10-30 of Gemma-3-4B using nnsight \cite{alain2016understanding}. Inputs were augmented with suffix ``The cognitive action being demonstrated here is'' for consistent final-token extraction. We trained 45 binary linear probes using \textbf{one-vs-rest} with AdamW optimization, cosine annealing, and early stopping based on AUC-ROC.
+\textbf{Activation Capture and Probing.} Activations were extracted from layers 0-30 of Gemma-3-4B using nnsight \cite{alain2016understanding}. Inputs were augmented with suffix ``The cognitive action being demonstrated here is'' for consistent final-token extraction. We trained 45 binary linear probes using \textbf{one-vs-rest} with AdamW optimization, cosine annealing, and early stopping based on AUC-ROC.
 
 \textbf{CAA Steering Vector Training.} We trained CAA steering vectors \cite{rimsky2023steering,zou2023representation} on 752 contrastive triplets from BigToM's \textit{forward\_belief} scenarios (50/50 false-true split). Each triplet contains story context, belief question, and positive (correct ToM) versus negative (incorrect ToM) completions, capturing representational differences between accurate and inaccurate perspective-taking. Vectors were trained across layers 14-30 using PCA-centered activation differences.
 
@@ -77,9 +77,13 @@ Conversely, analytical processes decreased: \textit{questioning} ($\Delta$=-1.24
 
 \section{Discussion}
 
-\textbf{Theory of Heart: Emotional Foundations of Perspective-Taking.} Our decomposition reveals successful ToM is mediated by emotional understanding rather than analytical reasoning—a "Theory of Heart" where emotional grounding constitutes perspective-taking's fundamental building block.
+\textbf{Emotional Foundations of Perspective-Taking.} Our decomposition reveals successful ToM is mediated by emotional understanding rather than analytical reasoning, where emotional grounding constitutes ToM's fundamental building block.
 
 \textbf{Implications for AI Cognition.} This challenges assumptions that LLM social reasoning relies on deliberate chain-of-thought. Instead, ToM operates through rapid emotional inference—mirroring "hot" (affective) versus "cold" (deliberative) cognition. Decreased \textit{questioning} and \textit{convergent\_thinking} suggest explicit interrogation may interfere with perspective-taking.
+
+\textbf{Emulation, Emergence, or Anthropomorphic Illusion?} We must clarify what we mean by ``emotional processing'' to avoid anthropomorphic misinterpretation. Our findings indicate that LLMs engaging in successful ToM more strongly activate representations trained on \textit{text pertaining to emotional contexts}—not that models possess subjective emotional experiences. We make no claims that these findings generalize to human cognition, nor does our methodology validate such cross-species comparisons.
+
+However, neuroscience research reveals that hot and cold ToM share neural mechanisms in humans: \citet{Corradi2014} demonstrate that ``emotion and belief patterns in TPJ and MTG reflect the same neuronal activity, equally recruited in these two independent conditions.'' This suggests a principled reason why LLMs might exhibit similar patterns—during language modeling, networks may learn shared representations linking perspective-taking with emotional context processing, mirroring the compressed structure of human social cognition embedded in linguistic data. Whether this constitutes genuine emulation of cognitive architecture or emergent convergence on functionally equivalent representations remains an open question.
 
 \textbf{Building on Activation Steering.} We extend \citet{Bortoletto2024} by revealing \textit{why} steering works: amplifying emotional-perceptual substrate while suppressing analytical interference. This enables more targeted interventions emphasizing emotional inference.
 
@@ -89,7 +93,7 @@ Conversely, analytical processes decreased: \textit{questioning} ($\Delta$=-1.24
 
 \section{Conclusion}
 
-We mechanistically decompose Theory of Mind by comparing steered versus baseline activations. Building on \citet{Bortoletto2024}, we reveal \textit{what} changes: successful perspective-taking is mediated by emotional understanding rather than analytical reasoning. This "Theory of Heart"—that emotional processes mediate ToM—challenges assumptions about deliberative social cognition and suggests cognitive action probes offer a principled approach for decomposing complex AI capabilities.
+We mechanistically decompose Theory of Mind by comparing steered versus baseline activations. Building on \citet{Bortoletto2024}, we reveal \textit{what} changes: successful perspective-taking is mediated by emotional understanding rather than analytical reasoning. This finding—that emotional processes mediate ToM—challenges assumptions about deliberative social cognition and suggests cognitive action probes offer a principled approach for decomposing complex AI capabilities.
 
 \bibliography{cogni_map_workshop}
 
@@ -193,7 +197,7 @@ The key distinction is that the positive completion always reflects accurate per
 \begin{figure*}[!htbp]
 \centering
 \includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_category_analysis.png}
-\caption{Category-level analysis of steering effects. Top left: mean steering effect by cognitive action category shows emotional and creative categories increase while analytical decreases. Top right: distribution of effects at question timepoint with emotional and creative categories shifted positive. Bottom left: proportion of 45 actions in each category. Bottom right: category × timepoint heatmap showing consistent patterns—emotional/creative increases persist across all timepoints while analytical decreases after answers. This systematic category-level pattern supports the "Theory of Heart" interpretation.}
+\caption{Category-level analysis of steering effects. Top left: mean steering effect by cognitive action category shows emotional and creative categories increase while analytical decreases. Top right: distribution of effects at question timepoint with emotional and creative categories shifted positive. Bottom left: proportion of 45 actions in each category. Bottom right: category × timepoint heatmap showing consistent patterns—emotional/creative increases persist across all timepoints while analytical decreases after answers. This systematic category-level pattern supports the interpretation that emotional processing mediates ToM abilities.}
 \label{fig:category_analysis}
 \end{figure*}
 

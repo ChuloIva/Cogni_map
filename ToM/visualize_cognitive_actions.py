@@ -1884,13 +1884,15 @@ By Category:
         ax.axhline(y=0, color='black', linestyle='--', linewidth=1, alpha=0.5)
         ax.grid(axis='y', alpha=0.3)
 
-        # Plot 2: Distribution of effects per category (at question)
+        # Plot 2: Distribution of effects per category (at answer level)
         ax = axes[1]
         data_for_violin = []
         labels_for_violin = []
 
         for category in categories:
-            values = category_stats[category]['mean_diff_at_question']
+            # Combine both correct and incorrect answer effects
+            values = (category_stats[category]['mean_diff_after_true'] +
+                     category_stats[category]['mean_diff_after_wrong'])
             if values:
                 data_for_violin.append(values)
                 labels_for_violin.append(f'{category.title()}\\n(n={len(values)})')
@@ -1906,7 +1908,7 @@ By Category:
         ax.set_xticks(range(len(labels_for_violin)))
         ax.set_xticklabels(labels_for_violin, fontsize=10)
         ax.set_ylabel('Layer Count Difference', fontweight='bold', fontsize=12)
-        ax.set_title('Distribution of Effects by Category (At Question)', fontweight='bold',
+        ax.set_title('Distribution of Effects by Category (At Answer)', fontweight='bold',
                     pad=10, fontsize=13)
         ax.axhline(y=0, color='black', linestyle='--', linewidth=1, alpha=0.5)
         ax.grid(axis='y', alpha=0.3)
