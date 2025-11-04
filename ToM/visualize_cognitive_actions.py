@@ -2080,6 +2080,131 @@ By Category:
         plt.close()
         print(f"   ✓ Saved to {output_path}")
 
+    def viz_top_changes_question_answer(self):
+        """
+        Visualization: Top 10 increased/decreased at question and answer levels
+        """
+        fig, axes = plt.subplots(2, 2, figsize=(16, 10))
+
+        # Calculate mean at answer level (combining correct and incorrect)
+        mean_diff_at_answer = {}
+        for action in self.all_actions:
+            after_true = self.data['mean_diff_after_true'].get(action, 0)
+            after_wrong = self.data['mean_diff_after_wrong'].get(action, 0)
+            mean_diff_at_answer[action] = (after_true + after_wrong) / 2
+
+        # Top 10 increases at question
+        top_increases_q = sorted(self.data['mean_diff_at_question'].items(),
+                                key=lambda x: x[1], reverse=True)[:10]
+
+        actions = [t[0] for t in top_increases_q]
+        values = [t[1] for t in top_increases_q]
+        colors = [self._get_category_color(self.action_categories[a]) for a in actions]
+
+        bars = axes[0, 0].barh(range(len(actions)), values, color=colors, alpha=0.8,
+                               edgecolor='black', linewidth=0.5)
+        axes[0, 0].set_yticks(range(len(actions)))
+        axes[0, 0].set_yticklabels(actions, fontsize=10)
+        axes[0, 0].set_xlabel('Layer Count Increase', fontsize=11, fontweight='bold')
+        axes[0, 0].set_title('Top 10 Increased Cognitive Actions (At Question)',
+                            fontsize=12, fontweight='bold', pad=10)
+        axes[0, 0].grid(axis='x', alpha=0.3)
+        axes[0, 0].invert_yaxis()
+
+        for i, (bar, val) in enumerate(zip(bars, values)):
+            axes[0, 0].text(val, i, f'  {val:.2f}', va='center', fontsize=9, fontweight='bold')
+
+        # Top 10 decreases at question
+        top_decreases_q = sorted(self.data['mean_diff_at_question'].items(),
+                                key=lambda x: x[1])[:10]
+
+        actions = [t[0] for t in top_decreases_q]
+        values = [t[1] for t in top_decreases_q]
+        colors = [self._get_category_color(self.action_categories[a]) for a in actions]
+
+        bars = axes[1, 0].barh(range(len(actions)), values, color=colors, alpha=0.8,
+                               edgecolor='black', linewidth=0.5)
+        axes[1, 0].set_yticks(range(len(actions)))
+        axes[1, 0].set_yticklabels(actions, fontsize=10)
+        axes[1, 0].set_xlabel('Layer Count Decrease', fontsize=11, fontweight='bold')
+        axes[1, 0].set_title('Top 10 Decreased Cognitive Actions (At Question)',
+                            fontsize=12, fontweight='bold', pad=10)
+        axes[1, 0].grid(axis='x', alpha=0.3)
+        axes[1, 0].invert_yaxis()
+
+        for i, (bar, val) in enumerate(zip(bars, values)):
+            axes[1, 0].text(val, i, f'{val:.2f}  ', va='center', ha='right',
+                           fontsize=9, fontweight='bold')
+
+        # Top 10 increases at answer
+        top_increases_a = sorted(mean_diff_at_answer.items(),
+                                key=lambda x: x[1], reverse=True)[:10]
+
+        actions = [t[0] for t in top_increases_a]
+        values = [t[1] for t in top_increases_a]
+        colors = [self._get_category_color(self.action_categories[a]) for a in actions]
+
+        bars = axes[0, 1].barh(range(len(actions)), values, color=colors, alpha=0.8,
+                               edgecolor='black', linewidth=0.5)
+        axes[0, 1].set_yticks(range(len(actions)))
+        axes[0, 1].set_yticklabels(actions, fontsize=10)
+        axes[0, 1].set_xlabel('Layer Count Increase', fontsize=11, fontweight='bold')
+        axes[0, 1].set_title('Top 10 Increased Cognitive Actions (At Answer)',
+                            fontsize=12, fontweight='bold', pad=10)
+        axes[0, 1].grid(axis='x', alpha=0.3)
+        axes[0, 1].invert_yaxis()
+
+        for i, (bar, val) in enumerate(zip(bars, values)):
+            axes[0, 1].text(val, i, f'  {val:.2f}', va='center', fontsize=9, fontweight='bold')
+
+        # Top 10 decreases at answer
+        top_decreases_a = sorted(mean_diff_at_answer.items(),
+                                key=lambda x: x[1])[:10]
+
+        actions = [t[0] for t in top_decreases_a]
+        values = [t[1] for t in top_decreases_a]
+        colors = [self._get_category_color(self.action_categories[a]) for a in actions]
+
+        bars = axes[1, 1].barh(range(len(actions)), values, color=colors, alpha=0.8,
+                               edgecolor='black', linewidth=0.5)
+        axes[1, 1].set_yticks(range(len(actions)))
+        axes[1, 1].set_yticklabels(actions, fontsize=10)
+        axes[1, 1].set_xlabel('Layer Count Decrease', fontsize=11, fontweight='bold')
+        axes[1, 1].set_title('Top 10 Decreased Cognitive Actions (At Answer)',
+                            fontsize=12, fontweight='bold', pad=10)
+        axes[1, 1].grid(axis='x', alpha=0.3)
+        axes[1, 1].invert_yaxis()
+
+        for i, (bar, val) in enumerate(zip(bars, values)):
+            axes[1, 1].text(val, i, f'{val:.2f}  ', va='center', ha='right',
+                           fontsize=9, fontweight='bold')
+
+        plt.suptitle('Top 10 Changes: Question vs Answer Level', fontsize=14, fontweight='bold')
+
+        # Add category legend
+        from matplotlib.patches import Patch
+        legend_elements = [
+            Patch(facecolor=self._get_category_color('emotional'), alpha=0.8,
+                  edgecolor='black', linewidth=0.5, label='Emotional'),
+            Patch(facecolor=self._get_category_color('analytical'), alpha=0.8,
+                  edgecolor='black', linewidth=0.5, label='Analytical'),
+            Patch(facecolor=self._get_category_color('creative'), alpha=0.8,
+                  edgecolor='black', linewidth=0.5, label='Creative'),
+            Patch(facecolor=self._get_category_color('metacognitive'), alpha=0.8,
+                  edgecolor='black', linewidth=0.5, label='Metacognitive'),
+            Patch(facecolor=self._get_category_color('memory'), alpha=0.8,
+                  edgecolor='black', linewidth=0.5, label='Memory')
+        ]
+        fig.legend(handles=legend_elements, loc='lower center', ncol=5,
+                  frameon=True, fontsize=10, bbox_to_anchor=(0.5, -0.02))
+
+        plt.tight_layout()
+
+        output_path = self.output_dir / 'paper_top_changes_question_answer.png'
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
+        plt.close()
+        print(f"   ✓ Saved to {output_path}")
+
     def create_paper_visualizations(self):
         """Generate paper-specific visualizations"""
         print("\\n📄 PAPER-SPECIFIC VISUALIZATIONS")
@@ -2096,6 +2221,9 @@ By Category:
 
         print("P4. Creating comprehensive heatmap (non-zero)...")
         self.viz_comprehensive_heatmap_nonzero_paper()
+
+        print("P5. Creating top changes question vs answer...")
+        self.viz_top_changes_question_answer()
 
         print()
 
