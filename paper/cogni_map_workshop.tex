@@ -17,6 +17,13 @@
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
 
+% Adjust float placement parameters for figure*
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\textfraction}{0.1}
+\setcounter{topnumber}{3}
+\setcounter{dbltopnumber}{3}
+
 \pdfinfo{
 /TemplateVersion (2026.1)
 }
@@ -51,6 +58,14 @@ We introduce a mechanistic decomposition approach combining linear probes traine
 
 \textbf{Contributions:} (1) A mechanistic decomposition methodology using cognitive action probes to analyze steering effects; (2) Evaluation on 1,000 BigToM false-belief scenarios showing 14.2 percentage point accuracy improvement (32.5\% to 46.7\%); (3) Discovery that successful ToM systematically upregulates emotional/creative processes while downregulating analytical processes; (4) Evidence that emotional understanding serves as the fundamental building block of perspective-taking in language models.
 
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=0.80\textwidth]{../ToM/visualizations/paper/paper_radar_baseline_vs_steered.png}
+    \caption{Radar chart comparing baseline versus steered cognitive action activation patterns across categories. The steered condition (red) compared to baseline (blue)}
+    \label{fig:radar_comparison_top}
+    \end{figure*}
+
+
 \section{Methodology}
 
 To investigate how steering vectors modulate cognitive processes during ToM tasks, we developed a multi-stage pipeline integrating probe training, activation steering, and comparative analysis. We began by defining 45 cognitive actions across four categories: \textit{Metacognitive}, \textit{Analytical}, \textit{Creative}, and \textit{Emotional} (see appendix). For each action, we generated 31,500 synthetic training examples (700 per action) using Gemma-3-4B. First-person narratives (2-4 sentences) varied across 20 everyday contexts, producing balanced datasets with realistic language patterns.
@@ -69,19 +84,19 @@ To understand what drives this improvement, we analyzed cognitive action activat
 
 In contrast, analytical processes decreased: \textit{questioning} ($\Delta$=-1.24), \textit{convergent\_thinking} ($\Delta$=-1.13), and \textit{understanding} ($\Delta$=-0.77), suggesting successful ToM suppresses deliberate analytical interrogation. Category aggregation reinforces this pattern—creative processes (+0.35, +0.28, +0.24) and emotional processes (+0.35, +0.20, +0.22) consistently increase across timepoints, while analytical processes show decreases (+0.06, -0.19, -0.19).
 
+\FloatBarrier
+
 \section{Discussion}
 
 This pattern of upregulated emotional and generative processes and downregulated analytical processes challenges assumptions that LLM social reasoning relies on deliberate chain-of-thought mechanisms. Rather, successful perspective-taking appears to operate through activating representations responsible for processing emotional contexts.
 
 We make no claims that these findings generalize to human cognition, nor does our methodology validate such comparisons. However, neuroscience research shows that affective and cognitive ToM share neural mechanisms in humans: \citet{Corradi2014} demonstrate that ``patterns in TPJ (Temporoparietal Junction) and MTG (Middle Temporal Gyrus) reflect the same neuronal activity, equally recruited in these two independent conditions.'' During language modeling, networks may learn shared representations linking perspective-taking with emotional context processing, mirroring the compressed structure of human social cognition embedded in linguistic data. Whether this constitutes genuine emulation of cognitive architecture or emergent convergence on functionally equivalent representations remains an open question.
 
-Our work extends \citet{Bortoletto2024} by revealing \textit{why} activation steering improves ToM: by amplifying the generative-emotional substrate while suppressing analytical interference. This mechanistic understanding enables more targeted interventions emphasizing intuitive belief formation and emotional inference over deliberate reasoning. For AI safety, cognitive action monitoring could potentially detect inappropriate belief modeling or emotional inference, though capabilities in hypothesis generation combined with emotional understanding also raise concerns about potential misuse in persuasion, manipulation, or deception.
-
 Several limitations warrant consideration. Our probe training relies on synthetic data from a single model (Gemma-3-4B), with a relatively small sample size (700). We've evaluated the difference of steering vs base model on a single BigToM condition. Future work should validate these findings across diverse ToM scenarios, multiple, bigger models, and varied belief attribution tasks.
 
 \section{Conclusion}
 
-By applying cognitive action probes to activation steering, we move beyond evaluating \textit{whether} steering improves ToM to understanding \textit{how} it works. Our analysis of 1,000 false-belief scenarios reveals systematic modulation of cognitive processes: steering amplifies generative hypothesis formation and emotional inference while suppressing analytical interrogation. This decomposition approach, combining interpretability tools with targeted interventions, offers a principled methodology for understanding complex AI capabilities. The findings challenge assumptions about deliberative social reasoning in LLMs and open new directions for mechanistic analysis of perspective-taking and other high-level cognitive abilities.
+Our work extends \citet{Bortoletto2024} by applying cognitive action probes to activation steered LLMs, we move beyond evaluating \textit{whether} steering improves ToM to understanding \textit{how} it works. Our analysis of 1,000 false-belief scenarios reveals systematic modulation of cognitive processes: steering amplifies generative hypothesis formation and emotional inference while suppressing analytical interrogation. This decomposition approach, combining interpretability tools with targeted interventions, offers a principled methodology for understanding complex AI capabilities. The findings challenge assumptions about deliberative social reasoning in LLMs and open new directions for mechanistic analysis of perspective-taking and other high-level cognitive abilities.
 
 \bibliography{cogni_map_workshop}
 
@@ -173,8 +188,6 @@ The CAA steering vectors were trained on contrastive pairs distinguishing correc
 
 \textit{Negative (incorrect ToM):} ``Noor believes the milk pitcher contains almond milk.''
 
-The key distinction is that the positive completion always reflects accurate perspective-taking (understanding what the protagonist actually believes based on their observational access), while the negative completion represents a ToM failure (confusing the protagonist's belief with objective reality or making incorrect inferences).
-
 \begin{figure*}[!htbp]
 \centering
 \includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_complete_comparison_nonzero.png}
@@ -185,21 +198,22 @@ The key distinction is that the positive completion always reflects accurate per
 \begin{figure*}[!htbp]
 \centering
 \includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_category_analysis.png}
-\caption{Category-level analysis of steering effects. Top left: mean steering effect by cognitive action category shows emotional and creative categories increase while analytical decreases. Top right: distribution of effects at question timepoint with emotional and creative categories shifted positive. Bottom left: proportion of 45 actions in each category. Bottom right: category × timepoint heatmap showing consistent patterns—emotional/creative increases persist across all timepoints while analytical decreases after answers. This systematic category-level pattern supports the interpretation that emotional processing mediates ToM abilities.}
+\caption{Category-level analysis of steering effects. Negative points represent more activation at baseline while positive represent more activation on steered. Left: mean steering effect by cognitive action category. Right: distribution of effects at answer timepoint.}
 \label{fig:category_analysis}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_radar_baseline_vs_steered.png}
-\caption{Radar chart comparing baseline versus steered cognitive action activation patterns across categories. The steered condition (red) shows elevated emotional and creative process engagement compared to baseline (blue), while analytical processes remain similar or decrease. This visualization highlights the shift toward emotional understanding that characterizes successful Theory of Mind enhancement through CAA steering.}
-\label{fig:radar_comparison}
-\end{figure*}
+\includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_top_changes_question_answer.png}
+\caption{Top 10 cognitive actions with largest increases and decreases between baseline and steered conditions at question level (left) and answer level (right). Emotional actions (emotion\_perception, emotion\_valuing, noticing) show the strongest upregulation, while analytical actions (questioning, convergent\_thinking, understanding) show the strongest downregulation, revealing the cognitive processes most affected by successful ToM steering.}
+\label{fig:top_changes}
+\end{figure}
+    
 
 \begin{figure*}[!htbp]
 \centering
 \includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_heatmap_nonzero.png}
-\caption{Heatmap of cognitive action activation differences (steered - baseline) across timepoints. Each row represents a cognitive action, and columns show the three measurement timepoints: at question, after true answer, and after wrong answer. Red indicates upregulation and blue indicates downregulation. The consistent patterns across timepoints reveal that emotional actions (top section) are systematically upregulated while analytical actions show more variable and often negative modulation, supporting the emotional foundation of ToM.}
+\caption{Heatmap of cognitive action activation differences (steered - baseline) across timepoints. Each row represents a cognitive action, and columns show the three measurement timepoints: at question, after true answer, and after wrong answer. Red indicates upregulation and blue indicates downregulation.}
 \label{fig:heatmap}
 \end{figure*}
 
