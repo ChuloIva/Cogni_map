@@ -37,7 +37,7 @@
 \maketitle
 
 \begin{abstract}
-Recent work shows activation steering substantially improves language models' Theory of Mind (ToM) \cite{Bortoletto2024}, yet \textit{what} changes remains unclear. We decompose ToM by comparing steered versus baseline LLMs' activations using linear probes trained on 45 cognitive actions. Applying Contrastive Activation Addition (CAA) to 1,000 BigToM false-belief scenarios, we find successful ToM enhancement (32.5\% to 46.7\% accuracy) is mediated by activations processing emotional content—\textit{emotion\_perception} (+2.23), \textit{emotion\_valuing} (+2.20), \textit{noticing} (+2.08)—while suppressing analytical processes—\textit{questioning} (-0.78), \textit{convergent\_thinking} (-1.59). This reveals that successful ToM abilities in LLMs are mediated by emotional understanding, not analytical reasoning.
+Recent work shows activation steering substantially improves language models' Theory of Mind (ToM) \cite{Bortoletto2024}, yet \textit{what} changes remains unclear. We decompose ToM by comparing steered versus baseline LLMs' activations using linear probes trained on 45 cognitive actions. Applying Contrastive Activation Addition (CAA) to 1,000 BigToM forward belief scenarios, we find successful ToM enhancement (32.5\% to 46.7\% accuracy) is mediated by activations processing emotional content\textit{emotion\_perception} (+2.23), \textit{emotion\_valuing} (+2.20), \textit{noticing} (+2.08), while suppressing analytical processes—\textit{questioning} (-0.78), \textit{convergent\_thinking} (-1.59). This reveals that successful ToM abilities in LLMs are mediated by emotional understanding, not analytical reasoning.
 \end{abstract}
 
 \section{Introduction}
@@ -48,11 +48,11 @@ Traditional evaluations treat ToM as a monolithic capability measured through bi
 
 We introduce a mechanistic decomposition approach combining linear classifer probes trained on 45 cognitive actions with CAA steering vectors. By measuring which cognitive processes are systematically upregulated or downregulated when ToM performance improves, we can identify the fundamental components underlying successful perspective-taking.
 
-\textbf{Contributions:} (1) A mechanistic decomposition methodology using cognitive action probes to analyze steering effects; (2) Evaluation on 1,000 BigToM false-belief scenarios showing 14.2 percentage point accuracy improvement (32.5\% to 46.7\%); (3) Discovery that successful ToM systematically upregulates emotional/creative processes while downregulating analytical processes; (4) Evidence that emotional understanding serves as the fundamental building block of perspective-taking in language models.
+\textbf{Contributions:} (1) A mechanistic decomposition methodology using cognitive action probes to analyze steering effects; (2) Evaluation on 1,000 BigToM forward belief scenarios showing 14.2 percentage point accuracy improvement (32.5\% to 46.7\%); (3) Discovery that successful ToM systematically upregulates emotional/creative processes while downregulating analytical processes; (4) Findings suggesting that emotional understanding serves as the fundamental building block of perspective-taking in language models.
 
 \begin{figure*}[t]
     \centering
-    \includegraphics[width=0.80\textwidth]{../ToM/visualizations/paper/paper_radar_baseline_vs_steered.png}
+    \includegraphics[width=0.80\textwidth]{viz/paper_radar_baseline_vs_steered.png}
     \caption{Radar chart comparing baseline versus steered cognitive action activation patterns across categories. The steered condition (red) compared to baseline (blue)}
     \label{fig:radar_comparison_top}
     \end{figure*}
@@ -62,15 +62,15 @@ We introduce a mechanistic decomposition approach combining linear classifer pro
 
 To investigate how steering vectors modulate cognitive processes during ToM tasks, we developed a multi-stage pipeline integrating probe training, activation steering, and comparative analysis. We began by defining 45 cognitive actions across four categories: \textit{Metacognitive}, \textit{Analytical}, \textit{Creative}, and \textit{Emotional} (see appendix). For each action, we generated 31,500 synthetic training examples (700 per action) using Gemma-3-4B. First-person narratives (2-4 sentences) varied across 20 everyday contexts, producing balanced datasets with realistic language patterns.
 
-Activations were extracted from layers 0-30 of Gemma-3-4B using nnsight \cite{alain2016understanding}. To ensure consistent probe training, inputs were augmented (at extraction and during inference) with the suffix ``The cognitive action being demonstrated here is'' for consistent final-token extraction. We trained 45 binary linear probes using one-vs-rest classification with AdamW optimization, cosine annealing, and early stopping based on AUC-ROC.
+Activations were extracted from layers 0-30 of Gemma-3-4B using nnsight, loosely following the methodology from \cite{chen2024designing}. To ensure consistent probe training, inputs were augmented (at extraction and during inference) with the suffix ``The cognitive action being demonstrated here is'' for consistent final-token extraction. We trained 45 binary linear probes using one-vs-rest classification with AdamW optimization, cosine annealing, and early stopping based on AUC-ROC \cite{alain2016understanding}.
 
 For activation steering, we trained CAA vectors \cite{rimsky2023steering,zou2023representation} on 752 contrastive triplets from BigToM's \textit{forward\_belief} scenarios (50/50 false-true split). Each triplet contains story context, belief question, and positive (correct ToM) versus negative (incorrect ToM) completions, capturing representational differences between accurate and inaccurate perspective-taking. Vectors were trained across layers 14-30 using PCA-centered activation differences.
 
-We evaluated 1,000 false-belief scenarios from BigToM (\textit{forward\_belief\_false}), comparing baseline versus steered conditions. Answers were evaluated by computing p(correct) vs p(incorrect) from model logits. Cognitive action activations were captured at three timepoints: (1) at question, (2) after true answer, (3) after wrong answer. For each action, we computed layer count (layers 10-20 where probe confidence indicated presence) and analyzed baseline-steered differences to identify which cognitive processes characterize successful ToM improvements.
+We evaluated 1,000 forward belief scenarios from BigToM (\textit{forward\_belief\_false}), comparing baseline versus steered conditions. Answers were evaluated by computing p(correct) vs p(incorrect) from model logits. Cognitive action activations were captured at three timepoints: (1) at question, (2) after true answer, (3) after wrong answer. For each action, we computed layer count (layers 10-20 where probe confidence indicated presence) and analyzed baseline-steered differences to identify which cognitive processes characterize successful ToM improvements.
 
 \section{Results}
 
-We first validated our probe methodology, finding that binary probes achieved 0.78 average AUC-ROC and 0.68 F1 across 45 actions. Mid-layer performance (layers 5-24) outperformed early/late layers, informing our layer 10-20 analysis window. Having established probe validity, we evaluated CAA steering on 1,000 false-belief scenarios, observing accuracy improvements from 32.5\% to 46.7\% (14.2pp gain), shifting 217 examples from incorrect to correct predictions.
+We first validated our probe methodology, finding that binary probes achieved 0.78 average AUC-ROC and 0.68 F1 across 45 actions. Mid-layer performance (layers 5-24) outperformed early/late layers, informing our layer 10-20 analysis window. Having established probe validity, we evaluated CAA steering on 1,000 forward belief scenarios (false condition), observing accuracy improvements from 32.5\% to 46.7\% (14.2pp gain), shifting 217 examples from incorrect to correct predictions.
 
 To understand what drives this improvement, we analyzed cognitive action activation patterns in baseline versus steered conditions. The most striking finding was robust upregulation of emotional and generative processes. Emotional processes showed strong increases: \textit{emotion\_perception} (mean $\Delta$=+1.73), \textit{emotion\_valuing} ($\Delta$=+0.85), and \textit{emotion\_understanding} ($\Delta$=+0.77). Additionally, \textit{Hypothesis\_generation} ($\Delta$=+1.63) remained strongly elevated across all timepoints, indicating active belief formation and explanation generation.
 
@@ -82,11 +82,11 @@ This pattern of upregulated emotional and generative processes and downregulated
 
 We make no claims that these findings generalize to human cognition, nor does our methodology validate such comparisons. However, neuroscience research shows that affective and cognitive ToM share neural mechanisms in humans: \citet{Corradi2014} demonstrate that ``patterns in TPJ (Temporoparietal Junction) and MTG (Middle Temporal Gyrus) reflect the same neuronal activity, equally recruited in these two independent conditions.'' During language modeling, networks may learn shared representations linking perspective-taking with emotional context processing, mirroring the compressed structure of human social cognition embedded in linguistic data. Whether this constitutes genuine emulation of cognitive architecture or emergent convergence on functionally equivalent representations remains an open question.
 
-Several limitations warrant consideration. Our probe training relies on synthetic data from a single small model (Gemma-3-4B). We've evaluated the difference of steering vs base model on a single BigToM condition. Future work should validate these findings across diverse ToM scenarios, multiple, bigger models, and varied belief attribution tasks.
+Several limitations warrant consideration. Our probe training relies on synthetic data from a single small model (Gemma-3-4B). \citet{Bortoletto2024} already demonstrated how steering vectors behave and generalize across different BigToM conditions, which was not the focus of our work. Future work should validate these cognitive decomposition findings with multiple, bigger models.
 
 \section{Conclusion}
 
-Our work extends \citet{Bortoletto2024} by applying cognitive action probes to activation steered LLMs, we move beyond evaluating \textit{whether} steering improves ToM to understanding \textit{how} it works. Our analysis of 1,000 false-belief scenarios reveals systematic modulation of cognitive processes: steering amplifies generative hypothesis formation and emotional inference while suppressing analytical interrogation. This decomposition approach, combining interpretability tools with targeted interventions, offers a principled methodology for understanding complex AI capabilities. The findings challenge assumptions about deliberative social reasoning in LLMs and open new directions for mechanistic analysis of perspective-taking and other high-level cognitive abilities.
+Our work extends \citet{Bortoletto2024} by applying cognitive action probes to activation steered LLMs, we move beyond evaluating \textit{whether} steering improves ToM to understanding \textit{how} it works. Our analysis of 1,000 forward belief scenarios reveals systematic modulation of cognitive processes: steering amplifies generative hypothesis formation and emotional inference while suppressing analytical interrogation. This decomposition approach, combining interpretability tools with targeted interventions, offers a principled methodology for understanding complex AI capabilities. The findings challenge assumptions about deliberative social reasoning in LLMs and open new directions for mechanistic analysis of perspective-taking and other high-level cognitive abilities.
 
 \bibliography{cogni_map_workshop}
 
@@ -179,21 +179,21 @@ The CAA steering vectors were trained on contrastive pairs distinguishing correc
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_complete_comparison_nonzero.png}
+\includegraphics[width=\textwidth]{viz/paper_complete_comparison_nonzero.png}
 \caption{Steering effects across all cognitive actions and timepoints (n=1000). Left panels show individual action changes at three timepoints: at question (before answer), after true answer, and after wrong answer. Bars indicate mean layer count difference (steered - baseline) with positive values (right) showing increases and negative values (left) showing decreases. Emotional actions (\textit{emotion\_perception}, \textit{emotion\_valuing}, \textit{noticing}) consistently increase across timepoints, while analytical actions (\textit{questioning}, \textit{convergent\_thinking}, \textit{understanding}) consistently decrease, revealing the emotional foundation of successful ToM.}
 \label{fig:complete_comparison}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_category_analysis.png}
+\includegraphics[width=\textwidth]{viz/paper_category_analysis.png}
 \caption{Category-level analysis of steering effects. Negative points represent more activation at baseline while positive represent more activation on steered. Left: mean steering effect by cognitive action category. Right: distribution of effects at answer timepoint.}
 \label{fig:category_analysis}
 \end{figure*}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_top_changes_question_answer.png}
+\includegraphics[width=\textwidth]{viz/paper_top_changes_question_answer.png}
 \caption{Top 10 cognitive actions with largest increases and decreases between baseline and steered conditions at question level (left) and answer level (right). Emotional actions (emotion\_perception, emotion\_valuing, noticing) show the strongest upregulation, while analytical actions (questioning, convergent\_thinking, understanding) show the strongest downregulation, revealing the cognitive processes most affected by successful ToM steering.}
 \label{fig:top_changes}
 \end{figure}
@@ -201,21 +201,21 @@ The CAA steering vectors were trained on contrastive pairs distinguishing correc
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_heatmap_nonzero.png}
+\includegraphics[width=\textwidth]{viz/paper_heatmap_nonzero.png}
 \caption{Heatmap of cognitive action activation differences (steered - baseline) across timepoints. Each row represents a cognitive action, and columns show the three measurement timepoints: at question, after true answer, and after wrong answer. Green indicates upregulation and red indicates downregulation.}
 \label{fig:heatmap}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{../data/cognitive_probe_performance_by_layer.png}
+\includegraphics[width=\textwidth]{viz/cognitive_probe_performance_by_layer.png}
 \caption{Cognitive action probe performance across all 30 layers of Gemma-3-4B. The visualization shows average AUC-ROC scores for each layer, with Layer 9 achieving peak performance (0.948 AUC-ROC). Strong performance is maintained across mid-layers (5-24), while early and late layers show degraded performance. This pattern suggests that early layers focus on surface-level features, mid-layers capture high-level cognitive abstractions, and late layers optimize for next-token prediction, potentially overwriting intermediate representations.}
 \label{fig:layer_performance}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{../data/best_worst_actions.png}
+\includegraphics[width=\textwidth]{viz/best_worst_actions.png}
 \caption{Comparison of top 10 and bottom 10 performing cognitive actions ranked by average AUC-ROC across all layers. Best performers like \textit{suspending\_judgment} (0.988) and \textit{counterfactual\_reasoning} (0.984) show consistently high performance and distinct activation patterns across most layers. Worst performers like \textit{emotion\_responding} (0.778) and \textit{understanding} (0.837) exhibit more variability and lower overall discrimination ability, suggesting these concepts may be more distributed or context-dependent in the model's representation space.}
 \label{fig:best_worst}
 \end{figure*}
