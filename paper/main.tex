@@ -1,38 +1,13 @@
-%File: cogni_map_workshop.tex
-\documentclass[letterpaper]{article}
-\usepackage[submission]{aaai2026}
-\usepackage{times}
-\usepackage{helvet}
-\usepackage{courier}
-\usepackage[hyphens]{url}
-\usepackage{graphicx}
-\urlstyle{rm}
-\def\UrlFont{\rm}
-\usepackage{natbib}
-\usepackage{caption}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\frenchspacing
-\setlength{\pdfpagewidth}{8.5in}
-\setlength{\pdfpageheight}{11in}
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
 
-\pdfinfo{
-/TemplateVersion (2026.1)
-}
-
-\setcounter{secnumdepth}{0}
-
-\title{Decomposing Theory of Mind: How Emotional Processing Mediates ToM Abilities in LLMs}
-
-\author{
-    Ivan Chulo, Ananya Joshi
-}
-\affiliations{
-    Johns Hopkins University\\
-    Baltimore, MD 21218 USA\\
-}
+\title{hi}
+\author{aaj }
+\date{November 2025}
 
 \begin{document}
+
+\maketitle
 
 \begin{abstract}
 Recent work shows activation steering substantially improves language models' Theory of Mind (ToM) \cite{Bortoletto2024}, yet the mechanisms of \textit{what} changes occur internally that leads to different outputs remains unclear. We propose decomposing ToM in LLMs by comparing steered versus baseline LLMs' activations using linear probes trained on 45 cognitive actions. We applied Contrastive Activation Addition (CAA) to 1,000 BigToM forward belief scenarios \cite{gandhi2023understanding}, and improved performance on belief attribution tasks (32.5\% to 46.7\% accuracy) is mediated by activations processing emotional content : \textit{emotion\_perception} (+2.23), \textit{emotion\_valuing} (+2.20), \textit{noticing} (+2.08), while suppressing analytical processes: \textit{questioning} (-0.78), \textit{convergent\_thinking} (-1.59). This suggests that successful ToM abilities in LLMs are mediated by emotional understanding, not analytical reasoning.
@@ -42,7 +17,7 @@ Recent work shows activation steering substantially improves language models' Th
 
 The capacity to attribute mental states to oneself and others represents a critical capability for AI systems engaged in social reasoning, alignment, and human collaboration. Recent benchmarking work by \citet{Bortoletto2024} has demonstrated that activation steering techniques, particularly Contrastive Activation Addition (CAA), can substantially improve language models' ToM performance on belief attribution tasks, often achieving accuracy improvements exceeding 10 \%. This raises a question:\textit{what cognitive processes change} when models successfully engage in perspective-taking?
 
-Traditional evaluations treat ToM as a monolithic capability measured through binary accuracy on belief attribution tasks \cite{gandhi2023understanding}. However, cognitive science views ToM as comprising multiple interacting processes (perceptual encoding, emotional inference, hypothesis generation etc.) \cite{Gabriel2019} that lead to final outputs. If steering vectors modulate these components differently, comparing steered versus baseline activation patterns could reveal which processes are \textit{essential} for successful perspective-taking, thus  decomposing ToM processes in LLMs into their constituent building blocks.
+Traditional evaluations treat ToM as a monolithic capability measured through binary accuracy on belief attribution tasks \cite{gandhi2023understanding}. However, cognitive science views ToM as comprising multiple interacting processes (perceptual encoding, emotional inference, hypothesis generation etc.) [CITE] that lead to final outputs. If steering vectors modulate these components differently, comparing steered versus baseline activation patterns could reveal which processes are \textit{essential} for successful perspective-taking, thus  decomposing ToM processes in LLMs into their constituent building blocks.
 
 We introduce a decomposition approach using techniques from mechanistic interpretability in LLMs by combining linear classifer probes trained on 45 cognitive actions with CAA steering vectors. By measuring which cognitive processes are systematically increase or decrease when ToM performance improves, we can identify what cognitive actions are correlated with language model activations in successful perspective-taking.
 
@@ -71,7 +46,7 @@ For activation steering, we trained CAA vectors \cite{rimsky2023steering,zou2023
 
 We first validated our probe methodology, finding that binary probes achieved 0.78 average AUC-ROC and 0.68 F1 across 45 actions. Mid-layer performance (layers 5-24) outperformed early/late layers, informing our layer 10-20 analysis window. We then evaluated CAA steered LLMs on 1,000 forward belief scenarios (false condition), observing accuracy improvements from 32.5\% to 46.7\% (a 14.2\% gain), shifting 217 examples from incorrect to correct predictions.
 
-To understand what drives this improvement, we analyzed cognitive action activation patterns in baseline versus steered conditions. The most striking finding was robust increase of emotional and generative processes. Emotional processes showed strong increases: \textit{emotion\_perception} (mean $\Delta$=+1.73), \textit{emotion\_valuing} ($\Delta$=+0.85), and \textit{emotion\_understanding} ($\Delta$=+0.77). Additionally, \textit{Hypothesis\_generation} ($\Delta$=+1.63) remained strongly elevated across all timepoints, indicating active belief formation and explanation generation.
+To understand what drives this improvement, we analyzed cognitive action activation patterns in baseline versus steered conditions. The most striking finding was robust upregulation of emotional and generative processes. Emotional processes showed strong increases: \textit{emotion\_perception} (mean $\Delta$=+1.73), \textit{emotion\_valuing} ($\Delta$=+0.85), and \textit{emotion\_understanding} ($\Delta$=+0.77). Additionally, \textit{Hypothesis\_generation} ($\Delta$=+1.63) remained strongly elevated across all timepoints, indicating active belief formation and explanation generation.
 
 In contrast, analytical processes decreased: \textit{questioning} ($\Delta$=-1.24), \textit{convergent\_thinking} ($\Delta$=-1.13), and \textit{understanding} ($\Delta$=-0.77), suggesting successful persepective taking in LLMs suppresses deliberate analytical interrogation. Category aggregation reinforces this pattern—creative processes (+0.35, +0.28, +0.24) and emotional processes (+0.35, +0.20, +0.22) consistently increase across timepoints, while analytical processes show decreases (+0.06, -0.19, -0.19).
 
@@ -254,7 +229,7 @@ This probability-based ranking approach eliminates confounds from text generatio
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{viz/paper_top_changes_question_answer.png}
-\caption{Top 10 cognitive actions with largest increases and decreases between baseline and steered conditions at question level (left) and answer level (right). Emotional actions (emotion\_perception, emotion\_valuing, noticing) show the strongest increase, while analytical actions (questioning, convergent\_thinking, understanding) show the strongest decrease, revealing the cognitive processes most affected by successful ToM steering.}
+\caption{Top 10 cognitive actions with largest increases and decreases between baseline and steered conditions at question level (left) and answer level (right). Emotional actions (emotion\_perception, emotion\_valuing, noticing) show the strongest upregulation, while analytical actions (questioning, convergent\_thinking, understanding) show the strongest decrease, revealing the cognitive processes most affected by successful ToM steering.}
 \label{fig:top_changes}
 \end{figure}
     
@@ -262,7 +237,7 @@ This probability-based ranking approach eliminates confounds from text generatio
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{viz/paper_heatmap_nonzero.png}
-\caption{Heatmap of cognitive action activation differences (steered - baseline) across timepoints. Each row represents a cognitive action, and columns show the three measurement timepoints: at question, after true answer, and after wrong answer. Green indicates increase and red indicates decreases.}
+\caption{Heatmap of cognitive action activation differences (steered - baseline) across timepoints. Each row represents a cognitive action, and columns show the three measurement timepoints: at question, after true answer, and after wrong answer. Green indicates upregulation and red indicates decreases.}
 \label{fig:heatmap}
 \end{figure*}
 
