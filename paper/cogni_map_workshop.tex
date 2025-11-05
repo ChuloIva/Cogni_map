@@ -177,6 +177,34 @@ The CAA steering vectors were trained on contrastive pairs distinguishing correc
 
 \textit{Negative (incorrect ToM):} ``Noor believes the milk pitcher contains almond milk.''
 
+\subsection{Evaluation Methodology: Answer Ranking by Probability}
+
+Following the BigToM evaluation protocol, we used answer ranking by probability rather than free-form text generation. Each question was formatted as a multiple-choice task with randomized answer positions:
+
+\textbf{Prompt Format:}
+\begin{verbatim}
+Story: [story text]
+
+Question: [question text]
+Choose one of the following:
+a) [answer 1]
+b) [answer 2]
+
+Please answer with the letter of your choice (a or b).
+Answer:
+\end{verbatim}
+
+\textbf{Evaluation Process:}
+For each question, we:
+\begin{enumerate}
+    \item Randomized the positions of true and wrong answers between options a) and b)
+    \item Calculated $p(\text{letter}=\text{`a'})$ and $p(\text{letter}=\text{`b'})$ from model logits at the final token position
+    \item Selected the answer corresponding to the letter with higher probability
+    \item Determined correctness by comparing the selected answer to the ground truth
+\end{enumerate}
+
+This probability-based ranking approach eliminates confounds from text generation artifacts and provides a more reliable measure of the model's belief attribution capabilities. Answer position randomization ensures that the model cannot exploit systematic biases in option ordering.
+
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{viz/paper_complete_comparison_nonzero.png}
