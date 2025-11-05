@@ -1,6 +1,6 @@
 %File: cogni_map_workshop.tex
 \documentclass[letterpaper]{article}
-\usepackage{aaai2026}
+\usepackage[submission]{aaai2026}
 \usepackage{times}
 \usepackage{helvet}
 \usepackage{courier}
@@ -12,17 +12,9 @@
 \usepackage{caption}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{placeins}
 \frenchspacing
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
-
-% Adjust float placement parameters for figure*
-\renewcommand{\topfraction}{0.9}
-\renewcommand{\dbltopfraction}{0.9}
-\renewcommand{\textfraction}{0.1}
-\setcounter{topnumber}{3}
-\setcounter{dbltopnumber}{3}
 
 \pdfinfo{
 /TemplateVersion (2026.1)
@@ -58,7 +50,7 @@ We introduce a mechanistic decomposition approach combining linear probes traine
 
 \textbf{Contributions:} (1) A mechanistic decomposition methodology using cognitive action probes to analyze steering effects; (2) Evaluation on 1,000 BigToM false-belief scenarios showing 14.2 percentage point accuracy improvement (32.5\% to 46.7\%); (3) Discovery that successful ToM systematically upregulates emotional/creative processes while downregulating analytical processes; (4) Evidence that emotional understanding serves as the fundamental building block of perspective-taking in language models.
 
-\begin{figure*}[!t]
+\begin{figure*}[t]
     \centering
     \includegraphics[width=0.80\textwidth]{../ToM/visualizations/paper/paper_radar_baseline_vs_steered.png}
     \caption{Radar chart comparing baseline versus steered cognitive action activation patterns across categories. The steered condition (red) compared to baseline (blue)}
@@ -84,8 +76,6 @@ To understand what drives this improvement, we analyzed cognitive action activat
 
 In contrast, analytical processes decreased: \textit{questioning} ($\Delta$=-1.24), \textit{convergent\_thinking} ($\Delta$=-1.13), and \textit{understanding} ($\Delta$=-0.77), suggesting successful ToM suppresses deliberate analytical interrogation. Category aggregation reinforces this pattern—creative processes (+0.35, +0.28, +0.24) and emotional processes (+0.35, +0.20, +0.22) consistently increase across timepoints, while analytical processes show decreases (+0.06, -0.19, -0.19).
 
-\FloatBarrier
-
 \section{Discussion}
 
 This pattern of upregulated emotional and generative processes and downregulated analytical processes challenges assumptions that LLM social reasoning relies on deliberate chain-of-thought mechanisms. Rather, successful perspective-taking appears to operate through activating representations responsible for processing emotional contexts.
@@ -100,7 +90,6 @@ Our work extends \citet{Bortoletto2024} by applying cognitive action probes to a
 
 \bibliography{cogni_map_workshop}
 
-\clearpage
 \appendix
 
 \section{Appendix}
@@ -188,21 +177,21 @@ The CAA steering vectors were trained on contrastive pairs distinguishing correc
 
 \textit{Negative (incorrect ToM):} ``Noor believes the milk pitcher contains almond milk.''
 
-\begin{figure*}[!htbp]
+\begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_complete_comparison_nonzero.png}
 \caption{Steering effects across all cognitive actions and timepoints (n=1000). Left panels show individual action changes at three timepoints: at question (before answer), after true answer, and after wrong answer. Bars indicate mean layer count difference (steered - baseline) with positive values (right) showing increases and negative values (left) showing decreases. Emotional actions (\textit{emotion\_perception}, \textit{emotion\_valuing}, \textit{noticing}) consistently increase across timepoints, while analytical actions (\textit{questioning}, \textit{convergent\_thinking}, \textit{understanding}) consistently decrease, revealing the emotional foundation of successful ToM.}
 \label{fig:complete_comparison}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_category_analysis.png}
 \caption{Category-level analysis of steering effects. Negative points represent more activation at baseline while positive represent more activation on steered. Left: mean steering effect by cognitive action category. Right: distribution of effects at answer timepoint.}
 \label{fig:category_analysis}
 \end{figure*}
 
-\begin{figure}[!htbp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_top_changes_question_answer.png}
 \caption{Top 10 cognitive actions with largest increases and decreases between baseline and steered conditions at question level (left) and answer level (right). Emotional actions (emotion\_perception, emotion\_valuing, noticing) show the strongest upregulation, while analytical actions (questioning, convergent\_thinking, understanding) show the strongest downregulation, revealing the cognitive processes most affected by successful ToM steering.}
@@ -210,21 +199,21 @@ The CAA steering vectors were trained on contrastive pairs distinguishing correc
 \end{figure}
     
 
-\begin{figure*}[!htbp]
+\begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{../ToM/visualizations/paper/paper_heatmap_nonzero.png}
 \caption{Heatmap of cognitive action activation differences (steered - baseline) across timepoints. Each row represents a cognitive action, and columns show the three measurement timepoints: at question, after true answer, and after wrong answer. Green indicates upregulation and red indicates downregulation.}
 \label{fig:heatmap}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{../data/cognitive_probe_performance_by_layer.png}
 \caption{Cognitive action probe performance across all 30 layers of Gemma-3-4B. The visualization shows average AUC-ROC scores for each layer, with Layer 9 achieving peak performance (0.948 AUC-ROC). Strong performance is maintained across mid-layers (5-24), while early and late layers show degraded performance. This pattern suggests that early layers focus on surface-level features, mid-layers capture high-level cognitive abstractions, and late layers optimize for next-token prediction, potentially overwriting intermediate representations.}
 \label{fig:layer_performance}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{../data/best_worst_actions.png}
 \caption{Comparison of top 10 and bottom 10 performing cognitive actions ranked by average AUC-ROC across all layers. Best performers like \textit{suspending\_judgment} (0.988) and \textit{counterfactual\_reasoning} (0.984) show consistently high performance and distinct activation patterns across most layers. Worst performers like \textit{emotion\_responding} (0.778) and \textit{understanding} (0.837) exhibit more variability and lower overall discrimination ability, suggesting these concepts may be more distributed or context-dependent in the model's representation space.}
