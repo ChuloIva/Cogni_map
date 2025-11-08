@@ -47,5 +47,8 @@ launch_interactive_viewer(
     aggregated_predictions,
     tokens,
     (engine.layer_start, engine.layer_end),  # layer_range tuple
-    threshold  # display_threshold
+    threshold,  # display_threshold
+    engine=engine,
+    original_text=text,
+    inference_threshold=threshold
 )
