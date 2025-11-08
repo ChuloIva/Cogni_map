@@ -18,7 +18,7 @@ sys.path.insert(0, str(NNSIGHT_PATH))
 
 from textual.app import App, ComposeResult
 from textual.containers import Container, Horizontal, Vertical, ScrollableContainer
-from textual.widgets import Header, Footer, Static, DataTable, Label
+from textual.widgets import Header, Footer, Static, DataTable, Label, Input
 from textual.binding import Binding
 from textual.reactive import reactive
 from rich.text import Text
@@ -535,8 +535,19 @@ class ProbeViewerApp(App):
     CSS = """
     Screen {
         layout: grid;
-        grid-size: 2 3;
-        grid-rows: auto auto 1fr;
+        grid-size: 2 4;
+        grid-rows: auto auto auto 1fr;
+    }
+
+    #text-input {
+        column-span: 2;
+        height: 0;
+        overflow: hidden;
+        border: solid yellow;
+    }
+
+    #text-input.visible {
+        height: 3;
     }
 
     #token-display {
@@ -568,6 +579,7 @@ class ProbeViewerApp(App):
         Binding("home", "first_token", "⇤ First"),
         Binding("end", "last_token", "⇥ Last"),
         Binding("r", "reload", "↻ Reload"),
+        Binding("escape", "toggle_edit", "Edit Text"),
     ]
 
     def __init__(
@@ -576,6 +588,9 @@ class ProbeViewerApp(App):
         tokens: List[str],
         layer_range: Tuple[int, int],
         display_threshold: float,
+        engine: Optional['StreamingProbeInferenceEngine'] = None,
+        original_text: str = "",
+        inference_threshold: float = 0.0,
         **kwargs
     ):
         super().__init__(**kwargs)
@@ -584,10 +599,22 @@ class ProbeViewerApp(App):
         self.layer_range = layer_range
         self.display_threshold = display_threshold
         self.selected_token = 0
+        self.engine = engine
+        self.original_text = original_text
+        self.inference_threshold = inference_threshold
+        self.edit_mode = False
 
     def compose(self) -> ComposeResult:
         """Create UI components"""
         yield Header()
+
+        # Text input for editing (hidden by default)
+        self.text_input = Input(
+            value=self.original_text,
+            placeholder="Enter text to analyze...",
+            id="text-input"
+        )
+        yield self.text_input
 
         # Token display (top row, spans 2 columns)
         self.token_display = TokenDisplay(self.tokens, id="token-display")
@@ -616,29 +643,32 @@ class ProbeViewerApp(App):
 
     def action_next_token(self) -> None:
         """Move to next token"""
-        if self.selected_token < len(self.tokens) - 1:
+        if not self.edit_mode and self.selected_token < len(self.tokens) - 1:
             self.selected_token += 1
             self._update_selection()
 
     def action_previous_token(self) -> None:
         """Move to previous token"""
-        if self.selected_token > 0:
+        if not self.edit_mode and self.selected_token > 0:
             self.selected_token -= 1
             self._update_selection()
 
     def action_first_token(self) -> None:
         """Jump to first token"""
-        self.selected_token = 0
-        self._update_selection()
+        if not self.edit_mode:
+            self.selected_token = 0
+            self._update_selection()
 
     def action_last_token(self) -> None:
         """Jump to last token"""
-        self.selected_token = len(self.tokens) - 1
-        self._update_selection()
+        if not self.edit_mode:
+            self.selected_token = len(self.tokens) - 1
+            self._update_selection()
 
     def action_reload(self) -> None:
         """Reload display"""
-        self._update_selection()
+        if not self.edit_mode:
+            self._update_selection()
 
     def _update_selection(self) -> None:
         """Update all panels with new selection"""
@@ -647,12 +677,110 @@ class ProbeViewerApp(App):
         self.probe_details.selected_token = self.selected_token
         self.heatmap.selected_token = self.selected_token
 
+    def action_toggle_edit(self) -> None:
+        """Toggle edit mode - ESC to enter, ENTER to apply"""
+        if not self.engine:
+            return  # Can't edit without engine
+
+        self.edit_mode = not self.edit_mode
+
+        if self.edit_mode:
+            # Enter edit mode
+            self.text_input.add_class("visible")
+            self.text_input.focus()
+        else:
+            # Exit edit mode without applying
+            self.text_input.remove_class("visible")
+            self.token_display.focus()
+
+    def on_input_submitted(self, event: Input.Submitted) -> None:
+        """Handle ENTER key in text input - recalculate probes"""
+        if event.input.id == "text-input" and self.edit_mode and self.engine:
+            new_text = event.value.strip()
+
+            if not new_text:
+                return  # Don't process empty text
+
+            # Exit edit mode
+            self.edit_mode = False
+            self.text_input.remove_class("visible")
+
+            # Update original text
+            self.original_text = new_text
+
+            # Recalculate probes with new text
+            self._recalculate_probes(new_text)
+
+    def _recalculate_probes(self, text: str) -> None:
+        """Recalculate probe predictions for new text"""
+        try:
+            # Show loading message
+            self.title = "Processing..."
+
+            # Get ALL predictions (cognitive + sentiment)
+            total_probes = len(self.engine.probes) + len(self.engine.sentiment_probes)
+            all_predictions = self.engine.predict_streaming(
+                text,
+                top_k=total_probes,
+                threshold=0.0,  # Get all, filter during aggregation
+                show_realtime=False
+            )
+
+            # Aggregate predictions by action across layers
+            aggregated_predictions = self.engine.aggregate_predictions(
+                all_predictions,
+                threshold=self.inference_threshold
+            )
+
+            # Sort by layer count and confidence
+            aggregated_predictions.sort(
+                key=lambda x: (x.layer_count, x.max_confidence),
+                reverse=True
+            )
+
+            # Get new tokens
+            inputs = self.engine.tokenizer(text, return_tensors="pt")
+            new_tokens = self.engine.tokenizer.convert_ids_to_tokens(inputs['input_ids'][0])
+
+            # Update app state
+            self.predictions = aggregated_predictions
+            self.tokens = new_tokens
+            self.selected_token = 0
+
+            # Update all widgets
+            self.token_display.tokens = new_tokens
+            self.token_display.set_predictions(aggregated_predictions)
+
+            self.sentiment_tracker.tokens = new_tokens
+            self.sentiment_tracker.set_predictions(aggregated_predictions)
+
+            self.probe_details.set_data(aggregated_predictions, new_tokens)
+            self.heatmap.set_data(aggregated_predictions, self.layer_range)
+
+            # Update selection
+            self._update_selection()
+
+            # Clear title
+            self.title = ""
+
+            # Focus back on token display
+            self.token_display.focus()
+
+        except Exception as e:
+            # Show error and revert
+            self.title = f"Error: {str(e)}"
+            self.edit_mode = False
+            self.text_input.remove_class("visible")
+
 
 def launch_interactive_viewer(
     predictions: List[AggregatedPrediction],
     tokens: List[str],
     layer_range: Tuple[int, int],
-    display_threshold: float
+    display_threshold: float,
+    engine: Optional[StreamingProbeInferenceEngine] = None,
+    original_text: str = "",
+    inference_threshold: float = 0.0
 ):
     """
     Launch the interactive TUI
@@ -661,8 +789,20 @@ def launch_interactive_viewer(
         predictions: List of aggregated predictions sorted by layer count
         tokens: List of token strings
         layer_range: Tuple of (start_layer, end_layer)
+        display_threshold: UI display threshold
+        engine: Optional StreamingProbeInferenceEngine for recalculating probes
+        original_text: Original text being analyzed
+        inference_threshold: Threshold for probe inference
     """
-    app = ProbeViewerApp(predictions, tokens, layer_range, display_threshold)
+    app = ProbeViewerApp(
+        predictions,
+        tokens,
+        layer_range,
+        display_threshold,
+        engine=engine,
+        original_text=original_text,
+        inference_threshold=inference_threshold
+    )
     app.run()
 
 
@@ -723,10 +863,13 @@ def main():
 
     # Launch TUI with aggregated predictions sorted by layer count
     launch_interactive_viewer(
-        aggregated_predictions, 
-        tokens, 
+        aggregated_predictions,
+        tokens,
         (engine.layer_start, engine.layer_end),
-        args.display_threshold if args.display_threshold is not None else args.threshold
+        args.display_threshold if args.display_threshold is not None else args.threshold,
+        engine=engine,
+        original_text=text,
+        inference_threshold=args.threshold
     )
 
 
